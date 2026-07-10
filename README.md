@@ -173,6 +173,18 @@ El boton `Actualizar resultados reales` de la vista `Historial real` envia solo 
 - resumen de requests y cache.
 - graficas de distribucion de resultados y resultados por fecha.
 
+### Resultados reales en GitHub Pages
+
+GitHub Pages no puede ejecutar `server/settlementServer.mjs`. Para que `Historial real` no quede en `Pendiente` en produccion, el proyecto incluye el workflow `.github/workflows/refresh-settlements.yml`.
+
+Configuracion:
+
+1. En GitHub, entra a `Settings > Secrets and variables > Actions > Secrets`.
+2. Crea el secret `FOOTBALL_API_KEY` con tu API key de API-Football.
+3. En `Actions`, ejecuta manualmente `Refresh Settlements Snapshot`.
+
+Ese workflow genera `public/settlements/latest.json` con resultados liquidados y hace commit automatico. Despues se ejecuta el deploy de GitHub Pages y el boton `Actualizar resultados reales` cargara ese snapshot publico. La API key no se publica en el frontend.
+
 Variables utiles:
 
 - `SETTLEMENT_TIMEZONE=America/Lima` define el corte de "hoy" para decidir si una fecha pasada sin datos oficiales debe dejar de mostrarse como pendiente.

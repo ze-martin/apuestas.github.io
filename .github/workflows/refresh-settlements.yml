@@ -1,0 +1,52 @@
+name: Refresh Settlements Snapshot
+
+on:
+  workflow_dispatch:
+  schedule:
+    - cron: '20 */6 * * *'
+
+permissions:
+  contents: write
+
+jobs:
+  refresh:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Setup pnpm
+        uses: pnpm/action-setup@v4
+        with:
+          version: 10
+
+      - name: Setup Node
+        uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: pnpm
+
+      - name: Install dependencies
+        run: pnpm install --frozen-lockfile
+
+      - name: Generate settlements snapshot
+        env:
+          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+          FOOTBALL_API_BASE_URL: ${{ vars.FOOTBALL_API_BASE_URL || 'https://v3.football.api-sports.io' }}
+          FOOTBALL_SEASON: ${{ vars.FOOTBALL_SEASON || '2026' }}
+          API_FOOTBALL_LEAGUES: ${{ vars.API_FOOTBALL_LEAGUES || '2,3,39,140,135,78,281,11,13' }}
+          VITE_PROTOCOL_INDEX_URL: ${{ vars.VITE_PROTOCOL_INDEX_URL || 'https://ze-martin.github.io/' }}
+          SETTLEMENT_TODAY: ${{ vars.SETTLEMENT_TODAY }}
+        run: node server/generateSettlementSnapshot.mjs
+
+      - name: Commit snapshot
+        run: |
+          if git diff --quiet -- public/settlements/latest.json; then
+            echo "No settlement changes to commit."
+            exit 0
+          fi
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add public/settlements/latest.json
+          git commit -m "Actualizar snapshot de resultados reales"
+          git push

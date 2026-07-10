@@ -6,6 +6,7 @@
   "scripts": {
     "dev": "vite",
     "settlement:api": "node server/settlementServer.mjs",
+    "settlement:snapshot": "node server/generateSettlementSnapshot.mjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"

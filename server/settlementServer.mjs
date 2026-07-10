@@ -4,6 +4,7 @@ import { mkdir, readFile, writeFile } from 'node:fs/promises'
 import { existsSync, readFileSync } from 'node:fs'
 import path from 'node:path'
 import process from 'node:process'
+import { pathToFileURL } from 'node:url'
 
 const projectRoot = process.cwd()
 loadEnv(path.join(projectRoot, '.env'))
@@ -18,35 +19,41 @@ const cacheDir = path.join(projectRoot, 'data', 'settlement-cache')
 const pendingTtlMs = Number(process.env.SETTLEMENT_PENDING_TTL_MINUTES || 60) * 60 * 1000
 const settledTtlMs = Number(process.env.SETTLEMENT_SETTLED_TTL_DAYS || 30) * 24 * 60 * 60 * 1000
 
-createServer(async (req, res) => {
-  try {
-    if (req.method === 'OPTIONS') return sendJson(res, 204, {})
-    if (req.method === 'GET' && req.url === '/api/settlements/health') {
-      return sendJson(res, 200, {
-        ok: true,
-        provider: 'api-football',
-        hasApiKey: Boolean(apiKey),
-        leagues,
-      })
-    }
-    if (req.method !== 'POST' || !req.url?.startsWith('/api/settlements')) {
-      return sendJson(res, 404, { error: 'Not found' })
-    }
-    if (!apiKey) {
-      return sendJson(res, 500, { error: 'FOOTBALL_API_KEY no esta configurada en el servidor.' })
-    }
+function startSettlementServer() {
+  createServer(async (req, res) => {
+    try {
+      if (req.method === 'OPTIONS') return sendJson(res, 204, {})
+      if (req.method === 'GET' && req.url === '/api/settlements/health') {
+        return sendJson(res, 200, {
+          ok: true,
+          provider: 'api-football',
+          hasApiKey: Boolean(apiKey),
+          leagues,
+        })
+      }
+      if (req.method !== 'POST' || !req.url?.startsWith('/api/settlements')) {
+        return sendJson(res, 404, { error: 'Not found' })
+      }
+      if (!apiKey) {
+        return sendJson(res, 500, { error: 'FOOTBALL_API_KEY no esta configurada en el servidor.' })
+      }
 
-    const payload = await readJson(req)
-    const picks = Array.isArray(payload.picks) ? payload.picks : []
-    const forceRefresh = Boolean(payload.forceRefresh)
-    const result = await settlePicks(picks, forceRefresh)
-    return sendJson(res, 200, result)
-  } catch (error) {
-    return sendJson(res, 500, { error: error instanceof Error ? error.message : 'Error inesperado liquidando picks.' })
-  }
-}).listen(port, '127.0.0.1', () => {
-  console.log(`Settlement API escuchando en http://127.0.0.1:${port}`)
-})
+      const payload = await readJson(req)
+      const picks = Array.isArray(payload.picks) ? payload.picks : []
+      const forceRefresh = Boolean(payload.forceRefresh)
+      const result = await settlePicks(picks, forceRefresh)
+      return sendJson(res, 200, result)
+    } catch (error) {
+      return sendJson(res, 500, { error: error instanceof Error ? error.message : 'Error inesperado liquidando picks.' })
+    }
+  }).listen(port, '127.0.0.1', () => {
+    console.log(`Settlement API escuchando en http://127.0.0.1:${port}`)
+  })
+}
+
+if (process.argv[1] && import.meta.url === pathToFileURL(process.argv[1]).href) {
+  startSettlementServer()
+}
 
 function loadEnv(filePath, override = false) {
   if (!existsSync(filePath)) return
@@ -83,7 +90,7 @@ async function readJson(req) {
   return raw ? JSON.parse(raw) : {}
 }
 
-async function settlePicks(picks, forceRefresh) {
+export async function settlePicks(picks, forceRefresh) {
   const requestSummary = {
     fixtureLookups: 0,
     fixtureStatistics: 0,

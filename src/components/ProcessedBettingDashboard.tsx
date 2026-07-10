@@ -74,6 +74,12 @@ interface SettlementRequestSummary {
   maxRecommendedRequestsPerMatch: number
 }
 
+interface SettlementPayload {
+  settlements: ApiSettlement[]
+  requestSummary: SettlementRequestSummary
+  generatedAt?: string
+}
+
 const defaultFilters: PickFilters = {
   fecha: '',
   partido: '',
@@ -363,6 +369,22 @@ function settlementEndpoint() {
   return ''
 }
 
+function settlementSnapshotUrl() {
+  const configured = import.meta.env.VITE_SETTLEMENT_SNAPSHOT_URL
+  if (configured) return configured
+  if (typeof window === 'undefined') return ''
+  return new URL('settlements/latest.json', window.location.origin + import.meta.env.BASE_URL).toString()
+}
+
+async function fetchSettlementSnapshot(): Promise<SettlementPayload> {
+  const url = settlementSnapshotUrl()
+  const response = await fetch(`${url}?t=${Date.now()}`)
+  if (!response.ok) {
+    throw new Error('No encontre un snapshot de resultados reales. Ejecuta el workflow "Refresh Settlements Snapshot" en GitHub Actions o configura VITE_SETTLEMENT_API_URL con un backend publico.')
+  }
+  return response.json() as Promise<SettlementPayload>
+}
+
 function todayInLima() {
   return new Intl.DateTimeFormat('en-CA', {
     timeZone: 'America/Lima',
@@ -588,33 +610,39 @@ export function ProcessedBettingDashboard() {
     setSettlementError('')
     try {
       const endpoint = settlementEndpoint()
-      if (!endpoint) {
-        throw new Error('La liquidacion automatica requiere configurar VITE_SETTLEMENT_API_URL con un backend publico. GitHub Pages solo sirve el frontend estatico.')
+      let payload: SettlementPayload
+      if (endpoint) {
+        const response = await fetch(endpoint, {
+          method: 'POST',
+          headers: { 'content-type': 'application/json' },
+          body: JSON.stringify({
+            forceRefresh,
+            picks: records.map((record) => ({
+              key: record.key,
+              fecha: record.fecha,
+              hora: record.hora,
+              partido: record.partido,
+              pick: record.pick.pick,
+              marketType: record.pick.marketType,
+              side: record.pick.side,
+              direction: record.pick.direction,
+              line: record.pick.line,
+            })),
+          }),
+        })
+        payload = await response.json() as SettlementPayload
+        if (!response.ok) throw new Error((payload as { error?: string }).error || 'No se pudo consultar API-Football.')
+      } else {
+        payload = await fetchSettlementSnapshot()
       }
-      const response = await fetch(endpoint, {
-        method: 'POST',
-        headers: { 'content-type': 'application/json' },
-        body: JSON.stringify({
-          forceRefresh,
-          picks: records.map((record) => ({
-            key: record.key,
-            fecha: record.fecha,
-            hora: record.hora,
-            partido: record.partido,
-            pick: record.pick.pick,
-            marketType: record.pick.marketType,
-            side: record.pick.side,
-            direction: record.pick.direction,
-            line: record.pick.line,
-          })),
-        }),
-      })
-      const payload = await response.json()
-      if (!response.ok) throw new Error(payload.error || 'No se pudo consultar API-Football.')
       const settlementMap = (payload.settlements as ApiSettlement[]).reduce<Record<string, ApiSettlement>>((acc, item) => {
         acc[item.key] = item
         return acc
       }, {})
+      const matchedSettlements = records.filter((record) => settlementMap[record.key]).length
+      if (!endpoint && !matchedSettlements) {
+        throw new Error('El snapshot existe, pero no coincide con los picks filtrados actuales. Ejecuta "Refresh Settlements Snapshot" despues de actualizar los reportes del protocolo.')
+      }
       setActualSettlements(settlementMap)
       setSettlementSummary(payload.requestSummary as SettlementRequestSummary)
     } catch (error) {
