@@ -123,6 +123,7 @@ function extractReportUrls(indexHtml: string, baseUrl: string) {
     .filter((href) => href.includes('reports/') && href.endsWith('.html'))
     .map((href) => absoluteUrl(href, baseUrl))
     .filter((url, index, urls) => urls.indexOf(url) === index)
+    .sort((a, b) => inferDateFromSource(b).localeCompare(inferDateFromSource(a)))
 }
 
 function inferDateFromSource(sourceLabel: string) {
@@ -519,7 +520,9 @@ export function ProcessedBettingDashboard() {
   }
 
   async function fetchText(url: string) {
-    const response = await fetch(url)
+    const fetchUrl = new URL(url)
+    fetchUrl.searchParams.set('_refresh', Date.now().toString())
+    const response = await fetch(fetchUrl.toString(), { cache: 'no-store' })
     if (!response.ok) throw new Error(`HTTP ${response.status} leyendo ${url}`)
     return response.text()
   }

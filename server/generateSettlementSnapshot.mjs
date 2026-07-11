@@ -34,7 +34,14 @@ function extractReportUrls(indexHtml, baseUrl) {
   return unique(
     Array.from(indexHtml.matchAll(/href=["']([^"']*reports\/[^"']+\.html)["']/gi))
       .map((match) => absoluteUrl(match[1], baseUrl)),
-  )
+  ).sort((a, b) => inferDateFromSource(b).localeCompare(inferDateFromSource(a)))
+}
+
+function inferDateFromSource(sourceLabel) {
+  const match = sourceLabel.match(/(20\d{6})/)
+  if (!match) return ''
+  const raw = match[1]
+  return `${raw.slice(0, 4)}-${raw.slice(4, 6)}-${raw.slice(6, 8)}`
 }
 
 function reportDateFrom(sourceUrl, html) {
@@ -231,7 +238,9 @@ function suggestedPickKey(pick) {
 }
 
 async function fetchText(url) {
-  const response = await fetch(url)
+  const fetchUrl = new URL(url)
+  fetchUrl.searchParams.set('_refresh', Date.now().toString())
+  const response = await fetch(fetchUrl.toString(), { cache: 'no-store' })
   if (!response.ok) throw new Error(`HTTP ${response.status} leyendo ${url}`)
   return response.text()
 }
