@@ -175,15 +175,27 @@ El boton `Actualizar resultados reales` de la vista `Historial real` envia solo 
 
 ### Resultados reales en GitHub Pages
 
-GitHub Pages no puede ejecutar `server/settlementServer.mjs`. Para que `Historial real` no quede en `Pendiente` en produccion, el proyecto incluye el workflow `.github/workflows/refresh-settlements.yml`.
+GitHub Pages no ejecuta backend ni scraping. Para no exponer claves en GitHub, el flujo recomendado es local:
 
-Configuracion:
+1. Actualiza los HTML/CSV del protocolo.
+2. Ejecuta localmente la liquidacion de resultados:
 
-1. En GitHub, entra a `Settings > Secrets and variables > Actions > Secrets`.
-2. Crea el secret `FOOTBALL_API_KEY` con tu API key de API-Football.
-3. En `Actions`, ejecuta manualmente `Refresh Settlements Snapshot`.
+```bash
+npm run settlement:snapshot
+```
 
-Ese workflow genera `public/settlements/latest.json` con resultados liquidados y hace commit automatico. Despues se ejecuta el deploy de GitHub Pages y el boton `Actualizar resultados reales` cargara ese snapshot publico. La API key no se publica en el frontend.
+3. Revisa `public/settlements/latest.json`.
+4. Sube el archivo actualizado:
+
+```bash
+git add public/settlements/latest.json
+git commit -m "Actualizar resultados reales"
+git push
+```
+
+El dashboard publicado en GitHub Pages solo lee `public/settlements/latest.json`. La API key vive en tu equipo local, por ejemplo en `.env` o en el proyecto privado `../APUESTAS/.env`, y no se publica.
+
+El workflow `.github/workflows/refresh-settlements.yml` queda disponible solo como ejecucion manual opcional. No corre en horario automatico para evitar fallos por falta de secrets y para mantener la API key fuera de GitHub.
 
 Variables utiles:
 

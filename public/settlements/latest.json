@@ -1,84 +1,120 @@
 {
-  "generatedAt": "2026-07-11T04:50:47.613Z",
+  "generatedAt": "2026-07-12T17:58:45.097Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 18,
   "suggestedPickCount": 176,
   "settlements": [
     {
       "key": "2026-07-11|16:00|Norway vs England|Goles +1.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1581037,
-        "status": "NS",
+        "status": "AET",
+        "score": "1-2",
+        "halftime": "1-1",
         "home": "Norway",
         "away": "England"
       }
     },
     {
       "key": "2026-07-11|16:00|Norway vs England|Tarjetas total -3.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1581037,
-        "status": "NS",
+        "status": "AET",
+        "score": "1-2",
+        "halftime": "1-1",
         "home": "Norway",
         "away": "England"
       }
     },
     {
       "key": "2026-07-11|16:00|Norway vs England|Visita goles +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1581037,
-        "status": "NS",
+        "status": "AET",
+        "score": "1-2",
+        "halftime": "1-1",
         "home": "Norway",
         "away": "England"
       }
     },
     {
       "key": "2026-07-11|16:00|Norway vs England|Local goles +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1581037,
-        "status": "NS",
+        "status": "AET",
+        "score": "1-2",
+        "halftime": "1-1",
         "home": "Norway",
         "away": "England"
       }
     },
     {
       "key": "2026-07-11|20:00|Argentina vs Switzerland|Tarjetas total -4.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1582681,
+        "status": "AET",
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Argentina",
+        "away": "Switzerland"
+      }
     },
     {
       "key": "2026-07-11|20:00|Argentina vs Switzerland|Local goles +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1582681,
+        "status": "AET",
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Argentina",
+        "away": "Switzerland"
+      }
     },
     {
       "key": "2026-07-11|20:00|Argentina vs Switzerland|Goles +1.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1582681,
+        "status": "AET",
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Argentina",
+        "away": "Switzerland"
+      }
     },
     {
       "key": "2026-07-11|20:00|Argentina vs Switzerland|1T -1.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1582681,
+        "status": "AET",
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Argentina",
+        "away": "Switzerland"
+      }
     },
     {
       "key": "2026-07-10|14:00|Spain vs Belgium|Tarjetas total -4.5|Betano",
@@ -2435,13 +2471,13 @@
   ],
   "requestSummary": {
     "uniqueMatches": 51,
-    "fixtureLookups": 17,
-    "fixtureStatistics": 42,
-    "fixtureEvents": 3,
+    "fixtureLookups": 18,
+    "fixtureStatistics": 43,
+    "fixtureEvents": 5,
     "cacheHits": 0,
-    "cacheMisses": 62,
-    "apiRequests": 62,
-    "estimatedExtraRequestsPerMatch": 1.22,
+    "cacheMisses": 66,
+    "apiRequests": 66,
+    "estimatedExtraRequestsPerMatch": 1.29,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
