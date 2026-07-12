@@ -12,24 +12,41 @@ jobs:
   refresh:
     runs-on: ubuntu-latest
     steps:
+      - name: Check API-Football secret
+        id: api_key
+        env:
+          FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
+        run: |
+          if [ -z "$FOOTBALL_API_KEY" ]; then
+            echo "::notice title=FOOTBALL_API_KEY no configurado::Crea el secret FOOTBALL_API_KEY en Settings > Secrets and variables > Actions > Secrets para actualizar resultados reales."
+            echo "configured=false" >> "$GITHUB_OUTPUT"
+          else
+            echo "configured=true" >> "$GITHUB_OUTPUT"
+          fi
+
       - name: Checkout
+        if: steps.api_key.outputs.configured == 'true'
         uses: actions/checkout@v4
 
       - name: Setup pnpm
+        if: steps.api_key.outputs.configured == 'true'
         uses: pnpm/action-setup@v4
         with:
           version: 10
 
       - name: Setup Node
+        if: steps.api_key.outputs.configured == 'true'
         uses: actions/setup-node@v4
         with:
           node-version: 22
           cache: pnpm
 
       - name: Install dependencies
+        if: steps.api_key.outputs.configured == 'true'
         run: pnpm install --frozen-lockfile
 
       - name: Generate settlements snapshot
+        if: steps.api_key.outputs.configured == 'true'
         env:
           FOOTBALL_API_KEY: ${{ secrets.FOOTBALL_API_KEY }}
           FOOTBALL_API_BASE_URL: ${{ vars.FOOTBALL_API_BASE_URL || 'https://v3.football.api-sports.io' }}
@@ -40,6 +57,7 @@ jobs:
         run: node server/generateSettlementSnapshot.mjs
 
       - name: Commit snapshot
+        if: steps.api_key.outputs.configured == 'true'
         run: |
           if git diff --quiet -- public/settlements/latest.json; then
             echo "No settlement changes to commit."
