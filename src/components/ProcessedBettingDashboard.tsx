@@ -667,11 +667,10 @@ export function ProcessedBettingDashboard() {
   useEffect(() => {
     if (view !== 'actualHistory') return
     if (actualAutoRefreshStarted.current) return
-    if (Object.keys(actualSettlements).length) return
     if (!filteredMain.length) return
     actualAutoRefreshStarted.current = true
     void refreshActualSettlements(false)
-  }, [actualSettlements, filteredMain.length, refreshActualSettlements, view])
+  }, [filteredMain.length, refreshActualSettlements, view])
 
   return (
     <div className="min-h-screen bg-slate-100 text-slate-950 dark:bg-slate-950 dark:text-slate-100">
