@@ -1,9 +1,57 @@
 {
-  "generatedAt": "2026-07-12T17:58:45.097Z",
+  "generatedAt": "2026-07-13T17:20:38.713Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 18,
-  "suggestedPickCount": 176,
+  "suggestedPickCount": 180,
   "settlements": [
+    {
+      "key": "2026-07-14|14:00|France vs Spain|Tarjetas total -3.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1585131,
+        "status": "NS",
+        "home": "France",
+        "away": "Spain"
+      }
+    },
+    {
+      "key": "2026-07-14|14:00|France vs Spain|Visita corners +3.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1585131,
+        "status": "NS",
+        "home": "France",
+        "away": "Spain"
+      }
+    },
+    {
+      "key": "2026-07-14|14:00|France vs Spain|Local corners -5.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1585131,
+        "status": "NS",
+        "home": "France",
+        "away": "Spain"
+      }
+    },
+    {
+      "key": "2026-07-14|14:00|France vs Spain|Goles -3.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1585131,
+        "status": "NS",
+        "home": "France",
+        "away": "Spain"
+      }
+    },
     {
       "key": "2026-07-11|16:00|Norway vs England|Goles +1.5|Betano",
       "settlement": "Acertado",
@@ -2470,14 +2518,14 @@
     }
   ],
   "requestSummary": {
-    "uniqueMatches": 51,
-    "fixtureLookups": 18,
-    "fixtureStatistics": 43,
+    "uniqueMatches": 52,
+    "fixtureLookups": 19,
+    "fixtureStatistics": 44,
     "fixtureEvents": 5,
     "cacheHits": 0,
-    "cacheMisses": 66,
-    "apiRequests": 66,
-    "estimatedExtraRequestsPerMatch": 1.29,
+    "cacheMisses": 68,
+    "apiRequests": 68,
+    "estimatedExtraRequestsPerMatch": 1.31,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
