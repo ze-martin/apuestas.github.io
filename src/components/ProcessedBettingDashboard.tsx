@@ -27,7 +27,6 @@ import {
 
 type MainView = 'main' | 'matches' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'noOdds'
 type SortKey = 'score' | 'edge' | 'probability' | 'ev' | 'odds' | 'risk'
-type UrlMode = 'allReports' | 'latest' | 'direct'
 type Settlement = 'Pendiente' | 'Acertado' | 'Fallado' | 'Devuelto' | 'Sin dato oficial'
 
 interface SuggestedHistoryRecord {
@@ -91,6 +90,8 @@ const defaultFilters: PickFilters = {
   minProbability: '0.70',
   query: '',
 }
+
+const configuredProtocolSourceUrl = import.meta.env.VITE_PROTOCOL_INDEX_URL || 'https://ze-martin.github.io/'
 
 const marketLabels: Record<MarketType, string> = {
   goals: 'Goles',
@@ -447,9 +448,7 @@ export function ProcessedBettingDashboard() {
   const [view, setView] = useState<MainView>('main')
   const [sortKey, setSortKey] = useState<SortKey>('score')
   const [darkMode, setDarkMode] = useState(false)
-  const [urlMode, setUrlMode] = useState<UrlMode>('allReports')
-  const [sourceUrl, setSourceUrl] = useState('https://ze-martin.github.io')
-  const [status, setStatus] = useState('Cargando reportes desde https://ze-martin.github.io...')
+  const [status, setStatus] = useState('Cargando reportes configurados...')
   const [loading, setLoading] = useState(false)
   const [historyOverrides, setHistoryOverrides] = useState<Record<string, Settlement>>(() => {
     if (typeof window === 'undefined') return {}
@@ -530,16 +529,12 @@ export function ProcessedBettingDashboard() {
   const loadUrl = useCallback(async () => {
     setLoading(true)
     try {
-      if (urlMode === 'direct') {
-        await loadText(await fetchText(sourceUrl), sourceUrl)
-        return
-      }
-
+      const sourceUrl = configuredProtocolSourceUrl
       const indexHtml = await fetchText(sourceUrl)
       const reportUrls = extractReportUrls(indexHtml, sourceUrl)
-      if (!reportUrls.length) throw new Error(`No encontre enlaces reports/*.html en ${sourceUrl}`)
+      if (!reportUrls.length) throw new Error('No encontre reportes disponibles en la fuente configurada.')
 
-      const urlsToLoad = urlMode === 'latest' ? reportUrls.slice(0, 1) : reportUrls
+      const urlsToLoad = reportUrls
       const reports = await Promise.all(
         urlsToLoad.map(async (url) => applyDateFallback(await parseReportText(await fetchText(url)), url)),
       )
@@ -549,11 +544,11 @@ export function ProcessedBettingDashboard() {
       setFilters(defaultFilters)
       setStatus(`${merged.length} mercados procesados desde ${urlsToLoad.length} reporte(s). Fechas disponibles: ${availableDates}.`)
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : 'No se pudo cargar la URL publica.')
+      setStatus(error instanceof Error ? error.message : 'No se pudieron cargar los reportes configurados.')
     } finally {
       setLoading(false)
     }
-  }, [loadText, sourceUrl, urlMode])
+  }, [])
 
   useEffect(() => {
     if (initialLoadStarted.current) return
@@ -727,31 +722,16 @@ export function ProcessedBettingDashboard() {
           <div>
             <div className="flex items-center gap-2">
               <CloudDownload className="h-5 w-5 text-teal-700 dark:text-teal-300" />
-              <h2 className="font-semibold">URL publica</h2>
+              <h2 className="font-semibold">Datos del protocolo</h2>
             </div>
-            <div className="mt-3 grid gap-2 md:grid-cols-[180px_1fr_auto]">
-              <select
-                value={urlMode}
-                onChange={(event) => setUrlMode(event.target.value as UrlMode)}
-                className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950"
-              >
-                <option value="allReports">Todos los reportes</option>
-                <option value="latest">Ultimo reporte</option>
-                <option value="direct">CSV/HTML directo</option>
-              </select>
-              <input
-                value={sourceUrl}
-                onChange={(event) => setSourceUrl(event.target.value)}
-                className="rounded-md border border-slate-300 bg-white px-3 py-2 text-sm dark:border-slate-700 dark:bg-slate-950"
-                placeholder="https://ze-martin.github.io"
-              />
+            <div className="mt-3 flex rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/50">
               <button
                 type="button"
                 onClick={() => void loadUrl()}
-                className="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800"
+                className="inline-flex w-fit items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800"
               >
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                Cargar
+                Cargar datos
               </button>
             </div>
             <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{status}</p>

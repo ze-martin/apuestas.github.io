@@ -10,19 +10,11 @@ La app permite:
 
 - Cargar un CSV local.
 - Cargar un HTML local del reporte.
-- Cargar una URL publica directa a CSV/HTML.
-- Cargar automaticamente todos los reportes enlazados desde la URL base por defecto:
+- Cargar automaticamente todos los reportes enlazados desde la fuente configurada en `VITE_PROTOCOL_INDEX_URL`.
 
-```text
-https://ze-martin.github.io
-```
+La interfaz publica no muestra ni permite editar la URL de origen. El boton `Cargar datos` usa la fuente configurada internamente y consolida las fechas disponibles en el filtro `Fecha`.
 
-El modo por defecto es `Todos los reportes`: lee el indice, detecta enlaces `reports/*.html`, descarga cada reporte y consolida las fechas disponibles en el filtro `Fecha`.
-
-Tambien puedes cambiar el modo a:
-
-- `Ultimo reporte`: carga solo el primer reporte enlazado en el indice.
-- `CSV/HTML directo`: carga exactamente la URL indicada.
+Importante: ocultar la URL en la interfaz mejora la experiencia y reduce exposicion visual, pero no es seguridad completa si el sitio sigue siendo estatico en GitHub Pages. Para proteger realmente datos, usuarios y suscripciones, la fuente debe pasar por un backend con autenticacion.
 
 Columnas CSV soportadas:
 
@@ -264,6 +256,26 @@ VITE_SETTLEMENT_API_URL=https://tu-backend-publico.com/api/settlements
 ```
 
 GitHub Pages solo sirve archivos estaticos. No ejecuta `server/settlementServer.mjs`, por eso la API key de API-Football debe vivir en un backend externo como Render, Railway, Fly.io, VPS o funciones serverless. Sin ese backend publico, el dashboard, la carga de reportes, filtros, simulacion Betano y guia funcionan, pero `Actualizar resultados reales` mostrara un aviso indicando que falta configurar `VITE_SETTLEMENT_API_URL`.
+
+## App instalable
+
+El proyecto incluye configuracion PWA inicial:
+
+- `public/manifest.webmanifest`
+- `public/sw.js`
+- registro del service worker en `src/main.tsx`
+
+Con esto, en Android se puede instalar desde Chrome con `Agregar a pantalla principal`. En iPhone se instala desde Safari con `Compartir > Agregar a pantalla de inicio`.
+
+Para publicar como app nativa en tiendas, la ruta recomendada es envolver este frontend con Capacitor:
+
+1. Mantener React/Vite como base.
+2. Agregar Capacitor para iOS y Android.
+3. Compilar el dashboard.
+4. Generar proyectos nativos.
+5. Publicar en Google Play y App Store.
+
+Para suscripciones reales, no usar GitHub Pages como unica capa. Se recomienda backend con autenticacion, planes, pagos y API protegida.
 
 ## Instalacion y ejecucion
 
