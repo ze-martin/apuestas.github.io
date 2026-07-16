@@ -25,7 +25,7 @@ import {
   type ProcessedPick,
 } from '../domain/pickProcessing'
 import { integrationConfig } from '../config/integrations'
-import { fetchProtectedProtocolPicks } from '../services/protectedProtocolRepository'
+import { fetchProtectedProtocolPicks, fetchProtectedSettlements } from '../services/protectedProtocolRepository'
 
 type MainView = 'main' | 'matches' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'noOdds'
 type SortKey = 'score' | 'edge' | 'probability' | 'ev' | 'odds' | 'risk'
@@ -381,6 +381,10 @@ function settlementSnapshotUrl() {
 }
 
 async function fetchSettlementSnapshot(): Promise<SettlementPayload> {
+  if (integrationConfig.dataSourceMode === 'supabase') {
+    return fetchProtectedSettlements() as Promise<SettlementPayload>
+  }
+
   const url = settlementSnapshotUrl()
   const response = await fetch(`${url}?t=${Date.now()}`)
   if (!response.ok) {

@@ -312,7 +312,13 @@ SUPABASE_REPORT_VISIBILITY=premium
 npm run supabase:import
 ```
 
-7. Ejecutar y validar:
+7. Importar resultados reales desde el snapshot local:
+
+```bash
+npm run supabase:import-settlements
+```
+
+8. Ejecutar y validar:
 
 ```bash
 npm run dev

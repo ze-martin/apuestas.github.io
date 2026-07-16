@@ -8,6 +8,7 @@
     "settlement:api": "node server/settlementServer.mjs",
     "settlement:snapshot": "node server/generateSettlementSnapshot.mjs",
     "supabase:import": "node server/importReportsToSupabase.mjs",
+    "supabase:import-settlements": "node server/importSettlementsToSupabase.mjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"

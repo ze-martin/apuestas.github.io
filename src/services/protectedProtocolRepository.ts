@@ -23,3 +23,43 @@ export async function fetchProtectedProtocolPicks(): Promise<ProcessedPick[]> {
     id: row.id,
   }))
 }
+
+interface ProtectedSettlementRow {
+  pick_key: string
+  settlement: string
+  source: string
+  reason: string | null
+  fixture: unknown
+}
+
+export async function fetchProtectedSettlements() {
+  if (!supabase) throw new Error('Supabase no esta configurado.')
+
+  const { data, error } = await supabase
+    .from('settlements')
+    .select('pick_key, settlement, source, reason, fixture')
+    .limit(20000)
+
+  if (error) throw new Error(`No se pudieron leer resultados protegidos: ${error.message}`)
+
+  return {
+    settlements: ((data ?? []) as ProtectedSettlementRow[]).map((row) => ({
+      key: row.pick_key,
+      settlement: row.settlement,
+      source: row.source,
+      reason: row.reason ?? undefined,
+      fixture: row.fixture,
+    })),
+    requestSummary: {
+      uniqueMatches: 0,
+      fixtureLookups: 0,
+      fixtureStatistics: 0,
+      fixtureEvents: 0,
+      cacheHits: 0,
+      cacheMisses: 0,
+      apiRequests: 0,
+      estimatedExtraRequestsPerMatch: 0,
+      maxRecommendedRequestsPerMatch: 3,
+    },
+  }
+}
