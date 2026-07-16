@@ -24,6 +24,8 @@ import {
   type PickFilters,
   type ProcessedPick,
 } from '../domain/pickProcessing'
+import { integrationConfig } from '../config/integrations'
+import { fetchProtectedProtocolPicks } from '../services/protectedProtocolRepository'
 
 type MainView = 'main' | 'matches' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'noOdds'
 type SortKey = 'score' | 'edge' | 'probability' | 'ev' | 'odds' | 'risk'
@@ -529,6 +531,15 @@ export function ProcessedBettingDashboard() {
   const loadUrl = useCallback(async () => {
     setLoading(true)
     try {
+      if (integrationConfig.dataSourceMode === 'supabase') {
+        const protectedPicks = await fetchProtectedProtocolPicks()
+        setPicks(protectedPicks)
+        setFilters(defaultFilters)
+        const availableDates = uniqDates(protectedPicks.map((pick) => pick.fecha)).join(', ')
+        setStatus(`${protectedPicks.length} mercados procesados desde la base protegida. Fechas disponibles: ${availableDates}.`)
+        return
+      }
+
       const sourceUrl = configuredProtocolSourceUrl
       const indexHtml = await fetchText(sourceUrl)
       const reportUrls = extractReportUrls(indexHtml, sourceUrl)

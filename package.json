@@ -7,11 +7,13 @@
     "dev": "vite",
     "settlement:api": "node server/settlementServer.mjs",
     "settlement:snapshot": "node server/generateSettlementSnapshot.mjs",
+    "supabase:import": "node server/importReportsToSupabase.mjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
   },
   "dependencies": {
+    "@supabase/supabase-js": "^2.110.5",
     "lucide-react": "^1.23.0",
     "papaparse": "^5.5.4",
     "react": "^19.2.7",

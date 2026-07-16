@@ -277,6 +277,61 @@ Para publicar como app nativa en tiendas, la ruta recomendada es envolver este f
 
 Para suscripciones reales, no usar GitHub Pages como unica capa. Se recomienda backend con autenticacion, planes, pagos y API protegida.
 
+## Primera accion tecnica: datos protegidos
+
+La app ya queda preparada para cambiar de fuente estatica a fuente protegida con Supabase:
+
+- `src/components/AuthGate.tsx`: login con Supabase cuando `VITE_AUTH_PROVIDER=supabase`.
+- `src/services/supabaseClient.ts`: cliente Supabase del frontend.
+- `src/services/protectedProtocolRepository.ts`: lectura de picks desde tabla `picks`.
+- `supabase/migrations/001_private_protocol_schema.sql`: tablas y politicas RLS.
+- `server/importReportsToSupabase.mjs`: importador local de reportes HTML hacia Supabase.
+
+Flujo recomendado:
+
+1. Crear proyecto Supabase.
+2. Ejecutar el SQL de `supabase/migrations/001_private_protocol_schema.sql`.
+3. Crear usuarios en Supabase Auth.
+4. Marcar tu usuario como admin en `profiles`.
+5. Configurar `.env` local:
+
+```text
+VITE_DATA_SOURCE_MODE=supabase
+VITE_AUTH_PROVIDER=supabase
+VITE_DATABASE_PROVIDER=supabase
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+VITE_SUPABASE_ANON_KEY=tu_anon_key
+SUPABASE_URL=https://tu-proyecto.supabase.co
+SUPABASE_SERVICE_ROLE_KEY=tu_service_role_key
+SUPABASE_REPORT_VISIBILITY=premium
+```
+
+6. Importar reportes desde tu equipo local:
+
+```bash
+npm run supabase:import
+```
+
+7. Ejecutar y validar:
+
+```bash
+npm run dev
+```
+
+No subas `SUPABASE_SERVICE_ROLE_KEY` a GitHub. Esa clave solo debe vivir en `.env` local o en un backend privado.
+
+### Plan de implementacion comercial
+
+1. **Base protegida:** activar Supabase, RLS y carga de picks con `npm run supabase:import`.
+2. **Login privado:** usar `VITE_AUTH_PROVIDER=supabase` y crear perfiles `free`, `premium`, `pro`.
+3. **Panel admin:** agregar una vista interna para subir HTML/CSV y disparar importaciones.
+4. **Suscripciones:** integrar Stripe o MercadoPago y actualizar `profiles.plan` y `profiles.subscription_status`.
+5. **API privada:** mover liquidacion de resultados, scraping y claves deportivas a backend/edge functions.
+6. **PWA comercial:** mantener instalacion desde navegador con login y planes.
+7. **Apps nativas:** envolver con Capacitor para Android/iOS.
+8. **Publicacion:** Google Play primero; App Store requiere Mac y cuenta Apple Developer.
+9. **Operacion:** monitoreo de errores, auditoria de acceso, terminos de uso y juego responsable.
+
 ## Instalacion y ejecucion
 
 ```bash

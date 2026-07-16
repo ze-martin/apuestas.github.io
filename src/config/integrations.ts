@@ -1,4 +1,4 @@
-export type DataSourceMode = 'github-pages' | 'local' | 'api'
+export type DataSourceMode = 'github-pages' | 'local' | 'api' | 'supabase'
 export type AuthProvider = 'none' | 'supabase' | 'auth0' | 'clerk' | 'custom'
 
 function readEnv(key: string, fallback = '') {
@@ -11,6 +11,8 @@ export const integrationConfig = {
   protocolIndexUrl: readEnv('VITE_PROTOCOL_INDEX_URL', 'https://ze-martin.github.io/'),
   protocolApiUrl: readEnv('VITE_PROTOCOL_API_URL'),
   sportsApiUrl: readEnv('VITE_SPORTS_API_URL'),
+  supabaseUrl: readEnv('VITE_SUPABASE_URL'),
+  supabaseAnonKey: readEnv('VITE_SUPABASE_ANON_KEY'),
   authProvider: readEnv('VITE_AUTH_PROVIDER', 'none') as AuthProvider,
   authIssuerUrl: readEnv('VITE_AUTH_ISSUER_URL'),
   databaseProvider: readEnv('VITE_DATABASE_PROVIDER', 'localStorage'),
@@ -24,7 +26,9 @@ export const integrationRoadmap = [
         ? 'GitHub Pages'
         : integrationConfig.dataSourceMode === 'api'
           ? 'API configurada'
-          : 'Local JSON/CSV',
+          : integrationConfig.dataSourceMode === 'supabase'
+            ? 'Supabase protegido'
+            : 'Local JSON/CSV',
     readyFor: 'Reportes HTML, endpoints REST/GraphQL o archivos JSON/CSV',
   },
   {
