@@ -1,53 +1,117 @@
 {
-  "generatedAt": "2026-07-13T17:20:38.713Z",
+  "generatedAt": "2026-07-16T03:53:22.644Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
-  "reportCount": 18,
-  "suggestedPickCount": 180,
+  "reportCount": 19,
+  "suggestedPickCount": 184,
   "settlements": [
     {
-      "key": "2026-07-14|14:00|France vs Spain|Tarjetas total -3.5|Betano",
-      "settlement": "Pendiente",
+      "key": "2026-07-15|14:00|England vs Argentina|Tarjetas total -4.5|Betano",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1586077,
+        "status": "FT",
+        "score": "1-2",
+        "halftime": "0-0",
+        "home": "England",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-15|14:00|England vs Argentina|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1586077,
+        "status": "FT",
+        "score": "1-2",
+        "halftime": "0-0",
+        "home": "England",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-15|14:00|England vs Argentina|Visita goles +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1586077,
+        "status": "FT",
+        "score": "1-2",
+        "halftime": "0-0",
+        "home": "England",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-15|14:00|England vs Argentina|Local goles +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1586077,
+        "status": "FT",
+        "score": "1-2",
+        "halftime": "0-0",
+        "home": "England",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-14|14:00|France vs Spain|Tarjetas total -3.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1585131,
-        "status": "NS",
+        "status": "FT",
+        "score": "0-2",
+        "halftime": "0-1",
         "home": "France",
         "away": "Spain"
       }
     },
     {
       "key": "2026-07-14|14:00|France vs Spain|Visita corners +3.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1585131,
-        "status": "NS",
+        "status": "FT",
+        "score": "0-2",
+        "halftime": "0-1",
         "home": "France",
         "away": "Spain"
       }
     },
     {
       "key": "2026-07-14|14:00|France vs Spain|Local corners -5.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1585131,
-        "status": "NS",
+        "status": "FT",
+        "score": "0-2",
+        "halftime": "0-1",
         "home": "France",
         "away": "Spain"
       }
     },
     {
       "key": "2026-07-14|14:00|France vs Spain|Goles -3.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1585131,
-        "status": "NS",
+        "status": "FT",
+        "score": "0-2",
+        "halftime": "0-1",
         "home": "France",
         "away": "Spain"
       }
@@ -2518,14 +2582,14 @@
     }
   ],
   "requestSummary": {
-    "uniqueMatches": 52,
-    "fixtureLookups": 19,
-    "fixtureStatistics": 44,
-    "fixtureEvents": 5,
+    "uniqueMatches": 53,
+    "fixtureLookups": 20,
+    "fixtureStatistics": 45,
+    "fixtureEvents": 7,
     "cacheHits": 0,
-    "cacheMisses": 68,
-    "apiRequests": 68,
-    "estimatedExtraRequestsPerMatch": 1.31,
+    "cacheMisses": 72,
+    "apiRequests": 72,
+    "estimatedExtraRequestsPerMatch": 1.36,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
