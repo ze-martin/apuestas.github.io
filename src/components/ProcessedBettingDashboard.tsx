@@ -115,6 +115,38 @@ function uniqDates(values: string[]) {
   return Array.from(new Set(values.filter(Boolean))).sort((a, b) => b.localeCompare(a))
 }
 
+function eventTimestamp(fecha: string, hora: string) {
+  if (!/^\d{4}-\d{2}-\d{2}$/.test(fecha)) return Number.POSITIVE_INFINITY
+  const time = hora.match(/(\d{1,2}):(\d{2})/)
+  if (!time) return Number.POSITIVE_INFINITY
+  const hours = time[1].padStart(2, '0')
+  const minutes = time[2]
+  const value = new Date(`${fecha}T${hours}:${minutes}:00-05:00`).getTime()
+  return Number.isFinite(value) ? value : Number.POSITIVE_INFINITY
+}
+
+function pickTimestamp(pick: ProcessedPick) {
+  return eventTimestamp(pick.fecha, pick.hora)
+}
+
+function hasEventStarted(pick: ProcessedPick, now = new Date()) {
+  const timestamp = pickTimestamp(pick)
+  return Number.isFinite(timestamp) && timestamp <= now.getTime()
+}
+
+function sortByKickoff<T extends Pick<ProcessedPick, 'fecha' | 'hora' | 'partido'>>(items: T[]) {
+  return [...items].sort((a, b) => {
+    const timeDiff = eventTimestamp(a.fecha, a.hora) - eventTimestamp(b.fecha, b.hora)
+    if (timeDiff !== 0) return timeDiff
+    return a.partido.localeCompare(b.partido)
+  })
+}
+
+function eventLabelFromKey(key: string) {
+  const [fecha = '', hora = '', ...matchParts] = key.split('|')
+  return { fecha, hora, partido: matchParts.join('|') }
+}
+
 function absoluteUrl(href: string, baseUrl: string) {
   return new URL(href, baseUrl.endsWith('/') ? baseUrl : `${baseUrl}/`).toString()
 }
@@ -154,12 +186,14 @@ function Badge({ children, className = '' }: { children: ReactNode; className?: 
 
 function sortPicks(picks: ProcessedPick[], sortKey: SortKey) {
   return [...picks].sort((a, b) => {
-    if (sortKey === 'score') return b.pickScore - a.pickScore
-    if (sortKey === 'edge') return (b.edge ?? -999) - (a.edge ?? -999)
-    if (sortKey === 'probability') return b.probability - a.probability
-    if (sortKey === 'ev') return (b.ev ?? -999) - (a.ev ?? -999)
-    if (sortKey === 'odds') return (b.odds ?? 0) - (a.odds ?? 0)
-    return a.riskTier.localeCompare(b.riskTier)
+    const kickoffDiff = pickTimestamp(a) - pickTimestamp(b)
+    const fallback = kickoffDiff || a.partido.localeCompare(b.partido) || b.pickScore - a.pickScore
+    if (sortKey === 'score') return b.pickScore - a.pickScore || fallback
+    if (sortKey === 'edge') return (b.edge ?? -999) - (a.edge ?? -999) || fallback
+    if (sortKey === 'probability') return b.probability - a.probability || fallback
+    if (sortKey === 'ev') return (b.ev ?? -999) - (a.ev ?? -999) || fallback
+    if (sortKey === 'odds') return (b.odds ?? 0) - (a.odds ?? 0) || fallback
+    return a.riskTier.localeCompare(b.riskTier) || fallback
   })
 }
 
@@ -225,7 +259,7 @@ function settleProfit(settlement: Settlement, odds: number | null) {
 
 function buildSuggestedHistory(picks: ProcessedPick[], overrides: Record<string, Settlement>): SuggestedHistoryRecord[] {
   const groups = picks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
-    const key = `${pick.fecha}|${pick.partido}`
+    const key = `${pick.fecha}|${pick.hora}|${pick.partido}`
     acc[key] = [...(acc[key] ?? []), pick]
     return acc
   }, {})
@@ -255,7 +289,7 @@ function buildSuggestedHistory(picks: ProcessedPick[], overrides: Record<string,
 
 function buildSuggestedActualHistory(picks: ProcessedPick[], apiSettlements: Record<string, ApiSettlement>): SuggestedHistoryRecord[] {
   const groups = picks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
-    const key = `${pick.fecha}|${pick.partido}`
+    const key = `${pick.fecha}|${pick.hora}|${pick.partido}`
     acc[key] = [...(acc[key] ?? []), pick]
     return acc
   }, {})
@@ -409,7 +443,12 @@ function addDateDays(date: string, days: number) {
 }
 
 function activeSimulationDates(picks: ProcessedPick[]) {
-  const available = new Set(picks.map((pick) => pick.fecha).filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)))
+  const available = new Set(
+    picks
+      .filter((pick) => !hasEventStarted(pick))
+      .map((pick) => pick.fecha)
+      .filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)),
+  )
   const today = todayInLima()
   const windowDates = [today, addDateDays(today, 1), addDateDays(today, 2)]
   const inWindow = windowDates.filter((date) => available.has(date))
@@ -577,7 +616,7 @@ export function ProcessedBettingDashboard() {
   const withBetanoOdds = useMemo(() => picks.filter((pick) => pick.hasBetanoOdds), [picks])
   const simulationDates = useMemo(() => activeSimulationDates(picks), [picks])
   const simulationPicks = useMemo(
-    () => picks.filter((pick) => pick.hasBetanoOdds && simulationDates.includes(pick.fecha)),
+    () => picks.filter((pick) => pick.hasBetanoOdds && simulationDates.includes(pick.fecha) && !hasEventStarted(pick)),
     [picks, simulationDates],
   )
   const filteredMain = useMemo(() => sortPicks(filterPicks(withOdds, filters), sortKey), [filters, sortKey, withOdds])
@@ -599,10 +638,24 @@ export function ProcessedBettingDashboard() {
     return best === null ? pick.edgePct : Math.max(best, pick.edgePct)
   }, null)
   const matches = uniq(picks.map((pick) => pick.partido))
+  const matchOptions = useMemo(() => {
+    const scoped = filters.fecha ? picks.filter((pick) => pick.fecha === filters.fecha) : picks
+    const uniqueByMatch = new Map<string, ProcessedPick>()
+    for (const pick of scoped) {
+      if (!uniqueByMatch.has(pick.partido)) uniqueByMatch.set(pick.partido, pick)
+    }
+    return sortByKickoff([...uniqueByMatch.values()]).map((pick) => pick.partido)
+  }, [filters.fecha, picks])
   const dates = uniqDates(picks.map((pick) => pick.fecha))
   const marketTypes = uniq(picks.map((pick) => pick.marketType))
   const changeDate = (fecha: string) => setFilters({ ...defaultFilters, fecha })
   const resetFilters = () => setFilters(defaultFilters)
+
+  useEffect(() => {
+    if (filters.partido && !matchOptions.includes(filters.partido)) {
+      setFilters((current) => ({ ...current, partido: '' }))
+    }
+  }, [filters.partido, matchOptions])
   const updateHistorySettlement = (key: string, settlement: Settlement) => {
     setHistoryOverrides((current) => ({ ...current, [key]: settlement }))
   }
@@ -766,7 +819,7 @@ export function ProcessedBettingDashboard() {
         <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="grid gap-3 lg:grid-cols-4 xl:grid-cols-8">
             <Select label="Fecha" value={filters.fecha} onChange={changeDate} options={dates} />
-            <Select label="Partido" value={filters.partido} onChange={(value) => setFilters({ ...filters, partido: value })} options={matches} />
+            <Select label="Partido" value={filters.partido} onChange={(value) => setFilters({ ...filters, partido: value })} options={matchOptions} />
             <Select
               label="Mercado"
               value={filters.marketType}
@@ -1402,14 +1455,14 @@ function BetanoSimulation({
 }) {
   const groups = Object.entries(
     picks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
-      const key = `${pick.fecha}|${pick.partido}`
+      const key = `${pick.fecha}|${pick.hora}|${pick.partido}`
       acc[key] = [...(acc[key] ?? []), pick]
       return acc
     }, {}),
-  ).sort(([a], [b]) => a.localeCompare(b))
+  ).sort(([, aPicks], [, bPicks]) => pickTimestamp(aPicks[0]) - pickTimestamp(bPicks[0]))
   const selectedPicks = picks.filter((pick) => selections[suggestedPickKey(pick)])
   const selectedByMatch = selectedPicks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
-    const key = `${pick.fecha}|${pick.partido}`
+    const key = `${pick.fecha}|${pick.hora}|${pick.partido}`
     acc[key] = [...(acc[key] ?? []), pick]
     return acc
   }, {})
@@ -1473,7 +1526,10 @@ function BetanoSimulation({
               {Object.entries(selectedByMatch).map(([key, matchPicks]) => (
                 <div key={key} className="rounded-md border border-teal-200 bg-white p-3 text-sm dark:border-teal-800 dark:bg-slate-950">
                   <div className="flex flex-wrap items-center justify-between gap-2">
-                    <strong>{key.replace('|', ' - ')}</strong>
+                    <strong>{(() => {
+                      const event = eventLabelFromKey(key)
+                      return `${event.fecha} ${event.hora} - ${event.partido}`
+                    })()}</strong>
                     <span>Cuota partido: <strong>{formatDecimal(combinedOdds(matchPicks))}</strong></span>
                   </div>
                   <p className="mt-1 text-slate-600 dark:text-slate-300">
@@ -1497,15 +1553,15 @@ function BetanoSimulation({
           const recommendedKeys = new Set(recommended.map(suggestedPickKey))
           const selectedInMatch = matchPicks.filter((pick) => selections[suggestedPickKey(pick)])
           const matchOdds = combinedOdds(selectedInMatch)
-          const [date, match] = groupKey.split('|')
+          const event = eventLabelFromKey(groupKey)
           const sorted = [...matchPicks].sort((a, b) => b.probability - a.probability || (b.evBetano ?? -999) - (a.evBetano ?? -999))
 
           return (
             <article key={groupKey} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
               <div className="flex flex-wrap items-start justify-between gap-3">
                 <div>
-                  <p className="text-xs font-semibold uppercase text-slate-500">{date}</p>
-                  <h3 className="text-lg font-bold">{match}</h3>
+                  <p className="text-xs font-semibold uppercase text-slate-500">{event.fecha} {event.hora}</p>
+                  <h3 className="text-lg font-bold">{event.partido}</h3>
                 </div>
                 <div className="text-right">
                   <p className="text-xs text-slate-500">Cuota partido</p>
@@ -1575,18 +1631,19 @@ function MatchCards({ picks }: { picks: ProcessedPick[] }) {
   const grouped = groupByMatch(picks)
   return (
     <section className="grid gap-4 xl:grid-cols-2">
-      {Object.entries(grouped).map(([match, matchPicks]) => {
+      {Object.entries(grouped).sort(([, aPicks], [, bPicks]) => pickTimestamp(aPicks[0]) - pickTimestamp(bPicks[0])).map(([groupKey, matchPicks]) => {
+        const event = eventLabelFromKey(groupKey)
         const safe = [...matchPicks].filter((pick) => pick.riskTier === 'Bajo').sort((a, b) => b.probability - a.probability)[0]
         const bestEv = [...matchPicks].sort((a, b) => (b.ev ?? -999) - (a.ev ?? -999))[0]
         const balanced = [...matchPicks].sort((a, b) => b.pickScore - a.pickScore)[0]
         const topEv = [...matchPicks].filter((pick) => pick.isPositiveEV).sort((a, b) => (b.ev ?? 0) - (a.ev ?? 0)).slice(0, 5)
         const parlay = createSuggestedParlay(matchPicks, 4)
         return (
-          <article key={match} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <article key={groupKey} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
             <div className="flex flex-wrap items-start justify-between gap-3">
               <div>
-                <h2 className="text-lg font-semibold">{match}</h2>
-                <p className="text-sm text-slate-500">{matchPicks[0]?.fecha} {matchPicks[0]?.hora}</p>
+                <h2 className="text-lg font-semibold">{event.partido}</h2>
+                <p className="text-sm text-slate-500">{event.fecha} {event.hora}</p>
               </div>
               <Badge className="border-teal-500/40 bg-teal-500/10 text-teal-700 dark:text-teal-200">{matchPicks.length} mercados</Badge>
             </div>

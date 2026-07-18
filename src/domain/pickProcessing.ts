@@ -376,7 +376,8 @@ export function filterPicks(picks: ProcessedPick[], filters: PickFilters) {
 
 export function groupByMatch(picks: ProcessedPick[]) {
   return picks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
-    acc[pick.partido] = [...(acc[pick.partido] ?? []), pick]
+    const key = `${pick.fecha}|${pick.hora}|${pick.partido}`
+    acc[key] = [...(acc[key] ?? []), pick]
     return acc
   }, {})
 }
