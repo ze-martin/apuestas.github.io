@@ -73,6 +73,15 @@ function reportDateFrom(sourceUrl, html) {
   return titleDate || inferDateFromSource(sourceUrl) || null
 }
 
+function inferLeagueFromTitle(title) {
+  const normalized = String(title || '').trim()
+  const withoutDate = normalized.replace(/\b20\d{2}-\d{2}-\d{2}\b/g, '').replace(/\s+-\s*$/g, '').trim()
+  const parts = withoutDate.split(/\s+-\s+/).map((part) => part.trim()).filter(Boolean)
+  const candidate = [...parts].reverse().find((part) => !/protocolo|reporte|completo|dashboard/i.test(part))
+  if (!candidate || /mundial\s+2026/i.test(candidate)) return 'Liga no disponible'
+  return candidate
+}
+
 function extractReportUrls(indexHtml, baseUrl) {
   return unique(
     Array.from(indexHtml.matchAll(/href=["']([^"']*reports\/[^"']+\.html)["']/gi))
@@ -97,6 +106,7 @@ function parseNumber(value) {
 function parseHtmlReport(html, sourceUrl) {
   const reportDate = reportDateFrom(sourceUrl, html)
   const title = stripTags(html.match(/<h1[^>]*>([\s\S]*?)<\/h1>/i)?.[1] ?? `Reporte ${reportDate ?? ''}`)
+  const reportLeague = inferLeagueFromTitle(title)
   const marketsTable = html.match(/<table[^>]*id=["']markets["'][\s\S]*?<\/table>/i)?.[0] ?? html
   const headers = Array.from(marketsTable.matchAll(/<th[^>]*>([\s\S]*?)<\/th>/gi)).map((match) => stripTags(match[1]).toLowerCase())
   const hasDualOddsSchema = headers.some((header) => header.includes('betano'))
@@ -110,6 +120,7 @@ function parseHtmlReport(html, sourceUrl) {
           fecha: reportDate ?? 'No disponible',
           hora: cells[1] ?? '',
           partido: cells[2] ?? '',
+          league: attr(rowHtml, 'data-league') || attr(rowHtml, 'data-liga') || reportLeague,
           pick: cells[3] ?? '',
           market_original: cells[3] ?? '',
           probabilidad: cells[4] ?? '',
@@ -134,6 +145,7 @@ function parseHtmlReport(html, sourceUrl) {
         fecha: reportDate ?? 'No disponible',
         hora: cells[1] ?? '',
         partido: cells[2] ?? '',
+        league: attr(rowHtml, 'data-league') || attr(rowHtml, 'data-liga') || reportLeague,
         bookmaker: 'API-Football/10Bet',
         pick: cells[3] ?? '',
         market_original: cells[3] ?? '',

@@ -20,6 +20,10 @@ export interface RawPickRow {
   fecha?: string
   hora?: string
   partido?: string
+  league?: string
+  liga?: string
+  competition?: string
+  competicion?: string
   bookmaker?: string
   bookmaker_api?: string
   bookmaker_betano?: string
@@ -49,6 +53,7 @@ export interface ProcessedPick {
   fecha: string
   hora: string
   partido: string
+  league: string
   bookmaker: string
   bookmakerApi: string
   bookmakerBetano: string
@@ -92,6 +97,7 @@ export interface ProcessedPick {
 
 export interface PickFilters {
   fecha: string
+  league: string
   partido: string
   marketType: string
   riskTier: string
@@ -210,6 +216,7 @@ export function classifyRisk(probability: number, ev: number | null, odds: numbe
 export function processRawPick(row: RawPickRow, index: number): ProcessedPick {
   const pick = text(row.pick || row.market_original || row.partido, 'No disponible')
   const marketOriginal = text(row.market_original || row.pick, pick)
+  const league = text(firstField(row, ['league', 'liga', 'competition', 'competicion', 'torneo', 'campeonato']), 'Liga no disponible')
   const probability = parseProbability(row.prob_num ?? row.probabilidad)
   const genericOdds = parseNumber(firstField(row, ['cuota', 'odds']))
   const genericEv = parseNumber(firstField(row, ['ev_num', 'ev']))
@@ -239,6 +246,7 @@ export function processRawPick(row: RawPickRow, index: number): ProcessedPick {
     fecha: text(row.fecha, 'No disponible'),
     hora: text(row.hora, ''),
     partido: text(row.partido, 'No disponible'),
+    league,
     bookmaker: preferredBookmaker,
     bookmakerApi,
     bookmakerBetano,
@@ -285,6 +293,7 @@ function parseHtmlReport(html: string): RawPickRow[] {
   const document = new DOMParser().parseFromString(html, 'text/html')
   const title = document.querySelector('h1')?.textContent ?? ''
   const reportDate = title.match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? 'No disponible'
+  const reportLeague = inferLeagueFromTitle(title)
   const headers = Array.from(document.querySelectorAll('#markets thead th')).map((cell) => cell.textContent?.trim().toLowerCase() ?? '')
   const hasDualOddsSchema = headers.some((header) => header.includes('betano'))
   const cell = (row: Element, index: number) => row.children[index]?.textContent?.trim() ?? ''
@@ -295,6 +304,7 @@ function parseHtmlReport(html: string): RawPickRow[] {
         fecha: reportDate,
         hora: cell(row, 1),
         partido: cell(row, 2),
+        league: row.getAttribute('data-league') ?? row.getAttribute('data-liga') ?? reportLeague,
         pick: cell(row, 3),
         market_original: cell(row, 3),
         probabilidad: cell(row, 4),
@@ -320,6 +330,7 @@ function parseHtmlReport(html: string): RawPickRow[] {
       fecha: reportDate,
       hora: cell(row, 1),
       partido: cell(row, 2),
+      league: row.getAttribute('data-league') ?? row.getAttribute('data-liga') ?? reportLeague,
       bookmaker: 'API-Football/10Bet',
       pick: cell(row, 3),
       market_original: cell(row, 3),
@@ -335,6 +346,15 @@ function parseHtmlReport(html: string): RawPickRow[] {
       riesgo: cell(row, 10),
     }
   })
+}
+
+function inferLeagueFromTitle(title: string) {
+  const normalized = text(title)
+  const withoutDate = normalized.replace(/\b20\d{2}-\d{2}-\d{2}\b/g, '').replace(/\s+-\s*$/g, '').trim()
+  const parts = withoutDate.split(/\s+-\s+/).map((part) => part.trim()).filter(Boolean)
+  const candidate = [...parts].reverse().find((part) => !/protocolo|reporte|completo|dashboard/i.test(part))
+  if (!candidate || /mundial\s+2026/i.test(candidate)) return 'Liga no disponible'
+  return candidate
 }
 
 export function parseReportText(raw: string): Promise<ProcessedPick[]> {
@@ -362,6 +382,7 @@ export function filterPicks(picks: ProcessedPick[], filters: PickFilters) {
 
   return picks.filter((pick) => {
     if (filters.fecha && pick.fecha !== filters.fecha) return false
+    if (filters.league && pick.league !== filters.league) return false
     if (filters.partido && pick.partido !== filters.partido) return false
     if (filters.marketType && pick.marketType !== filters.marketType) return false
     if (filters.riskTier && pick.riskTier !== filters.riskTier) return false
@@ -369,7 +390,7 @@ export function filterPicks(picks: ProcessedPick[], filters: PickFilters) {
     if (minOdds !== null && (pick.odds ?? 0) < minOdds) return false
     if (maxOdds !== null && (pick.odds ?? Number.POSITIVE_INFINITY) > maxOdds) return false
     if (pick.probability < minProbability) return false
-    if (query && !`${pick.partido} ${pick.pick} ${pick.marketOriginal}`.toLowerCase().includes(query)) return false
+    if (query && !`${pick.league} ${pick.partido} ${pick.pick} ${pick.marketOriginal}`.toLowerCase().includes(query)) return false
     return true
   })
 }

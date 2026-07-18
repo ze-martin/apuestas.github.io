@@ -27,7 +27,7 @@ import {
 import { integrationConfig } from '../config/integrations'
 import { fetchProtectedProtocolPicks, fetchProtectedSettlements } from '../services/protectedProtocolRepository'
 
-type MainView = 'main' | 'matches' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'noOdds'
+type MainView = 'main' | 'matches' | 'leagues' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'noOdds'
 type SortKey = 'score' | 'edge' | 'probability' | 'ev' | 'odds' | 'risk'
 type Settlement = 'Pendiente' | 'Acertado' | 'Fallado' | 'Devuelto' | 'Sin dato oficial'
 
@@ -83,6 +83,7 @@ interface SettlementPayload {
 
 const defaultFilters: PickFilters = {
   fecha: '',
+  league: '',
   partido: '',
   marketType: '',
   riskTier: '',
@@ -145,6 +146,14 @@ function sortByKickoff<T extends Pick<ProcessedPick, 'fecha' | 'hora' | 'partido
 function eventLabelFromKey(key: string) {
   const [fecha = '', hora = '', ...matchParts] = key.split('|')
   return { fecha, hora, partido: matchParts.join('|') }
+}
+
+function eventKey(pick: ProcessedPick) {
+  return `${pick.fecha}|${pick.hora}|${pick.partido}`
+}
+
+function countEvents(picks: ProcessedPick[]) {
+  return new Set(picks.map(eventKey)).size
 }
 
 function absoluteUrl(href: string, baseUrl: string) {
@@ -352,6 +361,7 @@ function pickCsv(picks: ProcessedPick[]) {
   const headers = [
     'fecha',
     'hora',
+    'liga',
     'partido',
     'bookmaker_preferido',
     'pick',
@@ -369,6 +379,7 @@ function pickCsv(picks: ProcessedPick[]) {
   const rows = picks.map((pick) => [
     pick.fecha,
     pick.hora,
+    pick.league,
     pick.partido,
     pick.preferredBookmaker,
     pick.pick,
@@ -637,19 +648,33 @@ export function ProcessedBettingDashboard() {
     if (pick.edgePct === null) return best
     return best === null ? pick.edgePct : Math.max(best, pick.edgePct)
   }, null)
-  const matches = uniq(picks.map((pick) => pick.partido))
-  const matchOptions = useMemo(() => {
+  const totalEvents = countEvents(picks)
+  const leagueOptions = useMemo(() => {
     const scoped = filters.fecha ? picks.filter((pick) => pick.fecha === filters.fecha) : picks
+    return uniq(scoped.map((pick) => pick.league))
+  }, [filters.fecha, picks])
+  const matchOptions = useMemo(() => {
+    const scoped = picks.filter((pick) => {
+      if (filters.fecha && pick.fecha !== filters.fecha) return false
+      if (filters.league && pick.league !== filters.league) return false
+      return true
+    })
     const uniqueByMatch = new Map<string, ProcessedPick>()
     for (const pick of scoped) {
       if (!uniqueByMatch.has(pick.partido)) uniqueByMatch.set(pick.partido, pick)
     }
     return sortByKickoff([...uniqueByMatch.values()]).map((pick) => pick.partido)
-  }, [filters.fecha, picks])
+  }, [filters.fecha, filters.league, picks])
   const dates = uniqDates(picks.map((pick) => pick.fecha))
   const marketTypes = uniq(picks.map((pick) => pick.marketType))
   const changeDate = (fecha: string) => setFilters({ ...defaultFilters, fecha })
   const resetFilters = () => setFilters(defaultFilters)
+
+  useEffect(() => {
+    if (filters.league && !leagueOptions.includes(filters.league)) {
+      setFilters((current) => ({ ...current, league: '', partido: '' }))
+    }
+  }, [filters.league, leagueOptions])
 
   useEffect(() => {
     if (filters.partido && !matchOptions.includes(filters.partido)) {
@@ -807,7 +832,7 @@ export function ProcessedBettingDashboard() {
         </section>
 
         <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-7">
-          <Kpi label="Partidos" value={matches.length.toString()} />
+          <Kpi label="Partidos" value={totalEvents.toString()} />
           <Kpi label="Con cuota 10Bet/API" value={withApiOdds.length.toString()} />
           <Kpi label="Con cuota Betano" value={withBetanoOdds.length.toString()} />
           <Kpi label="EV+ 10Bet/API" value={positiveApiEv.length.toString()} tone="green" />
@@ -817,8 +842,9 @@ export function ProcessedBettingDashboard() {
         </section>
 
         <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
-          <div className="grid gap-3 lg:grid-cols-4 xl:grid-cols-8">
+          <div className="grid gap-3 lg:grid-cols-4 xl:grid-cols-9">
             <Select label="Fecha" value={filters.fecha} onChange={changeDate} options={dates} />
+            <Select label="Liga" value={filters.league} onChange={(value) => setFilters({ ...filters, league: value, partido: '' })} options={leagueOptions} />
             <Select label="Partido" value={filters.partido} onChange={(value) => setFilters({ ...filters, partido: value })} options={matchOptions} />
             <Select
               label="Mercado"
@@ -845,7 +871,7 @@ export function ProcessedBettingDashboard() {
               value={filters.query}
               onChange={(event) => setFilters({ ...filters, query: event.target.value })}
               className="w-full rounded-md border border-slate-300 bg-white py-2 pl-9 pr-3 text-sm dark:border-slate-700 dark:bg-slate-950"
-              placeholder="Buscar partido, pick o mercado"
+              placeholder="Buscar liga, partido, pick o mercado"
             />
           </label>
           <button
@@ -860,6 +886,7 @@ export function ProcessedBettingDashboard() {
         <nav className="flex gap-2 overflow-x-auto rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
           <TabButton active={view === 'main'} onClick={() => setView('main')} label="Panel principal" count={filteredMain.length} />
           <TabButton active={view === 'matches'} onClick={() => setView('matches')} label="Vista por partido" count={Object.keys(groupByMatch(filteredMain)).length} />
+          <TabButton active={view === 'leagues'} onClick={() => setView('leagues')} label="Ligas" count={Object.keys(groupByLeague(filteredMain)).length} />
           <TabButton active={view === 'simulation'} onClick={() => setView('simulation')} label="Simulacion Betano" count={Object.keys(groupByMatch(simulationPicks)).length} />
           <TabButton active={view === 'guide'} onClick={() => setView('guide')} label="Guia de decision" />
           <TabButton active={view === 'userHistory'} onClick={() => setView('userHistory')} label="Mi seguimiento" count={suggestedUserHistory.length} />
@@ -869,6 +896,7 @@ export function ProcessedBettingDashboard() {
 
         {view === 'main' && (filteredMain.length ? <PicksTable picks={filteredMain} sortKey={sortKey} setSortKey={setSortKey} /> : <EmptyFilteredState onReset={resetFilters} />)}
         {view === 'matches' && (filteredMain.length ? <MatchCards picks={filteredMain} /> : <EmptyFilteredState onReset={resetFilters} />)}
+        {view === 'leagues' && (filteredMain.length ? <LeagueView picks={filteredMain} /> : <EmptyFilteredState onReset={resetFilters} />)}
         {view === 'simulation' && (
           <BetanoSimulation
             picks={simulationPicks}
@@ -1391,9 +1419,10 @@ function PicksTable({ picks, sortKey, setSortKey }: { picks: ProcessedPick[]; so
         ))}
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-[1420px] text-left text-sm">
+        <table className="min-w-[1540px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-950">
             <tr>
+              <th className="px-4 py-3">Liga</th>
               <th className="px-4 py-3">Partido</th>
               <th className="px-4 py-3">Hora</th>
               <th className="px-4 py-3">Pick</th>
@@ -1414,6 +1443,7 @@ function PicksTable({ picks, sortKey, setSortKey }: { picks: ProcessedPick[]; so
           <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
             {picks.map((pick) => (
               <tr key={pick.id}>
+                <td className="px-4 py-3"><Badge className="border-slate-300 text-slate-700 dark:border-slate-700 dark:text-slate-200">{pick.league}</Badge></td>
                 <td className="px-4 py-3 font-semibold">{pick.partido}</td>
                 <td className="px-4 py-3">{pick.hora}</td>
                 <td className="px-4 py-3">{pick.pick}</td>
@@ -1627,6 +1657,123 @@ function BetanoSimulation({
   )
 }
 
+function groupByLeague(picks: ProcessedPick[]) {
+  return picks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
+    const league = pick.league || 'Liga no disponible'
+    acc[league] = [...(acc[league] ?? []), pick]
+    return acc
+  }, {})
+}
+
+function LeagueView({ picks }: { picks: ProcessedPick[] }) {
+  const groups = Object.entries(groupByLeague(picks)).sort(([, aPicks], [, bPicks]) => {
+    const eventDiff = countEvents(bPicks) - countEvents(aPicks)
+    if (eventDiff !== 0) return eventDiff
+    return bPicks.length - aPicks.length
+  })
+  const hasMissingLeague = groups.some(([league]) => league === 'Liga no disponible')
+
+  return (
+    <section className="space-y-4">
+      {hasMissingLeague && (
+        <div className="rounded-lg border border-amber-300 bg-amber-50 p-4 text-sm text-amber-900 dark:border-amber-800 dark:bg-amber-950/30 dark:text-amber-100">
+          Algunos reportes no incluyen columna de liga. Esos mercados se agrupan como <strong>Liga no disponible</strong>; para separarlos mejor, carga CSV/DB con campos <strong>liga</strong>, <strong>league</strong> o <strong>competition</strong>.
+        </div>
+      )}
+
+      <section className="grid gap-4 xl:grid-cols-2">
+        {groups.map(([league, leaguePicks]) => {
+          const events = Object.entries(groupByMatch(leaguePicks)).sort(([, aPicks], [, bPicks]) => pickTimestamp(aPicks[0]) - pickTimestamp(bPicks[0]))
+          const positiveEv = leaguePicks.filter((pick) => pick.isPositiveEV)
+          const betano = leaguePicks.filter((pick) => pick.hasBetanoOdds)
+          const avgProbability = leaguePicks.length
+            ? leaguePicks.reduce((sum, pick) => sum + pick.probabilityPct, 0) / leaguePicks.length
+            : 0
+          const recommended = events.flatMap(([, matchPicks]) => createSuggestedParlay(matchPicks, 4))
+          const topPicks = [...leaguePicks]
+            .filter((pick) => pick.hasOdds)
+            .sort((a, b) => b.probability - a.probability || b.pickScore - a.pickScore)
+            .slice(0, 5)
+          const best = topPicks[0]
+
+          return (
+            <article key={league} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+              <div className="flex flex-wrap items-start justify-between gap-3">
+                <div>
+                  <p className="text-xs font-semibold uppercase text-slate-500">Liga</p>
+                  <h2 className="text-xl font-bold">{league}</h2>
+                </div>
+                <Badge className="border-teal-500/40 bg-teal-500/10 text-teal-800 dark:text-teal-100">
+                  {events.length} partidos
+                </Badge>
+              </div>
+
+              <div className="mt-4 grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+                <Kpi label="Mercados" value={leaguePicks.length.toString()} />
+                <Kpi label="EV+" value={positiveEv.length.toString()} tone="green" />
+                <Kpi label="Betano" value={betano.length.toString()} />
+                <Kpi label="Prob. media" value={formatPct(avgProbability)} />
+              </div>
+
+              <div className="mt-4 grid gap-3 lg:grid-cols-[1fr_1fr]">
+                <div className="rounded-lg border border-slate-200 p-3 dark:border-slate-800">
+                  <p className="text-sm font-semibold">Mejor oportunidad</p>
+                  {best ? (
+                    <div className="mt-2 space-y-1 text-sm">
+                      <p className="font-semibold">{best.partido}</p>
+                      <p>{best.pick}</p>
+                      <p className="text-slate-600 dark:text-slate-300">
+                        Prob. {formatPct(best.probabilityPct)} - Cuota {formatDecimal(best.odds)} - Score {best.pickScore.toFixed(1)}
+                      </p>
+                    </div>
+                  ) : (
+                    <p className="mt-2 text-sm text-slate-500">No hay mercados con cuota en esta liga.</p>
+                  )}
+                </div>
+
+                <div className="rounded-lg border border-slate-200 p-3 dark:border-slate-800">
+                  <p className="text-sm font-semibold">Combinadas sugeridas</p>
+                  <p className="mt-2 text-2xl font-bold text-teal-700 dark:text-teal-300">{recommended.length}</p>
+                  <p className="text-xs text-slate-500">Selecciones generadas desde partidos de esta liga con riesgo Bajo/Medio y EV+.</p>
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <p className="mb-2 text-sm font-semibold">Top picks por probabilidad</p>
+                <div className="space-y-2">
+                  {topPicks.map((pick) => <PickLine key={pick.id} pick={pick} />)}
+                  {!topPicks.length && <p className="text-sm text-slate-500">No disponible con los filtros actuales.</p>}
+                </div>
+              </div>
+
+              <div className="mt-4">
+                <p className="mb-2 text-sm font-semibold">Partidos de la liga</p>
+                <div className="space-y-2">
+                  {events.slice(0, 8).map(([event, matchPicks]) => {
+                    const label = eventLabelFromKey(event)
+                    const bestMatchPick = [...matchPicks].sort((a, b) => b.probability - a.probability || b.pickScore - a.pickScore)[0]
+                    return (
+                      <div key={event} className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-slate-50 p-2 text-sm dark:bg-slate-950">
+                        <span>
+                          <strong>{label.partido}</strong>
+                          <span className="ml-2 text-slate-500">{label.fecha} {label.hora}</span>
+                        </span>
+                        <span className="text-slate-600 dark:text-slate-300">
+                          {matchPicks.length} mercados - mejor prob. {formatPct(bestMatchPick?.probabilityPct ?? null)}
+                        </span>
+                      </div>
+                    )
+                  })}
+                </div>
+              </div>
+            </article>
+          )
+        })}
+      </section>
+    </section>
+  )
+}
+
 function MatchCards({ picks }: { picks: ProcessedPick[] }) {
   const grouped = groupByMatch(picks)
   return (
@@ -1713,13 +1860,14 @@ function NoOddsTable({ picks }: { picks: ProcessedPick[] }) {
         </div>
       </div>
       <div className="overflow-x-auto">
-        <table className="min-w-[900px] text-left text-sm">
+        <table className="min-w-[1020px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-950">
-            <tr><th className="px-4 py-3">Partido</th><th className="px-4 py-3">Hora</th><th className="px-4 py-3">Pick</th><th className="px-4 py-3">Probabilidad</th><th className="px-4 py-3">Confianza</th><th className="px-4 py-3">Estado</th></tr>
+            <tr><th className="px-4 py-3">Liga</th><th className="px-4 py-3">Partido</th><th className="px-4 py-3">Hora</th><th className="px-4 py-3">Pick</th><th className="px-4 py-3">Probabilidad</th><th className="px-4 py-3">Confianza</th><th className="px-4 py-3">Estado</th></tr>
           </thead>
           <tbody className="divide-y divide-slate-200 text-slate-600 dark:divide-slate-800 dark:text-slate-300">
             {picks.map((pick) => (
               <tr key={pick.id} className="bg-slate-50/50 dark:bg-slate-950/30">
+                <td className="px-4 py-3">{pick.league}</td>
                 <td className="px-4 py-3 font-semibold">{pick.partido}</td>
                 <td className="px-4 py-3">{pick.hora}</td>
                 <td className="px-4 py-3">{pick.pick}</td>
