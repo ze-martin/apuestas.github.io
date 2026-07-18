@@ -1,9 +1,598 @@
 {
-  "generatedAt": "2026-07-16T03:53:22.644Z",
+  "generatedAt": "2026-07-18T16:22:32.009Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
-  "reportCount": 19,
-  "suggestedPickCount": 184,
+  "reportCount": 23,
+  "suggestedPickCount": 228,
   "settlements": [
+    {
+      "key": "2026-07-19|14:00|Spain vs Argentina|Tarjetas total -4.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591866,
+        "status": "NS",
+        "home": "Spain",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-19|14:00|Spain vs Argentina|Goles +1.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591866,
+        "status": "NS",
+        "home": "Spain",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-19|14:00|Spain vs Argentina|Local goles +0.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591866,
+        "status": "NS",
+        "home": "Spain",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-19|14:00|Spain vs Argentina|Visita goles +0.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591866,
+        "status": "NS",
+        "home": "Spain",
+        "away": "Argentina"
+      }
+    },
+    {
+      "key": "2026-07-19|19:00|Alianza Lima vs Sport Huancayo|Corners total -8.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-18|16:00|France vs England|Visita goles -2.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591865,
+        "status": "NS",
+        "home": "France",
+        "away": "England"
+      }
+    },
+    {
+      "key": "2026-07-18|16:00|France vs England|Goles +1.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591865,
+        "status": "NS",
+        "home": "France",
+        "away": "England"
+      }
+    },
+    {
+      "key": "2026-07-18|16:00|France vs England|Local corners +4.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591865,
+        "status": "NS",
+        "home": "France",
+        "away": "England"
+      }
+    },
+    {
+      "key": "2026-07-18|16:00|France vs England|Local goles -2.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1591865,
+        "status": "NS",
+        "home": "France",
+        "away": "England"
+      }
+    },
+    {
+      "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|1T +0.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549413,
+        "status": "NS",
+        "home": "Cusco",
+        "away": "Alianza Atletico"
+      }
+    },
+    {
+      "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|Visita goles +0.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549413,
+        "status": "NS",
+        "home": "Cusco",
+        "away": "Alianza Atletico"
+      }
+    },
+    {
+      "key": "2026-07-17|13:00|FC Cajamarca vs Juan Pablo II College|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549414,
+        "status": "FT",
+        "score": "2-2",
+        "halftime": "0-0",
+        "home": "FC Cajamarca",
+        "away": "Juan Pablo II College"
+      }
+    },
+    {
+      "key": "2026-07-17|13:00|FC Cajamarca vs Juan Pablo II College|1T +0.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1549414,
+        "status": "FT",
+        "score": "2-2",
+        "halftime": "0-0",
+        "home": "FC Cajamarca",
+        "away": "Juan Pablo II College"
+      }
+    },
+    {
+      "key": "2026-07-17|13:00|FC Cajamarca vs Juan Pablo II College|Corners total -9.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549414,
+        "status": "FT",
+        "score": "2-2",
+        "halftime": "0-0",
+        "home": "FC Cajamarca",
+        "away": "Juan Pablo II College"
+      }
+    },
+    {
+      "key": "2026-07-17|15:15|Sporting Cristal vs Deportivo Garcilaso|Corners total -11.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1549418,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Sporting Cristal",
+        "away": "Deportivo Garcilaso"
+      }
+    },
+    {
+      "key": "2026-07-17|16:45|San Lorenzo vs Deportivo Riestra|Visita goles -2.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540061,
+        "status": "PEN",
+        "score": "1-1",
+        "halftime": "1-0",
+        "home": "San Lorenzo",
+        "away": "Deportivo Riestra"
+      }
+    },
+    {
+      "key": "2026-07-17|16:45|San Lorenzo vs Deportivo Riestra|DNB local|Betano",
+      "settlement": "Devuelto",
+      "source": "API-Football",
+      "reason": "Apuesta devuelta: la seleccion no gana ni pierde y el stake se devuelve.",
+      "fixture": {
+        "id": 1540061,
+        "status": "PEN",
+        "score": "1-1",
+        "halftime": "1-0",
+        "home": "San Lorenzo",
+        "away": "Deportivo Riestra"
+      }
+    },
+    {
+      "key": "2026-07-17|16:45|San Lorenzo vs Deportivo Riestra|Local goles +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540061,
+        "status": "PEN",
+        "score": "1-1",
+        "halftime": "1-0",
+        "home": "San Lorenzo",
+        "away": "Deportivo Riestra"
+      }
+    },
+    {
+      "key": "2026-07-17|16:45|San Lorenzo vs Deportivo Riestra|1T +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540061,
+        "status": "PEN",
+        "score": "1-1",
+        "halftime": "1-0",
+        "home": "San Lorenzo",
+        "away": "Deportivo Riestra"
+      }
+    },
+    {
+      "key": "2026-07-17|17:30|Bahia vs Chapecoense-sc|Tarjetas total +3.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492140,
+        "status": "FT",
+        "score": "2-0",
+        "halftime": "2-0",
+        "home": "Bahia",
+        "away": "Chapecoense-sc"
+      }
+    },
+    {
+      "key": "2026-07-17|17:30|Bahia vs Chapecoense-sc|1T -1.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492140,
+        "status": "FT",
+        "score": "2-0",
+        "halftime": "2-0",
+        "home": "Bahia",
+        "away": "Chapecoense-sc"
+      }
+    },
+    {
+      "key": "2026-07-17|17:30|Bahia vs Chapecoense-sc|Corners total +9.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492140,
+        "status": "FT",
+        "score": "2-0",
+        "halftime": "2-0",
+        "home": "Bahia",
+        "away": "Chapecoense-sc"
+      }
+    },
+    {
+      "key": "2026-07-17|18:00|Fluminense vs RB Bragantino|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492295,
+        "status": "FT",
+        "score": "1-1",
+        "halftime": "0-1",
+        "home": "Fluminense",
+        "away": "RB Bragantino"
+      }
+    },
+    {
+      "key": "2026-07-17|18:00|Fluminense vs RB Bragantino|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492295,
+        "status": "FT",
+        "score": "1-1",
+        "halftime": "0-1",
+        "home": "Fluminense",
+        "away": "RB Bragantino"
+      }
+    },
+    {
+      "key": "2026-07-17|18:00|Mirassol vs Gremio|Tarjetas total -6.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492297,
+        "status": "FT",
+        "score": "2-1",
+        "halftime": "2-0",
+        "home": "Mirassol",
+        "away": "Gremio"
+      }
+    },
+    {
+      "key": "2026-07-17|18:00|Mirassol vs Gremio|1T -1.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492297,
+        "status": "FT",
+        "score": "2-1",
+        "halftime": "2-0",
+        "home": "Mirassol",
+        "away": "Gremio"
+      }
+    },
+    {
+      "key": "2026-07-17|19:45|River Plate vs Aldosivi|Local goles -2.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540060,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "0-2",
+        "home": "River Plate",
+        "away": "Aldosivi"
+      }
+    },
+    {
+      "key": "2026-07-17|19:45|River Plate vs Aldosivi|1T -1.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1540060,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "0-2",
+        "home": "River Plate",
+        "away": "Aldosivi"
+      }
+    },
+    {
+      "key": "2026-07-17|19:45|River Plate vs Aldosivi|Goles -3.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1540060,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "0-2",
+        "home": "River Plate",
+        "away": "Aldosivi"
+      }
+    },
+    {
+      "key": "2026-07-17|20:00|Cienciano vs FBC Melgar|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549412,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "1-1",
+        "home": "Cienciano",
+        "away": "FBC Melgar"
+      }
+    },
+    {
+      "key": "2026-07-17|20:00|Cienciano vs FBC Melgar|Tarjetas total -5.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1549412,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "1-1",
+        "home": "Cienciano",
+        "away": "FBC Melgar"
+      }
+    },
+    {
+      "key": "2026-07-17|20:00|Cienciano vs FBC Melgar|Corners total -10.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549412,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "1-1",
+        "home": "Cienciano",
+        "away": "FBC Melgar"
+      }
+    },
+    {
+      "key": "2026-07-17|20:00|Cienciano vs FBC Melgar|Visita goles +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549412,
+        "status": "FT",
+        "score": "1-3",
+        "halftime": "1-1",
+        "home": "Cienciano",
+        "away": "FBC Melgar"
+      }
+    },
+    {
+      "key": "2026-07-16|16:45|Racing Club vs Defensa Y Justicia|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540059,
+        "status": "FT",
+        "score": "4-1",
+        "halftime": "2-0",
+        "home": "Racing Club",
+        "away": "Defensa Y Justicia"
+      }
+    },
+    {
+      "key": "2026-07-16|16:45|Racing Club vs Defensa Y Justicia|DNB local|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540059,
+        "status": "FT",
+        "score": "4-1",
+        "halftime": "2-0",
+        "home": "Racing Club",
+        "away": "Defensa Y Justicia"
+      }
+    },
+    {
+      "key": "2026-07-16|16:45|Racing Club vs Defensa Y Justicia|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540059,
+        "status": "FT",
+        "score": "4-1",
+        "halftime": "2-0",
+        "home": "Racing Club",
+        "away": "Defensa Y Justicia"
+      }
+    },
+    {
+      "key": "2026-07-16|17:30|Botafogo vs Santos|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1576751,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "1-0",
+        "home": "Botafogo U20",
+        "away": "Santos U20"
+      }
+    },
+    {
+      "key": "2026-07-16|17:30|Botafogo vs Santos|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1576751,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "1-0",
+        "home": "Botafogo U20",
+        "away": "Santos U20"
+      }
+    },
+    {
+      "key": "2026-07-16|17:30|Botafogo vs Santos|Local corners -5.5|10Bet",
+      "settlement": "Sin dato oficial",
+      "source": "API-Football",
+      "reason": "API-Football no devolvio estadistica suficiente para este mercado. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
+      "fixture": {
+        "id": 1576751,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "1-0",
+        "home": "Botafogo U20",
+        "away": "Santos U20"
+      }
+    },
+    {
+      "key": "2026-07-16|17:30|Vitoria vs Vasco DA Gama|Local corners -5.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492299,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Vitoria",
+        "away": "Vasco DA Gama"
+      }
+    },
+    {
+      "key": "2026-07-16|17:30|Vitoria vs Vasco DA Gama|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492299,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Vitoria",
+        "away": "Vasco DA Gama"
+      }
+    },
+    {
+      "key": "2026-07-16|17:30|Vitoria vs Vasco DA Gama|Corners total -9.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492299,
+        "status": "FT",
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Vitoria",
+        "away": "Vasco DA Gama"
+      }
+    },
+    {
+      "key": "2026-07-16|19:45|Sarmiento Junin vs Boca Juniors|1T -1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540103,
+        "status": "FT",
+        "score": "0-2",
+        "halftime": "0-0",
+        "home": "Sarmiento Junin",
+        "away": "Boca Juniors"
+      }
+    },
+    {
+      "key": "2026-07-16|19:45|Sarmiento Junin vs Boca Juniors|Goles -3.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1540103,
+        "status": "FT",
+        "score": "0-2",
+        "halftime": "0-0",
+        "home": "Sarmiento Junin",
+        "away": "Boca Juniors"
+      }
+    },
     {
       "key": "2026-07-15|14:00|England vs Argentina|Tarjetas total -4.5|Betano",
       "settlement": "Acertado",
@@ -2582,14 +3171,14 @@
     }
   ],
   "requestSummary": {
-    "uniqueMatches": 53,
-    "fixtureLookups": 20,
-    "fixtureStatistics": 45,
-    "fixtureEvents": 7,
+    "uniqueMatches": 69,
+    "fixtureLookups": 24,
+    "fixtureStatistics": 54,
+    "fixtureEvents": 10,
     "cacheHits": 0,
-    "cacheMisses": 72,
-    "apiRequests": 72,
-    "estimatedExtraRequestsPerMatch": 1.36,
+    "cacheMisses": 88,
+    "apiRequests": 88,
+    "estimatedExtraRequestsPerMatch": 1.28,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
