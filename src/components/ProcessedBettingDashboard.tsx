@@ -831,8 +831,9 @@ export function ProcessedBettingDashboard() {
           </div>
         </section>
 
-        <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-7">
+        <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-8">
           <Kpi label="Partidos" value={totalEvents.toString()} />
+          <Kpi label="Ligas" value={leagueOptions.length.toString()} />
           <Kpi label="Con cuota 10Bet/API" value={withApiOdds.length.toString()} />
           <Kpi label="Con cuota Betano" value={withBetanoOdds.length.toString()} />
           <Kpi label="EV+ 10Bet/API" value={positiveApiEv.length.toString()} tone="green" />
@@ -883,10 +884,10 @@ export function ProcessedBettingDashboard() {
           </button>
         </section>
 
-        <nav className="flex gap-2 overflow-x-auto rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
+        <nav className="flex flex-wrap gap-2 rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
           <TabButton active={view === 'main'} onClick={() => setView('main')} label="Panel principal" count={filteredMain.length} />
-          <TabButton active={view === 'matches'} onClick={() => setView('matches')} label="Vista por partido" count={Object.keys(groupByMatch(filteredMain)).length} />
           <TabButton active={view === 'leagues'} onClick={() => setView('leagues')} label="Ligas" count={Object.keys(groupByLeague(filteredMain)).length} />
+          <TabButton active={view === 'matches'} onClick={() => setView('matches')} label="Vista por partido" count={Object.keys(groupByMatch(filteredMain)).length} />
           <TabButton active={view === 'simulation'} onClick={() => setView('simulation')} label="Simulacion Betano" count={Object.keys(groupByMatch(simulationPicks)).length} />
           <TabButton active={view === 'guide'} onClick={() => setView('guide')} label="Guia de decision" />
           <TabButton active={view === 'userHistory'} onClick={() => setView('userHistory')} label="Mi seguimiento" count={suggestedUserHistory.length} />

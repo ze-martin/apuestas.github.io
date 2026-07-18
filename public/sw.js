@@ -1,4 +1,4 @@
-const CACHE_NAME = 'protocolo-apuestas-shell-v1'
+const CACHE_NAME = 'protocolo-apuestas-shell-v2'
 const SHELL_ASSETS = ['./', './manifest.webmanifest', './favicon.svg']
 
 self.addEventListener('install', (event) => {
@@ -21,9 +21,16 @@ self.addEventListener('fetch', (event) => {
 
   const url = new URL(request.url)
   const isFreshData = url.pathname.endsWith('.json') || url.pathname.includes('/reports/')
+  const isAppShell = request.mode === 'navigate' || url.pathname.endsWith('.html') || url.pathname.includes('/assets/')
 
-  if (isFreshData) {
-    event.respondWith(fetch(request).catch(() => caches.match(request)))
+  if (isFreshData || isAppShell) {
+    event.respondWith(
+      fetch(request).then((response) => {
+        const copy = response.clone()
+        caches.open(CACHE_NAME).then((cache) => cache.put(request, copy))
+        return response
+      }).catch(() => caches.match(request)),
+    )
     return
   }
 
