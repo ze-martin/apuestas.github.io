@@ -98,6 +98,7 @@ export async function settlePicks(picks, forceRefresh) {
     cacheHits: 0,
     cacheMisses: 0,
     matches: new Set(),
+    liveMatches: new Set(),
   }
   const fixturesByDate = new Map()
   const statisticsByFixture = new Map()
@@ -115,12 +116,13 @@ export async function settlePicks(picks, forceRefresh) {
     }
 
     const { fixture, reversed } = fixtureMatch
+    if (fixtureIsLive(fixture)) requestSummary.liveMatches.add(matchKey)
     const settlementPick = reversed ? remapPickForReversedFixture(pick) : pick
     const needsStats = needsFixtureStatistics(pick)
     const stats = needsStats
       ? await getFixtureStatistics(fixture.fixture.id, statisticsByFixture, requestSummary, forceRefresh, fixtureIsFinished(fixture))
       : null
-    const events = settlementPick.marketType === 'cards' && fixtureIsFinished(fixture)
+    const events = settlementPick.marketType === 'cards' && (fixtureIsFinished(fixture) || fixtureIsLive(fixture))
       ? await getFixtureEvents(fixture.fixture.id, eventsByFixture, requestSummary, forceRefresh)
       : null
     settlements.push(settlePick(settlementPick, fixture, stats, events, reversed))
@@ -137,6 +139,7 @@ export async function settlePicks(picks, forceRefresh) {
       fixtureEvents: requestSummary.fixtureEvents,
       cacheHits: requestSummary.cacheHits,
       cacheMisses: requestSummary.cacheMisses,
+      liveMatches: requestSummary.liveMatches.size,
       apiRequests: apiMisses,
       estimatedExtraRequestsPerMatch: uniqueMatches ? Number((apiMisses / uniqueMatches).toFixed(2)) : 0,
       maxRecommendedRequestsPerMatch: 3,
@@ -339,6 +342,10 @@ function fixtureIsFinished(fixture) {
   return ['FT', 'AET', 'PEN'].includes(fixture.fixture?.status?.short)
 }
 
+function fixtureIsLive(fixture) {
+  return ['1H', 'HT', '2H', 'ET', 'BT', 'P', 'SUSP', 'INT', 'LIVE'].includes(fixture.fixture?.status?.short)
+}
+
 function todayYmd() {
   if (process.env.SETTLEMENT_TODAY) return process.env.SETTLEMENT_TODAY
   const timeZone = process.env.SETTLEMENT_TIMEZONE || 'America/Lima'
@@ -439,7 +446,9 @@ function compareLine(value, direction, line) {
 
 function settlePick(pick, fixture, stats, events = null, reversed = false) {
   if (!fixtureIsFinished(fixture)) {
-    const reason = `Fixture ${fixture.fixture?.status?.short || ''}: ${fixture.fixture?.status?.long || 'no finalizado'}.`
+    const reason = fixtureIsLive(fixture)
+      ? liveReason(fixture)
+      : `Fixture ${fixture.fixture?.status?.short || ''}: ${fixture.fixture?.status?.long || 'no finalizado'}.`
     return isBeforeToday(pick.fecha) ? noOfficialData(pick, reason, fixture) : pending(pick, reason, fixture)
   }
 
@@ -490,14 +499,7 @@ function settlePick(pick, fixture, stats, events = null, reversed = false) {
     settlement: outcome.settlement,
     source: 'API-Football',
     reason: reversed ? `${outcome.reason} Fixture encontrado con equipos invertidos respecto al reporte.` : outcome.reason,
-    fixture: {
-      id: fixture.fixture?.id,
-      status: fixture.fixture?.status?.short,
-      score: `${homeGoals}-${awayGoals}`,
-      halftime: `${halfHome ?? 'N/D'}-${halfAway ?? 'N/D'}`,
-      home: fixture.teams?.home?.name,
-      away: fixture.teams?.away?.name,
-    },
+    fixture: fixtureSummary(fixture),
   }
 }
 
@@ -516,33 +518,48 @@ function pending(pick, reason, fixture = null) {
     settlement: 'Pendiente',
     source: 'API-Football',
     reason,
-    fixture: fixture ? {
-      id: fixture.fixture?.id,
-      status: fixture.fixture?.status?.short,
-      home: fixture.teams?.home?.name,
-      away: fixture.teams?.away?.name,
-    } : null,
+    fixture: fixture ? fixtureSummary(fixture) : null,
   }
 }
 
 function noOfficialData(pick, reason, fixture = null) {
-  const homeGoals = fixture?.goals?.home
-  const awayGoals = fixture?.goals?.away
-  const halfHome = fixture?.score?.halftime?.home
-  const halfAway = fixture?.score?.halftime?.away
   return {
     key: pick.key,
     settlement: 'Sin dato oficial',
     source: 'API-Football',
     reason: `${reason} Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.`,
-    fixture: fixture ? {
-      id: fixture.fixture?.id,
-      status: fixture.fixture?.status?.short,
-      score: homeGoals !== undefined && awayGoals !== undefined ? `${homeGoals}-${awayGoals}` : undefined,
-      halftime: halfHome !== undefined || halfAway !== undefined ? `${halfHome ?? 'N/D'}-${halfAway ?? 'N/D'}` : undefined,
-      home: fixture.teams?.home?.name,
-      away: fixture.teams?.away?.name,
-    } : null,
+    fixture: fixture ? fixtureSummary(fixture) : null,
+  }
+}
+
+function liveReason(fixture) {
+  const status = fixture.fixture?.status || {}
+  const score = fixtureScore(fixture)
+  const minute = status.elapsed ? ` minuto ${status.elapsed}` : ''
+  return `Partido en vivo${minute}: ${status.short || ''} ${status.long || ''}. Marcador provisional ${score || 'N/D'}. No se liquida hasta el final.`
+}
+
+function fixtureScore(fixture) {
+  const homeGoals = fixture?.goals?.home
+  const awayGoals = fixture?.goals?.away
+  return homeGoals !== undefined && awayGoals !== undefined && homeGoals !== null && awayGoals !== null
+    ? `${homeGoals}-${awayGoals}`
+    : undefined
+}
+
+function fixtureSummary(fixture) {
+  const halfHome = fixture?.score?.halftime?.home
+  const halfAway = fixture?.score?.halftime?.away
+  return {
+    id: fixture.fixture?.id,
+    status: fixture.fixture?.status?.short,
+    statusLong: fixture.fixture?.status?.long,
+    elapsed: fixture.fixture?.status?.elapsed,
+    live: fixtureIsLive(fixture),
+    score: fixtureScore(fixture),
+    halftime: halfHome !== undefined || halfAway !== undefined ? `${halfHome ?? 'N/D'}-${halfAway ?? 'N/D'}` : undefined,
+    home: fixture.teams?.home?.name,
+    away: fixture.teams?.away?.name,
   }
 }
 

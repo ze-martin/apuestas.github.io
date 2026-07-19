@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-19T00:39:56.716Z",
+  "generatedAt": "2026-07-19T00:55:32.987Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 23,
   "suggestedPickCount": 228,
@@ -12,6 +12,10 @@
       "fixture": {
         "id": 1591866,
         "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
         "home": "Spain",
         "away": "Argentina"
       }
@@ -24,6 +28,10 @@
       "fixture": {
         "id": 1591866,
         "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
         "home": "Spain",
         "away": "Argentina"
       }
@@ -36,6 +44,10 @@
       "fixture": {
         "id": 1591866,
         "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
         "home": "Spain",
         "away": "Argentina"
       }
@@ -48,6 +60,10 @@
       "fixture": {
         "id": 1591866,
         "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
         "home": "Spain",
         "away": "Argentina"
       }
@@ -67,6 +83,9 @@
       "fixture": {
         "id": 1591865,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-6",
         "halftime": "0-4",
         "home": "France",
@@ -81,6 +100,9 @@
       "fixture": {
         "id": 1591865,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-6",
         "halftime": "0-4",
         "home": "France",
@@ -95,6 +117,9 @@
       "fixture": {
         "id": 1591865,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-6",
         "halftime": "0-4",
         "home": "France",
@@ -109,6 +134,9 @@
       "fixture": {
         "id": 1591865,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-6",
         "halftime": "0-4",
         "home": "France",
@@ -119,10 +147,15 @@
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|1T +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Fixture 2H: Second Half.",
+      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final.",
       "fixture": {
         "id": 1549413,
         "status": "2H",
+        "statusLong": "Second Half",
+        "elapsed": 65,
+        "live": true,
+        "score": "2-1",
+        "halftime": "2-0",
         "home": "Cusco",
         "away": "Alianza Atletico"
       }
@@ -131,10 +164,15 @@
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|Visita goles +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Fixture 2H: Second Half.",
+      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final.",
       "fixture": {
         "id": 1549413,
         "status": "2H",
+        "statusLong": "Second Half",
+        "elapsed": 65,
+        "live": true,
+        "score": "2-1",
+        "halftime": "2-0",
         "home": "Cusco",
         "away": "Alianza Atletico"
       }
@@ -147,6 +185,9 @@
       "fixture": {
         "id": 1549414,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-2",
         "halftime": "0-0",
         "home": "FC Cajamarca",
@@ -161,6 +202,9 @@
       "fixture": {
         "id": 1549414,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-2",
         "halftime": "0-0",
         "home": "FC Cajamarca",
@@ -175,6 +219,9 @@
       "fixture": {
         "id": 1549414,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-2",
         "halftime": "0-0",
         "home": "FC Cajamarca",
@@ -189,6 +236,9 @@
       "fixture": {
         "id": 1549418,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "Sporting Cristal",
@@ -203,6 +253,9 @@
       "fixture": {
         "id": 1540061,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "1-0",
         "home": "San Lorenzo",
@@ -217,6 +270,9 @@
       "fixture": {
         "id": 1540061,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "1-0",
         "home": "San Lorenzo",
@@ -231,6 +287,9 @@
       "fixture": {
         "id": 1540061,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "1-0",
         "home": "San Lorenzo",
@@ -245,6 +304,9 @@
       "fixture": {
         "id": 1540061,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "1-0",
         "home": "San Lorenzo",
@@ -259,6 +321,9 @@
       "fixture": {
         "id": 1492140,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "2-0",
         "home": "Bahia",
@@ -273,6 +338,9 @@
       "fixture": {
         "id": 1492140,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "2-0",
         "home": "Bahia",
@@ -287,6 +355,9 @@
       "fixture": {
         "id": 1492140,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "2-0",
         "home": "Bahia",
@@ -301,6 +372,9 @@
       "fixture": {
         "id": 1492295,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "0-1",
         "home": "Fluminense",
@@ -315,6 +389,9 @@
       "fixture": {
         "id": 1492295,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "0-1",
         "home": "Fluminense",
@@ -329,6 +406,9 @@
       "fixture": {
         "id": 1492297,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "2-0",
         "home": "Mirassol",
@@ -343,6 +423,9 @@
       "fixture": {
         "id": 1492297,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "2-0",
         "home": "Mirassol",
@@ -357,6 +440,9 @@
       "fixture": {
         "id": 1540060,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "River Plate",
@@ -371,6 +457,9 @@
       "fixture": {
         "id": 1540060,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "River Plate",
@@ -385,6 +474,9 @@
       "fixture": {
         "id": 1540060,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "River Plate",
@@ -399,6 +491,9 @@
       "fixture": {
         "id": 1549412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "1-1",
         "home": "Cienciano",
@@ -413,6 +508,9 @@
       "fixture": {
         "id": 1549412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "1-1",
         "home": "Cienciano",
@@ -427,6 +525,9 @@
       "fixture": {
         "id": 1549412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "1-1",
         "home": "Cienciano",
@@ -441,6 +542,9 @@
       "fixture": {
         "id": 1549412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "1-1",
         "home": "Cienciano",
@@ -455,6 +559,9 @@
       "fixture": {
         "id": 1540059,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-1",
         "halftime": "2-0",
         "home": "Racing Club",
@@ -469,6 +576,9 @@
       "fixture": {
         "id": 1540059,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-1",
         "halftime": "2-0",
         "home": "Racing Club",
@@ -483,6 +593,9 @@
       "fixture": {
         "id": 1540059,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-1",
         "halftime": "2-0",
         "home": "Racing Club",
@@ -497,6 +610,9 @@
       "fixture": {
         "id": 1576751,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Botafogo U20",
@@ -511,6 +627,9 @@
       "fixture": {
         "id": 1576751,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Botafogo U20",
@@ -525,6 +644,9 @@
       "fixture": {
         "id": 1576751,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Botafogo U20",
@@ -539,6 +661,9 @@
       "fixture": {
         "id": 1492299,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "Vitoria",
@@ -553,6 +678,9 @@
       "fixture": {
         "id": 1492299,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "Vitoria",
@@ -567,6 +695,9 @@
       "fixture": {
         "id": 1492299,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "Vitoria",
@@ -581,6 +712,9 @@
       "fixture": {
         "id": 1540103,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-0",
         "home": "Sarmiento Junin",
@@ -595,6 +729,9 @@
       "fixture": {
         "id": 1540103,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-0",
         "home": "Sarmiento Junin",
@@ -609,6 +746,9 @@
       "fixture": {
         "id": 1586077,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "England",
@@ -623,6 +763,9 @@
       "fixture": {
         "id": 1586077,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "England",
@@ -637,6 +780,9 @@
       "fixture": {
         "id": 1586077,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "England",
@@ -651,6 +797,9 @@
       "fixture": {
         "id": 1586077,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "England",
@@ -665,6 +814,9 @@
       "fixture": {
         "id": 1585131,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-1",
         "home": "France",
@@ -679,6 +831,9 @@
       "fixture": {
         "id": 1585131,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-1",
         "home": "France",
@@ -693,6 +848,9 @@
       "fixture": {
         "id": 1585131,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-1",
         "home": "France",
@@ -707,6 +865,9 @@
       "fixture": {
         "id": 1585131,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-1",
         "home": "France",
@@ -721,6 +882,9 @@
       "fixture": {
         "id": 1581037,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-2",
         "halftime": "1-1",
         "home": "Norway",
@@ -735,6 +899,9 @@
       "fixture": {
         "id": 1581037,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-2",
         "halftime": "1-1",
         "home": "Norway",
@@ -749,6 +916,9 @@
       "fixture": {
         "id": 1581037,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-2",
         "halftime": "1-1",
         "home": "Norway",
@@ -763,6 +933,9 @@
       "fixture": {
         "id": 1581037,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-2",
         "halftime": "1-1",
         "home": "Norway",
@@ -777,6 +950,9 @@
       "fixture": {
         "id": 1582681,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-1",
         "halftime": "1-0",
         "home": "Argentina",
@@ -791,6 +967,9 @@
       "fixture": {
         "id": 1582681,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-1",
         "halftime": "1-0",
         "home": "Argentina",
@@ -805,6 +984,9 @@
       "fixture": {
         "id": 1582681,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-1",
         "halftime": "1-0",
         "home": "Argentina",
@@ -819,6 +1001,9 @@
       "fixture": {
         "id": 1582681,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-1",
         "halftime": "1-0",
         "home": "Argentina",
@@ -833,6 +1018,9 @@
       "fixture": {
         "id": 1581821,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Spain",
@@ -847,6 +1035,9 @@
       "fixture": {
         "id": 1581821,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Spain",
@@ -861,6 +1052,9 @@
       "fixture": {
         "id": 1581821,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Spain",
@@ -875,6 +1069,9 @@
       "fixture": {
         "id": 1581821,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Spain",
@@ -889,6 +1086,9 @@
       "fixture": {
         "id": 1578539,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "0-0",
         "home": "France",
@@ -903,6 +1103,9 @@
       "fixture": {
         "id": 1578539,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "0-0",
         "home": "France",
@@ -917,6 +1120,9 @@
       "fixture": {
         "id": 1578539,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "0-0",
         "home": "France",
@@ -931,6 +1137,9 @@
       "fixture": {
         "id": 1578539,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "0-0",
         "home": "France",
@@ -945,6 +1154,9 @@
       "fixture": {
         "id": 1576804,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Argentina",
@@ -959,6 +1171,9 @@
       "fixture": {
         "id": 1576804,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Argentina",
@@ -973,6 +1188,9 @@
       "fixture": {
         "id": 1576804,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Argentina",
@@ -987,6 +1205,9 @@
       "fixture": {
         "id": 1576804,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Argentina",
@@ -1001,6 +1222,9 @@
       "fixture": {
         "id": 1576805,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -1015,6 +1239,9 @@
       "fixture": {
         "id": 1576805,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -1029,6 +1256,9 @@
       "fixture": {
         "id": 1576805,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -1043,6 +1273,9 @@
       "fixture": {
         "id": 1576805,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -1057,6 +1290,9 @@
       "fixture": {
         "id": 1576756,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1071,6 +1307,9 @@
       "fixture": {
         "id": 1576756,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1085,6 +1324,9 @@
       "fixture": {
         "id": 1576756,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1099,6 +1341,9 @@
       "fixture": {
         "id": 1576756,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1113,6 +1358,9 @@
       "fixture": {
         "id": 1570715,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-4",
         "halftime": "1-2",
         "home": "USA",
@@ -1127,6 +1375,9 @@
       "fixture": {
         "id": 1570715,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-4",
         "halftime": "1-2",
         "home": "USA",
@@ -1141,6 +1392,9 @@
       "fixture": {
         "id": 1570715,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-4",
         "halftime": "1-2",
         "home": "USA",
@@ -1155,6 +1409,9 @@
       "fixture": {
         "id": 1568100,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "Brazil",
@@ -1169,6 +1426,9 @@
       "fixture": {
         "id": 1568100,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "Brazil",
@@ -1183,6 +1443,9 @@
       "fixture": {
         "id": 1568100,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-0",
         "home": "Brazil",
@@ -1197,6 +1460,9 @@
       "fixture": {
         "id": 1570714,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-3",
         "halftime": "1-2",
         "home": "Mexico",
@@ -1211,6 +1477,9 @@
       "fixture": {
         "id": 1570714,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-3",
         "halftime": "1-2",
         "home": "Mexico",
@@ -1225,6 +1494,9 @@
       "fixture": {
         "id": 1570714,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-3",
         "halftime": "1-2",
         "home": "Mexico",
@@ -1239,6 +1511,9 @@
       "fixture": {
         "id": 1567824,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Canada",
@@ -1253,6 +1528,9 @@
       "fixture": {
         "id": 1567824,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Canada",
@@ -1267,6 +1545,9 @@
       "fixture": {
         "id": 1567824,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Canada",
@@ -1281,6 +1562,9 @@
       "fixture": {
         "id": 1567824,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Canada",
@@ -1295,6 +1579,9 @@
       "fixture": {
         "id": 1569870,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "Paraguay",
@@ -1309,6 +1596,9 @@
       "fixture": {
         "id": 1569870,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "Paraguay",
@@ -1323,6 +1613,9 @@
       "fixture": {
         "id": 1565179,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-2",
         "halftime": "1-0",
         "home": "Argentina",
@@ -1337,6 +1630,9 @@
       "fixture": {
         "id": 1567310,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Colombia",
@@ -1351,6 +1647,9 @@
       "fixture": {
         "id": 1567310,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Colombia",
@@ -1365,6 +1664,9 @@
       "fixture": {
         "id": 1567310,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Colombia",
@@ -1379,6 +1681,9 @@
       "fixture": {
         "id": 1567310,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "1-0",
         "home": "Colombia",
@@ -1393,6 +1698,9 @@
       "fixture": {
         "id": 1567311,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "Spain",
@@ -1407,6 +1715,9 @@
       "fixture": {
         "id": 1567311,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "Spain",
@@ -1421,6 +1732,9 @@
       "fixture": {
         "id": 1567311,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "Spain",
@@ -1435,6 +1749,9 @@
       "fixture": {
         "id": 1567309,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1449,6 +1766,9 @@
       "fixture": {
         "id": 1567309,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1463,6 +1783,9 @@
       "fixture": {
         "id": 1567309,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1477,6 +1800,9 @@
       "fixture": {
         "id": 1567309,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Portugal",
@@ -1491,6 +1817,9 @@
       "fixture": {
         "id": 1567312,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "Switzerland",
@@ -1505,6 +1834,9 @@
       "fixture": {
         "id": 1567312,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "Switzerland",
@@ -1519,6 +1851,9 @@
       "fixture": {
         "id": 1567312,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "Switzerland",
@@ -1533,6 +1868,9 @@
       "fixture": {
         "id": 1567307,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-1",
         "home": "England",
@@ -1547,6 +1885,9 @@
       "fixture": {
         "id": 1567308,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Belgium",
@@ -1561,6 +1902,9 @@
       "fixture": {
         "id": 1567308,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Belgium",
@@ -1575,6 +1919,9 @@
       "fixture": {
         "id": 1567308,
         "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "3-2",
         "halftime": "0-1",
         "home": "Belgium",
@@ -1589,6 +1936,9 @@
       "fixture": {
         "id": 1562586,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "USA",
@@ -1603,6 +1953,9 @@
       "fixture": {
         "id": 1562586,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "USA",
@@ -1617,6 +1970,9 @@
       "fixture": {
         "id": 1562586,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "USA",
@@ -1631,6 +1987,9 @@
       "fixture": {
         "id": 1562586,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "USA",
@@ -1645,6 +2004,9 @@
       "fixture": {
         "id": 1564789,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-1",
         "home": "Ivory Coast",
@@ -1659,6 +2021,9 @@
       "fixture": {
         "id": 1564789,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-2",
         "halftime": "0-1",
         "home": "Ivory Coast",
@@ -1673,6 +2038,9 @@
       "fixture": {
         "id": 1565177,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "France",
@@ -1687,6 +2055,9 @@
       "fixture": {
         "id": 1565177,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "France",
@@ -1701,6 +2072,9 @@
       "fixture": {
         "id": 1565177,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "France",
@@ -1715,6 +2089,9 @@
       "fixture": {
         "id": 1565177,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-0",
         "halftime": "1-0",
         "home": "France",
@@ -1729,6 +2106,9 @@
       "fixture": {
         "id": 1567306,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "2-0",
         "home": "Mexico",
@@ -1743,6 +2123,9 @@
       "fixture": {
         "id": 1567306,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "2-0",
         "home": "Mexico",
@@ -1757,6 +2140,9 @@
       "fixture": {
         "id": 1567306,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "2-0",
         "home": "Mexico",
@@ -1771,6 +2157,9 @@
       "fixture": {
         "id": 1562344,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-1",
         "home": "Brazil",
@@ -1785,6 +2174,9 @@
       "fixture": {
         "id": 1562344,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-1",
         "home": "Brazil",
@@ -1799,6 +2191,9 @@
       "fixture": {
         "id": 1562344,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-1",
         "home": "Brazil",
@@ -1813,6 +2208,9 @@
       "fixture": {
         "id": 1565176,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-1",
         "home": "Germany",
@@ -1827,6 +2225,9 @@
       "fixture": {
         "id": 1565176,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-1",
         "home": "Germany",
@@ -1841,6 +2242,9 @@
       "fixture": {
         "id": 1565176,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-1",
         "home": "Germany",
@@ -1855,6 +2259,9 @@
       "fixture": {
         "id": 1565176,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-1",
         "home": "Germany",
@@ -1869,6 +2276,9 @@
       "fixture": {
         "id": 1562345,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Netherlands",
@@ -1883,6 +2293,9 @@
       "fixture": {
         "id": 1562345,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Netherlands",
@@ -1897,6 +2310,9 @@
       "fixture": {
         "id": 1562345,
         "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Netherlands",
@@ -1911,6 +2327,9 @@
       "fixture": {
         "id": 1561329,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "South Africa",
@@ -1925,6 +2344,9 @@
       "fixture": {
         "id": 1561329,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "South Africa",
@@ -1939,6 +2361,9 @@
       "fixture": {
         "id": 1561329,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "South Africa",
@@ -1953,6 +2378,9 @@
       "fixture": {
         "id": 1561329,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-0",
         "home": "South Africa",
@@ -1967,6 +2395,9 @@
       "fixture": {
         "id": 1489420,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-0",
         "home": "Croatia",
@@ -1981,6 +2412,9 @@
       "fixture": {
         "id": 1489420,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-0",
         "home": "Croatia",
@@ -1995,6 +2429,9 @@
       "fixture": {
         "id": 1489420,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-0",
         "home": "Croatia",
@@ -2009,6 +2446,9 @@
       "fixture": {
         "id": 1489420,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-0",
         "home": "Croatia",
@@ -2023,6 +2463,9 @@
       "fixture": {
         "id": 1489422,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-0",
         "home": "Panama",
@@ -2037,6 +2480,9 @@
       "fixture": {
         "id": 1489422,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-0",
         "home": "Panama",
@@ -2051,6 +2497,9 @@
       "fixture": {
         "id": 1489422,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-0",
         "home": "Panama",
@@ -2065,6 +2514,9 @@
       "fixture": {
         "id": 1489422,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-0",
         "home": "Panama",
@@ -2079,6 +2531,9 @@
       "fixture": {
         "id": 1489419,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Colombia",
@@ -2093,6 +2548,9 @@
       "fixture": {
         "id": 1489419,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Colombia",
@@ -2107,6 +2565,9 @@
       "fixture": {
         "id": 1489419,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Colombia",
@@ -2121,6 +2582,9 @@
       "fixture": {
         "id": 1489419,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Colombia",
@@ -2135,6 +2599,9 @@
       "fixture": {
         "id": 1539013,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "0-1",
         "home": "Congo DR",
@@ -2149,6 +2616,9 @@
       "fixture": {
         "id": 1539013,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "0-1",
         "home": "Congo DR",
@@ -2163,6 +2633,9 @@
       "fixture": {
         "id": 1539013,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "0-1",
         "home": "Congo DR",
@@ -2177,6 +2650,9 @@
       "fixture": {
         "id": 1539013,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "0-1",
         "home": "Congo DR",
@@ -2191,6 +2667,9 @@
       "fixture": {
         "id": 1489418,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-3",
         "halftime": "1-1",
         "home": "Algeria",
@@ -2205,6 +2684,9 @@
       "fixture": {
         "id": 1489418,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-3",
         "halftime": "1-1",
         "home": "Algeria",
@@ -2219,6 +2701,9 @@
       "fixture": {
         "id": 1489418,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-3",
         "halftime": "1-1",
         "home": "Algeria",
@@ -2233,6 +2718,9 @@
       "fixture": {
         "id": 1489418,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-3",
         "halftime": "1-1",
         "home": "Algeria",
@@ -2247,6 +2735,9 @@
       "fixture": {
         "id": 1489421,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Jordan",
@@ -2261,6 +2752,9 @@
       "fixture": {
         "id": 1489421,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Jordan",
@@ -2275,6 +2769,9 @@
       "fixture": {
         "id": 1489421,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Jordan",
@@ -2289,6 +2786,9 @@
       "fixture": {
         "id": 1489421,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Jordan",
@@ -2303,6 +2803,9 @@
       "fixture": {
         "id": 1489416,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-4",
         "halftime": "1-3",
         "home": "Norway",
@@ -2317,6 +2820,9 @@
       "fixture": {
         "id": 1489416,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-4",
         "halftime": "1-3",
         "home": "Norway",
@@ -2331,6 +2837,9 @@
       "fixture": {
         "id": 1489416,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-4",
         "halftime": "1-3",
         "home": "Norway",
@@ -2345,6 +2854,9 @@
       "fixture": {
         "id": 1539074,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "5-0",
         "halftime": "1-0",
         "home": "Senegal",
@@ -2359,6 +2871,9 @@
       "fixture": {
         "id": 1539074,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "5-0",
         "halftime": "1-0",
         "home": "Senegal",
@@ -2373,6 +2888,9 @@
       "fixture": {
         "id": 1489413,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Cape Verde Islands",
@@ -2387,6 +2905,9 @@
       "fixture": {
         "id": 1489413,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Cape Verde Islands",
@@ -2401,6 +2922,9 @@
       "fixture": {
         "id": 1489413,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Cape Verde Islands",
@@ -2415,6 +2939,9 @@
       "fixture": {
         "id": 1489413,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Cape Verde Islands",
@@ -2429,6 +2956,9 @@
       "fixture": {
         "id": 1489417,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-1",
         "home": "Uruguay",
@@ -2443,6 +2973,9 @@
       "fixture": {
         "id": 1489417,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-1",
         "home": "Uruguay",
@@ -2457,6 +2990,9 @@
       "fixture": {
         "id": 1489417,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-1",
         "home": "Uruguay",
@@ -2471,6 +3007,9 @@
       "fixture": {
         "id": 1489417,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-1",
         "halftime": "0-1",
         "home": "Uruguay",
@@ -2485,6 +3024,9 @@
       "fixture": {
         "id": 1489414,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "1-1",
         "home": "Egypt",
@@ -2499,6 +3041,9 @@
       "fixture": {
         "id": 1489415,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-5",
         "halftime": "0-1",
         "home": "New Zealand",
@@ -2513,6 +3058,9 @@
       "fixture": {
         "id": 1489415,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-5",
         "halftime": "0-1",
         "home": "New Zealand",
@@ -2527,6 +3075,9 @@
       "fixture": {
         "id": 1489415,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-5",
         "halftime": "0-1",
         "home": "New Zealand",
@@ -2541,6 +3092,9 @@
       "fixture": {
         "id": 1489409,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-1",
         "home": "Curaçao",
@@ -2555,6 +3109,9 @@
       "fixture": {
         "id": 1489409,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-2",
         "halftime": "0-1",
         "home": "Curaçao",
@@ -2569,6 +3126,9 @@
       "fixture": {
         "id": 1489410,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Ecuador",
@@ -2583,6 +3143,9 @@
       "fixture": {
         "id": 1489410,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Ecuador",
@@ -2597,6 +3160,9 @@
       "fixture": {
         "id": 1489410,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Ecuador",
@@ -2611,6 +3177,9 @@
       "fixture": {
         "id": 1489410,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "1-1",
         "home": "Ecuador",
@@ -2625,6 +3194,9 @@
       "fixture": {
         "id": 1539011,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Japan",
@@ -2639,6 +3211,9 @@
       "fixture": {
         "id": 1539011,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Japan",
@@ -2653,6 +3228,9 @@
       "fixture": {
         "id": 1539011,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Japan",
@@ -2667,6 +3245,9 @@
       "fixture": {
         "id": 1539011,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-1",
         "halftime": "0-0",
         "home": "Japan",
@@ -2681,6 +3262,9 @@
       "fixture": {
         "id": 1489412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Tunisia",
@@ -2695,6 +3279,9 @@
       "fixture": {
         "id": 1489412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Tunisia",
@@ -2709,6 +3296,9 @@
       "fixture": {
         "id": 1489412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Tunisia",
@@ -2723,6 +3313,9 @@
       "fixture": {
         "id": 1489412,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-3",
         "halftime": "0-2",
         "home": "Tunisia",
@@ -2737,6 +3330,9 @@
       "fixture": {
         "id": 1489411,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Paraguay",
@@ -2751,6 +3347,9 @@
       "fixture": {
         "id": 1489411,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Paraguay",
@@ -2765,6 +3364,9 @@
       "fixture": {
         "id": 1489411,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Paraguay",
@@ -2779,6 +3381,9 @@
       "fixture": {
         "id": 1489411,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-0",
         "halftime": "0-0",
         "home": "Paraguay",
@@ -2793,6 +3398,9 @@
       "fixture": {
         "id": 1539012,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "2-1",
         "home": "Türkiye",
@@ -2807,6 +3415,9 @@
       "fixture": {
         "id": 1539012,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "2-1",
         "home": "Türkiye",
@@ -2821,6 +3432,9 @@
       "fixture": {
         "id": 1539012,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "2-1",
         "home": "Türkiye",
@@ -2835,6 +3449,9 @@
       "fixture": {
         "id": 1539012,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-2",
         "halftime": "2-1",
         "home": "Türkiye",
@@ -2849,6 +3466,9 @@
       "fixture": {
         "id": 1539009,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "2-1",
         "home": "Bosnia & Herzegovina",
@@ -2863,6 +3483,9 @@
       "fixture": {
         "id": 1539009,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "2-1",
         "home": "Bosnia & Herzegovina",
@@ -2877,6 +3500,9 @@
       "fixture": {
         "id": 1539009,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "2-1",
         "home": "Bosnia & Herzegovina",
@@ -2891,6 +3517,9 @@
       "fixture": {
         "id": 1539009,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "3-1",
         "halftime": "2-1",
         "home": "Bosnia & Herzegovina",
@@ -2905,6 +3534,9 @@
       "fixture": {
         "id": 1489408,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -2919,6 +3551,9 @@
       "fixture": {
         "id": 1489408,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -2933,6 +3568,9 @@
       "fixture": {
         "id": 1489408,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -2947,6 +3585,9 @@
       "fixture": {
         "id": 1489408,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-1",
         "halftime": "0-0",
         "home": "Switzerland",
@@ -2961,6 +3602,9 @@
       "fixture": {
         "id": 1489405,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-2",
         "halftime": "2-2",
         "home": "Morocco",
@@ -2975,6 +3619,9 @@
       "fixture": {
         "id": 1489405,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-2",
         "halftime": "2-2",
         "home": "Morocco",
@@ -2989,6 +3636,9 @@
       "fixture": {
         "id": 1489405,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-2",
         "halftime": "2-2",
         "home": "Morocco",
@@ -3003,6 +3653,9 @@
       "fixture": {
         "id": 1489405,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "4-2",
         "halftime": "2-2",
         "home": "Morocco",
@@ -3017,6 +3670,9 @@
       "fixture": {
         "id": 1489406,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-2",
         "home": "Scotland",
@@ -3031,6 +3687,9 @@
       "fixture": {
         "id": 1489406,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-2",
         "home": "Scotland",
@@ -3045,6 +3704,9 @@
       "fixture": {
         "id": 1489406,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-2",
         "home": "Scotland",
@@ -3059,6 +3721,9 @@
       "fixture": {
         "id": 1489406,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-2",
         "home": "Scotland",
@@ -3073,6 +3738,9 @@
       "fixture": {
         "id": 1539010,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Czechia",
@@ -3087,6 +3755,9 @@
       "fixture": {
         "id": 1539010,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Czechia",
@@ -3101,6 +3772,9 @@
       "fixture": {
         "id": 1539010,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Czechia",
@@ -3115,6 +3789,9 @@
       "fixture": {
         "id": 1539010,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "0-3",
         "halftime": "0-0",
         "home": "Czechia",
@@ -3129,6 +3806,9 @@
       "fixture": {
         "id": 1489407,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "South Africa",
@@ -3143,6 +3823,9 @@
       "fixture": {
         "id": 1489407,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "South Africa",
@@ -3157,6 +3840,9 @@
       "fixture": {
         "id": 1489407,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "South Africa",
@@ -3171,6 +3857,9 @@
       "fixture": {
         "id": 1489407,
         "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "1-0",
         "halftime": "0-0",
         "home": "South Africa",
@@ -3185,6 +3874,7 @@
     "fixtureEvents": 11,
     "cacheHits": 0,
     "cacheMisses": 89,
+    "liveMatches": 1,
     "apiRequests": 89,
     "estimatedExtraRequestsPerMatch": 1.29,
     "maxRecommendedRequestsPerMatch": 3

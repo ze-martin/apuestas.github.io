@@ -44,6 +44,9 @@ interface SuggestedHistoryRecord {
   fixture?: {
     id?: number | string
     status?: string
+    statusLong?: string
+    elapsed?: number | string | null
+    live?: boolean
     score?: string
     halftime?: string
     home?: string
@@ -70,6 +73,7 @@ interface SettlementRequestSummary {
   fixtureEvents?: number
   cacheHits: number
   cacheMisses: number
+  liveMatches?: number
   apiRequests: number
   estimatedExtraRequestsPerMatch: number
   maxRecommendedRequestsPerMatch: number
@@ -333,6 +337,7 @@ function summarizeHistory(records: SuggestedHistoryRecord[]) {
   const returned = records.filter((record) => record.settlement === 'Devuelto').length
   const noData = records.filter((record) => record.settlement === 'Sin dato oficial').length
   const pending = records.filter((record) => record.settlement === 'Pendiente').length
+  const live = records.filter((record) => record.fixture?.live).length
   const profit = settled.reduce((sum, record) => sum + (record.profit ?? 0), 0)
   return {
     total: records.length,
@@ -342,6 +347,7 @@ function summarizeHistory(records: SuggestedHistoryRecord[]) {
     returned,
     noData,
     pending,
+    live,
     hitRate: graded.length ? won / graded.length : null,
     profit,
     roi: settled.length ? profit / settled.length : null,
@@ -807,7 +813,7 @@ export function ProcessedBettingDashboard() {
               <div className="text-sm text-slate-600 dark:text-slate-300">
                 <p className="font-semibold text-slate-950 dark:text-white">Reglas activas</p>
                 <p>Panel principal: solo mercados con cuota.</p>
-                <p>Sin cuota: informativos en pestaña secundaria.</p>
+                <p>Sin cuota: informativos en pestana secundaria.</p>
               </div>
             </div>
           </div>
@@ -1214,7 +1220,7 @@ function SuggestedHistoryView({
             </p>
           </div>
           <Badge className="border-amber-500/40 bg-amber-500/10 text-amber-800 dark:text-amber-100">
-            {isUserMode ? 'Modo editable por usuario' : 'Solo resultados reales cargados'} · Stake simulado: 1 unidad
+            {isUserMode ? 'Modo editable por usuario' : 'Solo resultados reales cargados'} - Stake simulado: 1 unidad
           </Badge>
         </div>
         {!isUserMode && (
@@ -1241,7 +1247,7 @@ function SuggestedHistoryView({
             <div className="text-sm text-slate-600 dark:text-slate-300">
               {requestSummary ? (
                 <span>
-                  API requests: <strong>{requestSummary.apiRequests}</strong> · partidos: <strong>{requestSummary.uniqueMatches}</strong> · extra por partido: <strong>{requestSummary.estimatedExtraRequestsPerMatch}</strong> · cache hits: <strong>{requestSummary.cacheHits}</strong>
+                  API requests: <strong>{requestSummary.apiRequests}</strong> - partidos: <strong>{requestSummary.uniqueMatches}</strong> - extra por partido: <strong>{requestSummary.estimatedExtraRequestsPerMatch}</strong> - cache hits: <strong>{requestSummary.cacheHits}</strong>{typeof requestSummary.liveMatches === 'number' && <> - en vivo: <strong>{requestSummary.liveMatches}</strong></>}
                 </span>
               ) : (
                 <span>Consulta server-side con API-Football. La clave no se envia al navegador.</span>
@@ -1256,7 +1262,7 @@ function SuggestedHistoryView({
         )}
       </div>
 
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-8">
+      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-9">
         <Kpi label="Sugeridos" value={summary.total.toString()} />
         <Kpi label="Liquidados" value={summary.settled.toString()} />
         <Kpi label="Acertados" value={summary.won.toString()} tone="green" />
@@ -1264,6 +1270,7 @@ function SuggestedHistoryView({
         <Kpi label="Devueltos" value={summary.returned.toString()} />
         <Kpi label="Sin dato oficial" value={summary.noData.toString()} />
         <Kpi label="Pendientes" value={summary.pending.toString()} />
+        <Kpi label="En vivo" value={summary.live.toString()} />
         <Kpi label="Acierto" value={summary.hitRate === null ? 'N/D' : formatPct(summary.hitRate * 100)} tone="green" />
       </section>
 
@@ -1380,7 +1387,10 @@ function SuggestedHistoryView({
                       <option value="Devuelto">Devuelto</option>
                       </select>
                     ) : (
-                      <Badge className={settlementClass(record.settlement)}>{record.settlement}</Badge>
+                      <div className="flex flex-wrap gap-2">
+                        <Badge className={settlementClass(record.settlement)}>{record.settlement}</Badge>
+                        {record.fixture?.live && <Badge className="border-sky-500/40 bg-sky-500/10 text-sky-800 dark:text-sky-100">En vivo</Badge>}
+                      </div>
                     )}
                   </td>
                   <td className="px-4 py-3"><Badge className={settlementClass(record.settlement)}>{record.settlementSource}</Badge></td>
@@ -1388,6 +1398,11 @@ function SuggestedHistoryView({
                     <div>{record.profit === null ? 'N/D' : `${record.profit.toFixed(2)} u`}</div>
                     {record.reason && <div className="mt-1 max-w-[260px] text-xs text-slate-500">{record.reason}</div>}
                     {record.fixture?.score && <div className="mt-1 text-xs text-slate-500">Marcador: {record.fixture.score}</div>}
+                    {record.fixture?.status && (
+                      <div className="mt-1 text-xs text-slate-500">
+                        Estado: {record.fixture.status}{record.fixture.elapsed ? ` - ${record.fixture.elapsed}'` : ''}{record.fixture.statusLong ? ` - ${record.fixture.statusLong}` : ''}
+                      </div>
+                    )}
                   </td>
                 </tr>
               ))}
@@ -1834,7 +1849,7 @@ function PickMini({ title, pick }: { title: string; pick?: ProcessedPick }) {
       {pick ? (
         <>
           <p className="mt-1 font-semibold">{pick.pick}</p>
-          <p className="text-sm text-slate-600 dark:text-slate-300">Prob. {formatPct(pick.probabilityPct)} · EV {pick.ev?.toFixed(2) ?? 'N/D'} · Score {pick.pickScore.toFixed(1)}</p>
+          <p className="text-sm text-slate-600 dark:text-slate-300">Prob. {formatPct(pick.probabilityPct)} - EV {pick.ev?.toFixed(2) ?? 'N/D'} - Score {pick.pickScore.toFixed(1)}</p>
         </>
       ) : <p className="mt-1 text-sm text-slate-500">No disponible</p>}
     </div>
@@ -1845,7 +1860,7 @@ function PickLine({ pick }: { pick: ProcessedPick }) {
   return (
     <div className="flex flex-wrap items-center justify-between gap-2 rounded-md bg-slate-50 p-2 text-sm dark:bg-slate-950">
       <span className="font-semibold">{pick.pick}</span>
-      <span className="text-slate-600 dark:text-slate-300">Cuota {pick.odds?.toFixed(2)} · Prob. {formatPct(pick.probabilityPct)} · Score {pick.pickScore.toFixed(1)}</span>
+      <span className="text-slate-600 dark:text-slate-300">Cuota {pick.odds?.toFixed(2)} - Prob. {formatPct(pick.probabilityPct)} - Score {pick.pickScore.toFixed(1)}</span>
     </div>
   )
 }
@@ -1883,3 +1898,4 @@ function NoOddsTable({ picks }: { picks: ProcessedPick[] }) {
     </section>
   )
 }
+
