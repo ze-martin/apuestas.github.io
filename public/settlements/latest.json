@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-18T16:22:32.009Z",
+  "generatedAt": "2026-07-19T00:39:56.716Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 23,
   "suggestedPickCount": 228,
@@ -61,48 +61,56 @@
     },
     {
       "key": "2026-07-18|16:00|France vs England|Visita goles -2.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1591865,
-        "status": "NS",
+        "status": "FT",
+        "score": "4-6",
+        "halftime": "0-4",
         "home": "France",
         "away": "England"
       }
     },
     {
       "key": "2026-07-18|16:00|France vs England|Goles +1.5|10Bet",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1591865,
-        "status": "NS",
+        "status": "FT",
+        "score": "4-6",
+        "halftime": "0-4",
         "home": "France",
         "away": "England"
       }
     },
     {
       "key": "2026-07-18|16:00|France vs England|Local corners +4.5|10Bet",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1591865,
-        "status": "NS",
+        "status": "FT",
+        "score": "4-6",
+        "halftime": "0-4",
         "home": "France",
         "away": "England"
       }
     },
     {
-      "key": "2026-07-18|16:00|France vs England|Local goles -2.5|Betano",
-      "settlement": "Pendiente",
+      "key": "2026-07-18|16:00|France vs England|Tarjetas total -3.5|Betano",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1591865,
-        "status": "NS",
+        "status": "FT",
+        "score": "4-6",
+        "halftime": "0-4",
         "home": "France",
         "away": "England"
       }
@@ -111,10 +119,10 @@
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|1T +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Fixture 2H: Second Half.",
       "fixture": {
         "id": 1549413,
-        "status": "NS",
+        "status": "2H",
         "home": "Cusco",
         "away": "Alianza Atletico"
       }
@@ -123,10 +131,10 @@
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|Visita goles +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Fixture 2H: Second Half.",
       "fixture": {
         "id": 1549413,
-        "status": "NS",
+        "status": "2H",
         "home": "Cusco",
         "away": "Alianza Atletico"
       }
@@ -3174,11 +3182,11 @@
     "uniqueMatches": 69,
     "fixtureLookups": 24,
     "fixtureStatistics": 54,
-    "fixtureEvents": 10,
+    "fixtureEvents": 11,
     "cacheHits": 0,
-    "cacheMisses": 88,
-    "apiRequests": 88,
-    "estimatedExtraRequestsPerMatch": 1.28,
+    "cacheMisses": 89,
+    "apiRequests": 89,
+    "estimatedExtraRequestsPerMatch": 1.29,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
