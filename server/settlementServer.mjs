@@ -446,10 +446,11 @@ function compareLine(value, direction, line) {
 
 function settlePick(pick, fixture, stats, events = null, reversed = false) {
   if (!fixtureIsFinished(fixture)) {
+    const liveProgress = fixtureIsLive(fixture) ? livePickProgress(pick, fixture, stats, events) : null
     const reason = fixtureIsLive(fixture)
-      ? liveReason(fixture)
+      ? `${liveReason(fixture)}${liveProgress ? ` ${liveProgress.reason}` : ''}`
       : `Fixture ${fixture.fixture?.status?.short || ''}: ${fixture.fixture?.status?.long || 'no finalizado'}.`
-    return isBeforeToday(pick.fecha) ? noOfficialData(pick, reason, fixture) : pending(pick, reason, fixture)
+    return isBeforeToday(pick.fecha) ? noOfficialData(pick, reason, fixture, liveProgress) : pending(pick, reason, fixture, liveProgress)
   }
 
   const homeGoals = fixture.goals?.home
@@ -512,23 +513,23 @@ function pickSide(pick) {
   return 'none'
 }
 
-function pending(pick, reason, fixture = null) {
+function pending(pick, reason, fixture = null, liveProgress = null) {
   return {
     key: pick.key,
     settlement: 'Pendiente',
     source: 'API-Football',
     reason,
-    fixture: fixture ? fixtureSummary(fixture) : null,
+    fixture: fixture ? fixtureSummary(fixture, liveProgress) : null,
   }
 }
 
-function noOfficialData(pick, reason, fixture = null) {
+function noOfficialData(pick, reason, fixture = null, liveProgress = null) {
   return {
     key: pick.key,
     settlement: 'Sin dato oficial',
     source: 'API-Football',
     reason: `${reason} Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.`,
-    fixture: fixture ? fixtureSummary(fixture) : null,
+    fixture: fixture ? fixtureSummary(fixture, liveProgress) : null,
   }
 }
 
@@ -547,7 +548,57 @@ function fixtureScore(fixture) {
     : undefined
 }
 
-function fixtureSummary(fixture) {
+function livePickProgress(pick, fixture, stats, events) {
+  if (!fixtureIsLive(fixture)) return null
+  const homeGoals = fixture.goals?.home
+  const awayGoals = fixture.goals?.away
+  const safeHomeGoals = homeGoals ?? 0
+  const safeAwayGoals = awayGoals ?? 0
+  const halfHome = fixture.score?.halftime?.home
+  const halfAway = fixture.score?.halftime?.away
+
+  if (pick.marketType === 'goals') {
+    const value = pick.side === 'home' ? safeHomeGoals : pick.side === 'away' ? safeAwayGoals : safeHomeGoals + safeAwayGoals
+    return fulfilledOverLine(pick, value, 'goles')
+  }
+
+  if (pick.marketType === 'first_half_goals') {
+    const firstHalfEnded = ['HT', '2H', 'ET', 'BT', 'P', 'SUSP', 'INT'].includes(fixture.fixture?.status?.short)
+    const value = firstHalfEnded && halfHome !== null && halfHome !== undefined && halfAway !== null && halfAway !== undefined
+      ? halfHome + halfAway
+      : safeHomeGoals + safeAwayGoals
+    return fulfilledOverLine(pick, value, 'goles 1T')
+  }
+
+  if (pick.marketType === 'btts') {
+    const both = safeHomeGoals > 0 && safeAwayGoals > 0
+    if (pick.direction === 'yes' && both) return liveFulfilled('BTTS ya se cumplio: ambos equipos anotaron.')
+    return null
+  }
+
+  if (needsFixtureStatistics(pick)) {
+    const metric = totalMetric(fixture, stats, pick, events)
+    return metric === null ? null : fulfilledOverLine(pick, metric, pick.marketType)
+  }
+
+  return null
+}
+
+function fulfilledOverLine(pick, value, label) {
+  if (pick.direction === 'over' && pick.line !== null && pick.line !== undefined && value > pick.line) {
+    return liveFulfilled(`${label}: ${value} supera la linea ${pick.line}.`)
+  }
+  return null
+}
+
+function liveFulfilled(reason) {
+  return {
+    livePickStatus: 'Cumplido en vivo',
+    reason,
+  }
+}
+
+function fixtureSummary(fixture, liveProgress = null) {
   const halfHome = fixture?.score?.halftime?.home
   const halfAway = fixture?.score?.halftime?.away
   return {
@@ -560,6 +611,8 @@ function fixtureSummary(fixture) {
     halftime: halfHome !== undefined || halfAway !== undefined ? `${halfHome ?? 'N/D'}-${halfAway ?? 'N/D'}` : undefined,
     home: fixture.teams?.home?.name,
     away: fixture.teams?.away?.name,
+    livePickStatus: liveProgress?.livePickStatus,
+    livePickReason: liveProgress?.reason,
   }
 }
 

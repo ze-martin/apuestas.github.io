@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-07-19T00:55:32.987Z",
+  "generatedAt": "2026-07-19T01:01:38.823Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 23,
   "suggestedPickCount": 228,
@@ -147,34 +147,38 @@
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|1T +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final.",
+      "reason": "Partido en vivo minuto 71: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final. goles 1T: 2 supera la linea 0.5.",
       "fixture": {
         "id": 1549413,
         "status": "2H",
         "statusLong": "Second Half",
-        "elapsed": 65,
+        "elapsed": 71,
         "live": true,
         "score": "2-1",
         "halftime": "2-0",
         "home": "Cusco",
-        "away": "Alianza Atletico"
+        "away": "Alianza Atletico",
+        "livePickStatus": "Cumplido en vivo",
+        "livePickReason": "goles 1T: 2 supera la linea 0.5."
       }
     },
     {
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|Visita goles +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final.",
+      "reason": "Partido en vivo minuto 71: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final. goles: 1 supera la linea 0.5.",
       "fixture": {
         "id": 1549413,
         "status": "2H",
         "statusLong": "Second Half",
-        "elapsed": 65,
+        "elapsed": 71,
         "live": true,
         "score": "2-1",
         "halftime": "2-0",
         "home": "Cusco",
-        "away": "Alianza Atletico"
+        "away": "Alianza Atletico",
+        "livePickStatus": "Cumplido en vivo",
+        "livePickReason": "goles: 1 supera la linea 0.5."
       }
     },
     {

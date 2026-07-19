@@ -51,6 +51,8 @@ interface SuggestedHistoryRecord {
     halftime?: string
     home?: string
     away?: string
+    livePickStatus?: string
+    livePickReason?: string
   } | null
 }
 
@@ -338,6 +340,7 @@ function summarizeHistory(records: SuggestedHistoryRecord[]) {
   const noData = records.filter((record) => record.settlement === 'Sin dato oficial').length
   const pending = records.filter((record) => record.settlement === 'Pendiente').length
   const live = records.filter((record) => record.fixture?.live).length
+  const liveFulfilled = records.filter((record) => record.fixture?.livePickStatus === 'Cumplido en vivo').length
   const profit = settled.reduce((sum, record) => sum + (record.profit ?? 0), 0)
   return {
     total: records.length,
@@ -348,6 +351,7 @@ function summarizeHistory(records: SuggestedHistoryRecord[]) {
     noData,
     pending,
     live,
+    liveFulfilled,
     hitRate: graded.length ? won / graded.length : null,
     profit,
     roi: settled.length ? profit / settled.length : null,
@@ -1262,7 +1266,7 @@ function SuggestedHistoryView({
         )}
       </div>
 
-      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-9">
+      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-10">
         <Kpi label="Sugeridos" value={summary.total.toString()} />
         <Kpi label="Liquidados" value={summary.settled.toString()} />
         <Kpi label="Acertados" value={summary.won.toString()} tone="green" />
@@ -1271,6 +1275,7 @@ function SuggestedHistoryView({
         <Kpi label="Sin dato oficial" value={summary.noData.toString()} />
         <Kpi label="Pendientes" value={summary.pending.toString()} />
         <Kpi label="En vivo" value={summary.live.toString()} />
+        <Kpi label="Cumplidos en vivo" value={summary.liveFulfilled.toString()} tone="green" />
         <Kpi label="Acierto" value={summary.hitRate === null ? 'N/D' : formatPct(summary.hitRate * 100)} tone="green" />
       </section>
 
@@ -1390,6 +1395,7 @@ function SuggestedHistoryView({
                       <div className="flex flex-wrap gap-2">
                         <Badge className={settlementClass(record.settlement)}>{record.settlement}</Badge>
                         {record.fixture?.live && <Badge className="border-sky-500/40 bg-sky-500/10 text-sky-800 dark:text-sky-100">En vivo</Badge>}
+                        {record.fixture?.livePickStatus && <Badge className="border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-100">{record.fixture.livePickStatus}</Badge>}
                       </div>
                     )}
                   </td>
@@ -1398,6 +1404,7 @@ function SuggestedHistoryView({
                     <div>{record.profit === null ? 'N/D' : `${record.profit.toFixed(2)} u`}</div>
                     {record.reason && <div className="mt-1 max-w-[260px] text-xs text-slate-500">{record.reason}</div>}
                     {record.fixture?.score && <div className="mt-1 text-xs text-slate-500">Marcador: {record.fixture.score}</div>}
+                    {record.fixture?.livePickReason && <div className="mt-1 text-xs font-semibold text-emerald-700 dark:text-emerald-300">{record.fixture.livePickReason}</div>}
                     {record.fixture?.status && (
                       <div className="mt-1 text-xs text-slate-500">
                         Estado: {record.fixture.status}{record.fixture.elapsed ? ` - ${record.fixture.elapsed}'` : ''}{record.fixture.statusLong ? ` - ${record.fixture.statusLong}` : ''}
