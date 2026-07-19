@@ -223,6 +223,42 @@ src/
     pickProcessing.ts
 ```
 
+## Supabase Auth: crear usuario admin o premium
+
+El proyecto ya tiene tablas `profiles` y `subscriptions` para controlar acceso.
+
+Flujo recomendado:
+
+1. En Supabase, entra a **Authentication > Users**.
+2. Crea el usuario con su email y password temporal.
+3. Si aun no lo hiciste, ejecuta en **SQL Editor** el archivo:
+
+```text
+supabase/migrations/002_auth_profile_trigger.sql
+```
+
+4. Desde este proyecto, marca el usuario como admin/premium:
+
+```bash
+pnpm run supabase:grant-access -- --email usuario@dominio.com --role admin --plan premium --status active
+```
+
+Para un usuario premium sin permisos admin:
+
+```bash
+pnpm run supabase:grant-access -- --email usuario@dominio.com --role subscriber --plan premium --status active
+```
+
+Para crear el usuario Auth desde CLI sin escribir password en el comando:
+
+```powershell
+$env:SUPABASE_NEW_USER_PASSWORD="password-temporal"
+pnpm run supabase:grant-access -- --email usuario@dominio.com --role admin --plan premium --status active --create
+Remove-Item Env:\SUPABASE_NEW_USER_PASSWORD
+```
+
+No subas passwords ni `SUPABASE_SERVICE_ROLE_KEY` a GitHub. El comando lee `SUPABASE_SERVICE_ROLE_KEY` solo desde `.env` local.
+
 Componentes antiguos del dashboard inicial permanecen en el repo, pero la pantalla activa usa `ProcessedBettingDashboard`.
 
 ## Publicacion en GitHub Pages

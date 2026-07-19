@@ -9,6 +9,7 @@
     "settlement:snapshot": "node server/generateSettlementSnapshot.mjs",
     "supabase:import": "node server/importReportsToSupabase.mjs",
     "supabase:import-settlements": "node server/importSettlementsToSupabase.mjs",
+    "supabase:grant-access": "node server/grantSupabaseAccess.mjs",
     "build": "tsc -b && vite build",
     "lint": "oxlint",
     "preview": "vite preview"
