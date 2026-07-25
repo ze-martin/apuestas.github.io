@@ -1,79 +1,1033 @@
 {
-  "generatedAt": "2026-07-19T01:01:38.823Z",
+  "generatedAt": "2026-07-25T05:32:28.246Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
-  "reportCount": 23,
-  "suggestedPickCount": 228,
+  "reportCount": 27,
+  "suggestedPickCount": 288,
   "settlements": [
     {
-      "key": "2026-07-19|14:00|Spain vs Argentina|Tarjetas total -4.5|Betano",
+      "key": "2026-07-25|12:45|Estudiantes de Rio Cuarto vs Tigre|DNB visita|10Bet",
       "settlement": "Pendiente",
       "source": "API-Football",
       "reason": "Fixture NS: Not Started.",
       "fixture": {
-        "id": 1591866,
+        "id": 1493007,
         "status": "NS",
         "statusLong": "Not Started",
         "elapsed": null,
         "live": false,
         "halftime": "N/D-N/D",
+        "home": "Estudiantes de Rio Cuarto",
+        "away": "Tigre"
+      }
+    },
+    {
+      "key": "2026-07-25|13:00|Sport Huancayo vs Atletico Grau|Local goles -2.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549426,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Sport Huancayo",
+        "away": "Atletico Grau"
+      }
+    },
+    {
+      "key": "2026-07-25|13:00|Sport Huancayo vs Atletico Grau|Tarjetas total -5.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549426,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Sport Huancayo",
+        "away": "Atletico Grau"
+      }
+    },
+    {
+      "key": "2026-07-25|13:00|Sport Huancayo vs Atletico Grau|1T -1.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549426,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Sport Huancayo",
+        "away": "Atletico Grau"
+      }
+    },
+    {
+      "key": "2026-07-25|13:00|Sport Huancayo vs Atletico Grau|Visita goles +0.5|Betano",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549426,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Sport Huancayo",
+        "away": "Atletico Grau"
+      }
+    },
+    {
+      "key": "2026-07-25|15:15|Juan Pablo II College vs Cienciano|Goles +1.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549424,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Juan Pablo II College",
+        "away": "Cienciano"
+      }
+    },
+    {
+      "key": "2026-07-25|15:15|Juan Pablo II College vs Cienciano|1T +0.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549424,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Juan Pablo II College",
+        "away": "Cienciano"
+      }
+    },
+    {
+      "key": "2026-07-25|17:15|River Plate vs Barracas Central|Goles -3.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1493014,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "River Plate",
+        "away": "Barracas Central"
+      }
+    },
+    {
+      "key": "2026-07-25|17:15|River Plate vs Barracas Central|Local corners -6.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1493014,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "River Plate",
+        "away": "Barracas Central"
+      }
+    },
+    {
+      "key": "2026-07-25|17:30|Sport Boys vs ADT|Goles -3.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549425,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Sport Boys",
+        "away": "ADT"
+      }
+    },
+    {
+      "key": "2026-07-25|19:30|Lanus vs San Lorenzo|1T -1.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-25|19:30|Lanus vs San Lorenzo|Local corners -5.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-25|20:00|FBC Melgar vs Sporting Cristal|Goles +1.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-25|20:00|FBC Melgar vs Sporting Cristal|Corners total -10.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-24|14:45|Gimnasia M. vs Central Cordoba de Santiago|Local corners -5.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1493008,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Gimnasia M.",
+        "away": "Central Cordoba de Santiago"
+      }
+    },
+    {
+      "key": "2026-07-24|15:00|Alianza Atletico vs Club Deportivo Los Chankas|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549419,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Alianza Atletico",
+        "away": "Club Deportivo Los Chankas"
+      }
+    },
+    {
+      "key": "2026-07-24|17:00|Racing Club vs Gimnasia L.P.|Visita corners -3.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1493013,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "1-1",
+        "home": "Racing Club",
+        "away": "Gimnasia L.P."
+      }
+    },
+    {
+      "key": "2026-07-24|19:15|Huracan vs Banfield|Local corners -5.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1493009,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Huracan",
+        "away": "Banfield"
+      }
+    },
+    {
+      "key": "2026-07-24|19:15|Huracan vs Banfield|Visita corners +3.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1493009,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-0",
+        "halftime": "0-0",
+        "home": "Huracan",
+        "away": "Banfield"
+      }
+    },
+    {
+      "key": "2026-07-24|19:15|Platense vs Union Santa Fe|Visita corners +3.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1493012,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-2",
+        "halftime": "1-0",
+        "home": "Platense",
+        "away": "Union Santa Fe"
+      }
+    },
+    {
+      "key": "2026-07-24|19:15|Platense vs Union Santa Fe|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1493012,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-2",
+        "halftime": "1-0",
+        "home": "Platense",
+        "away": "Union Santa Fe"
+      }
+    },
+    {
+      "key": "2026-07-24|20:30|Universitario vs Cusco|1T -1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549427,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "1-0",
+        "home": "Universitario",
+        "away": "Cusco"
+      }
+    },
+    {
+      "key": "2026-07-24|20:30|Universitario vs Cusco|Goles -3.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549427,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "1-0",
+        "home": "Universitario",
+        "away": "Cusco"
+      }
+    },
+    {
+      "key": "2026-07-24|20:30|Universitario vs Cusco|Corners total -10.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1549427,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "1-0",
+        "home": "Universitario",
+        "away": "Cusco"
+      }
+    },
+    {
+      "key": "2026-07-23|17:00|Bolívar vs Gremio|Corners total -11.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1547774,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "2-2",
+        "home": "Bolívar",
+        "away": "Gremio"
+      }
+    },
+    {
+      "key": "2026-07-23|17:00|Bolívar vs Gremio|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547774,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "2-2",
+        "home": "Bolívar",
+        "away": "Gremio"
+      }
+    },
+    {
+      "key": "2026-07-23|17:00|Bolívar vs Gremio|Local corners -6.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547774,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "2-2",
+        "home": "Bolívar",
+        "away": "Gremio"
+      }
+    },
+    {
+      "key": "2026-07-23|17:00|Bolívar vs Gremio|1T -1.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1547774,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "2-2",
+        "home": "Bolívar",
+        "away": "Gremio"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Botafogo vs Vitoria|Goles +1.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492141,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Botafogo",
+        "away": "Vitoria"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Botafogo vs Vitoria|Local corners -5.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492141,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Botafogo",
+        "away": "Vitoria"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Botafogo vs Vitoria|Corners total -10.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492141,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Botafogo",
+        "away": "Vitoria"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Botafogo vs Vitoria|Tarjetas total +4.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492141,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Botafogo",
+        "away": "Vitoria"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Corinthians vs Remo|1T +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492293,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-0",
+        "halftime": "3-0",
+        "home": "Corinthians",
+        "away": "Remo"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Corinthians vs Remo|Tarjetas total -4.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492293,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-0",
+        "halftime": "3-0",
+        "home": "Corinthians",
+        "away": "Remo"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Corinthians vs Remo|Goles -3.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492293,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-0",
+        "halftime": "3-0",
+        "home": "Corinthians",
+        "away": "Remo"
+      }
+    },
+    {
+      "key": "2026-07-23|17:30|Corinthians vs Remo|Corners total +9.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492293,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-0",
+        "halftime": "3-0",
+        "home": "Corinthians",
+        "away": "Remo"
+      }
+    },
+    {
+      "key": "2026-07-23|19:30|Boca Juniors vs O&#x27;Higgins|Local goles -2.5|Betano",
+      "settlement": "Sin dato oficial",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-23|19:30|Boca Juniors vs O&#x27;Higgins|Goles -3.5|Betano",
+      "settlement": "Sin dato oficial",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-23|19:30|Boca Juniors vs O&#x27;Higgins|1T -1.5|Betano",
+      "settlement": "Sin dato oficial",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
+      "fixture": null
+    },
+    {
+      "key": "2026-07-23|19:30|Santa Fe vs Caracas FC|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547778,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "1-0",
+        "home": "Santa Fe",
+        "away": "Caracas FC"
+      }
+    },
+    {
+      "key": "2026-07-23|19:30|Santa Fe vs Caracas FC|Local corners -5.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547778,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "1-0",
+        "home": "Santa Fe",
+        "away": "Caracas FC"
+      }
+    },
+    {
+      "key": "2026-07-22|17:00|Independiente Medellin vs Vasco DA Gama|Local goles +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547775,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-2",
+        "halftime": "1-0",
+        "home": "Independiente Medellin",
+        "away": "Vasco DA Gama"
+      }
+    },
+    {
+      "key": "2026-07-22|17:00|Independiente Medellin vs Vasco DA Gama|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547775,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-2",
+        "halftime": "1-0",
+        "home": "Independiente Medellin",
+        "away": "Vasco DA Gama"
+      }
+    },
+    {
+      "key": "2026-07-22|17:30|Coritiba vs Palmeiras|Tarjetas total -4.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492294,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-3",
+        "halftime": "0-2",
+        "home": "Coritiba",
+        "away": "Palmeiras"
+      }
+    },
+    {
+      "key": "2026-07-22|17:30|Coritiba vs Palmeiras|1T +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492294,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-3",
+        "halftime": "0-2",
+        "home": "Coritiba",
+        "away": "Palmeiras"
+      }
+    },
+    {
+      "key": "2026-07-22|17:30|Coritiba vs Palmeiras|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492294,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-3",
+        "halftime": "0-2",
+        "home": "Coritiba",
+        "away": "Palmeiras"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Lanus vs Cienciano|Corners total -10.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547776,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "1-0",
+        "home": "Lanus",
+        "away": "Cienciano"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Lanus vs Cienciano|1T -1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547776,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "1-0",
+        "home": "Lanus",
+        "away": "Cienciano"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Lanus vs Cienciano|Goles -3.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1547776,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "1-0",
+        "home": "Lanus",
+        "away": "Cienciano"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Sporting Cristal vs RB Bragantino|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1547779,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Sporting Cristal",
+        "away": "RB Bragantino"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Chapecoense-sc vs Flamengo|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492292,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-4",
+        "halftime": "0-2",
+        "home": "Chapecoense-sc",
+        "away": "Flamengo"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Chapecoense-sc vs Flamengo|1T -1.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492292,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-4",
+        "halftime": "0-2",
+        "home": "Chapecoense-sc",
+        "away": "Flamengo"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Chapecoense-sc vs Flamengo|Tarjetas total +4.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492292,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-4",
+        "halftime": "0-2",
+        "home": "Chapecoense-sc",
+        "away": "Flamengo"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Internacional vs Cruzeiro|Local corners -5.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492296,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "0-1",
+        "home": "Internacional",
+        "away": "Cruzeiro"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Internacional vs Cruzeiro|Corners total -11.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492296,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "0-1",
+        "home": "Internacional",
+        "away": "Cruzeiro"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Internacional vs Cruzeiro|1T +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492296,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "0-1",
+        "home": "Internacional",
+        "away": "Cruzeiro"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Internacional vs Cruzeiro|Goles +1.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492296,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "0-1",
+        "home": "Internacional",
+        "away": "Cruzeiro"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Sao Paulo vs Atletico Paranaense|Visita corners +3.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492298,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "1-0",
+        "home": "Sao Paulo",
+        "away": "Atletico Paranaense"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Sao Paulo vs Atletico Paranaense|Corners total +9.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492298,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "1-0",
+        "home": "Sao Paulo",
+        "away": "Atletico Paranaense"
+      }
+    },
+    {
+      "key": "2026-07-22|19:30|Sao Paulo vs Atletico Paranaense|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492298,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "1-0",
+        "home": "Sao Paulo",
+        "away": "Atletico Paranaense"
+      }
+    },
+    {
+      "key": "2026-07-19|14:00|Spain vs Argentina|Tarjetas total -4.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1591866,
+        "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
+        "score": "1-0",
+        "halftime": "0-0",
         "home": "Spain",
         "away": "Argentina"
       }
     },
     {
       "key": "2026-07-19|14:00|Spain vs Argentina|Goles +1.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1591866,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "1-0",
+        "halftime": "0-0",
         "home": "Spain",
         "away": "Argentina"
       }
     },
     {
       "key": "2026-07-19|14:00|Spain vs Argentina|Local goles +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1591866,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "1-0",
+        "halftime": "0-0",
         "home": "Spain",
         "away": "Argentina"
       }
     },
     {
       "key": "2026-07-19|14:00|Spain vs Argentina|Visita goles +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1591866,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "AET",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "1-0",
+        "halftime": "0-0",
         "home": "Spain",
         "away": "Argentina"
       }
     },
     {
       "key": "2026-07-19|19:00|Alianza Lima vs Sport Huancayo|Corners total -8.5|10Bet",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1549411,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "1-1",
+        "home": "Alianza Lima",
+        "away": "Sport Huancayo"
+      }
     },
     {
       "key": "2026-07-18|16:00|France vs England|Visita goles -2.5|Betano",
@@ -145,40 +1099,36 @@
     },
     {
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|1T +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 71: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final. goles 1T: 2 supera la linea 0.5.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1549413,
-        "status": "2H",
-        "statusLong": "Second Half",
-        "elapsed": 71,
-        "live": true,
-        "score": "2-1",
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "4-1",
         "halftime": "2-0",
         "home": "Cusco",
-        "away": "Alianza Atletico",
-        "livePickStatus": "Cumplido en vivo",
-        "livePickReason": "goles 1T: 2 supera la linea 0.5."
+        "away": "Alianza Atletico"
       }
     },
     {
       "key": "2026-07-18|18:30|Cusco vs Alianza Atletico|Visita goles +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 71: 2H Second Half. Marcador provisional 2-1. No se liquida hasta el final. goles: 1 supera la linea 0.5.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1549413,
-        "status": "2H",
-        "statusLong": "Second Half",
-        "elapsed": 71,
-        "live": true,
-        "score": "2-1",
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "4-1",
         "halftime": "2-0",
         "home": "Cusco",
-        "away": "Alianza Atletico",
-        "livePickStatus": "Cumplido en vivo",
-        "livePickReason": "goles: 1 supera la linea 0.5."
+        "away": "Alianza Atletico"
       }
     },
     {
@@ -3872,15 +4822,15 @@
     }
   ],
   "requestSummary": {
-    "uniqueMatches": 69,
-    "fixtureLookups": 24,
-    "fixtureStatistics": 54,
-    "fixtureEvents": 11,
+    "uniqueMatches": 94,
+    "fixtureLookups": 30,
+    "fixtureStatistics": 71,
+    "fixtureEvents": 16,
     "cacheHits": 0,
-    "cacheMisses": 89,
-    "liveMatches": 1,
-    "apiRequests": 89,
-    "estimatedExtraRequestsPerMatch": 1.29,
+    "cacheMisses": 117,
+    "liveMatches": 0,
+    "apiRequests": 117,
+    "estimatedExtraRequestsPerMatch": 1.24,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
