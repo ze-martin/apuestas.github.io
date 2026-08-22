@@ -466,7 +466,7 @@ function addDateDays(date: string, days: number) {
 function activeSimulationDates(picks: ProcessedPick[]) {
   const available = new Set(
     picks
-      .filter((pick) => !hasEventStarted(pick))
+      .filter((pick) => pick.hasBetanoOdds && !hasEventStarted(pick))
       .map((pick) => pick.fecha)
       .filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)),
   )
