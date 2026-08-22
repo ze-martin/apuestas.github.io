@@ -463,18 +463,37 @@ function addDateDays(date: string, days: number) {
   return value.toISOString().slice(0, 10)
 }
 
-function activeSimulationDates(picks: ProcessedPick[]) {
+type SimulationMode = 'upcoming' | 'selected-date' | 'latest-available'
+
+function simulationScope(picks: ProcessedPick[], selectedDate: string) {
+  const validDate = (date: string) => /^\d{4}-\d{2}-\d{2}$/.test(date)
+  const betanoDates = new Set(
+    picks
+      .filter((pick) => pick.hasBetanoOdds)
+      .map((pick) => pick.fecha)
+      .filter(validDate),
+  )
+  if (selectedDate && betanoDates.has(selectedDate)) {
+    return { dates: [selectedDate], includeStarted: true, mode: 'selected-date' as SimulationMode }
+  }
+
   const available = new Set(
     picks
       .filter((pick) => pick.hasBetanoOdds && !hasEventStarted(pick))
       .map((pick) => pick.fecha)
-      .filter((date) => /^\d{4}-\d{2}-\d{2}$/.test(date)),
+      .filter(validDate),
   )
   const today = todayInLima()
   const windowDates = [today, addDateDays(today, 1), addDateDays(today, 2)]
   const inWindow = windowDates.filter((date) => available.has(date))
-  if (inWindow.length) return inWindow
-  return uniqDates([...available]).slice(0, 3).reverse()
+  if (inWindow.length) return { dates: inWindow, includeStarted: false, mode: 'upcoming' as SimulationMode }
+
+  const upcomingFallback = [...available].sort((a, b) => a.localeCompare(b)).slice(0, 3)
+  if (upcomingFallback.length) {
+    return { dates: upcomingFallback, includeStarted: false, mode: 'upcoming' as SimulationMode }
+  }
+
+  return { dates: uniqDates([...betanoDates]).slice(0, 3), includeStarted: true, mode: 'latest-available' as SimulationMode }
 }
 
 function betanoOdds(pick: ProcessedPick) {
@@ -635,10 +654,10 @@ export function ProcessedBettingDashboard() {
   const withoutOdds = useMemo(() => picks.filter((pick) => !pick.hasOdds), [picks])
   const withApiOdds = useMemo(() => picks.filter((pick) => pick.hasApiOdds), [picks])
   const withBetanoOdds = useMemo(() => picks.filter((pick) => pick.hasBetanoOdds), [picks])
-  const simulationDates = useMemo(() => activeSimulationDates(picks), [picks])
+  const simulation = useMemo(() => simulationScope(picks, filters.fecha), [filters.fecha, picks])
   const simulationPicks = useMemo(
-    () => picks.filter((pick) => pick.hasBetanoOdds && simulationDates.includes(pick.fecha) && !hasEventStarted(pick)),
-    [picks, simulationDates],
+    () => picks.filter((pick) => pick.hasBetanoOdds && simulation.dates.includes(pick.fecha) && (simulation.includeStarted || !hasEventStarted(pick))),
+    [picks, simulation],
   )
   const filteredMain = useMemo(() => sortPicks(filterPicks(withOdds, filters), sortKey), [filters, sortKey, withOdds])
   const filteredInfo = useMemo(
@@ -911,7 +930,8 @@ export function ProcessedBettingDashboard() {
         {view === 'simulation' && (
           <BetanoSimulation
             picks={simulationPicks}
-            dates={simulationDates}
+            dates={simulation.dates}
+            mode={simulation.mode}
             selections={simulationSelections}
             onToggle={toggleSimulationPick}
             onUseRecommended={setSimulationMatchSelections}
@@ -1494,6 +1514,7 @@ function PicksTable({ picks, sortKey, setSortKey }: { picks: ProcessedPick[]; so
 function BetanoSimulation({
   picks,
   dates,
+  mode,
   selections,
   onToggle,
   onUseRecommended,
@@ -1501,6 +1522,7 @@ function BetanoSimulation({
 }: {
   picks: ProcessedPick[]
   dates: string[]
+  mode: SimulationMode
   selections: Record<string, boolean>
   onToggle: (key: string) => void
   onUseRecommended: (keys: string[]) => void
@@ -1529,11 +1551,17 @@ function BetanoSimulation({
           <h2 className="font-semibold">Simulacion Betano</h2>
         </div>
         <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
-          No hay cuotas Betano disponibles para el rango activo: hoy y los dos dias siguientes.
+          No hay cuotas Betano disponibles para la fecha o rango activo. Revisa si el reporte de esa fecha ya incluye cuotas Betano.
         </p>
       </section>
     )
   }
+
+  const modeCopy = {
+    upcoming: 'Partidos vigentes del dia y los 2 proximos dias con cuota Betano. Las filas destacadas son las recomendaciones del protocolo, priorizadas por mayor probabilidad.',
+    'selected-date': 'Mostrando la fecha elegida en el filtro. Puede incluir partidos ya iniciados o finalizados para revision y control.',
+    'latest-available': 'No hay partidos futuros con cuota Betano; se muestra la ultima fecha disponible con cuotas Betano en modo revision.',
+  } satisfies Record<SimulationMode, string>
 
   return (
     <section className="space-y-4">
@@ -1545,7 +1573,7 @@ function BetanoSimulation({
               <h2 className="font-semibold">Simulacion Betano</h2>
             </div>
             <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
-              Partidos vigentes del dia y los 2 proximos dias con cuota Betano. Las filas destacadas son las recomendaciones del protocolo, priorizadas por mayor probabilidad.
+              {modeCopy[mode]}
             </p>
             <p className="mt-1 text-xs text-slate-500">
               Riesgo combina probabilidad, EV y perfil de cuota; una probabilidad alta puede seguir marcada como riesgo alto si el valor esperado o la cuota no acompanan.
