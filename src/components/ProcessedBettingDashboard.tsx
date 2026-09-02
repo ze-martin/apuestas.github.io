@@ -19,7 +19,9 @@ import {
   filterPicks,
   formatPct,
   groupByMatch,
+  isHighAccuracyRecommendation,
   parseReportText,
+  recommendationProfileScore,
   type MarketType,
   type PickFilters,
   type ProcessedPick,
@@ -512,14 +514,15 @@ function isRedundantSimulationLine(a: ProcessedPick, b: ProcessedPick) {
 
 function createBetanoSuggestedParlay(picks: ProcessedPick[], maxLegs = 4) {
   const selected: ProcessedPick[] = []
+  const maxRecommendedLegs = Math.min(maxLegs, 3)
   const candidates = picks
-    .filter((pick) => betanoOdds(pick) !== null && pick.riskTier !== 'Alto' && (pick.evBetano ?? 0) > 0)
-    .sort((a, b) => b.probability - a.probability || b.pickScore - a.pickScore)
+    .filter((pick) => betanoOdds(pick) !== null && isHighAccuracyRecommendation({ ...pick, ev: pick.evBetano, isPositiveEV: (pick.evBetano ?? 0) > 0 }))
+    .sort((a, b) => b.probability - a.probability || recommendationProfileScore(b) - recommendationProfileScore(a) || b.pickScore - a.pickScore)
 
   for (const candidate of candidates) {
-    if (selected.length >= maxLegs) break
+    if (selected.length >= maxRecommendedLegs) break
     const sameGroup = selected.filter((pick) => pick.correlationGroup === candidate.correlationGroup).length
-    if (sameGroup >= 2) continue
+    if (sameGroup >= 1) continue
     if (selected.some((pick) => isRedundantSimulationLine(pick, candidate))) continue
     selected.push(candidate)
   }
@@ -1079,6 +1082,27 @@ function DecisionGuide() {
           body="Edge es la diferencia entre tu probabilidad estimada y la probabilidad implicita de la cuota. Edge positivo indica ventaja teorica; edge negativo indica cuota desfavorable."
           example="Si el modelo estima 62% y la cuota implica 54%, edge = +8 puntos porcentuales."
         />
+      </section>
+
+      <section className="rounded-lg border border-teal-300 bg-teal-50 p-5 shadow-sm dark:border-teal-800 dark:bg-teal-950/30">
+        <h3 className="font-semibold text-teal-950 dark:text-teal-100">Retroalimentacion historica aplicada</h3>
+        <p className="mt-2 text-sm text-teal-950 dark:text-teal-100">
+          Con el historial liquidado al 2026-09-02, las combinadas sugeridas ahora son mas selectivas: minimo 72% de probabilidad, EV positivo, riesgo no alto, maximo 3 picks por partido y sin repetir grupos correlacionados.
+        </p>
+        <div className="mt-4 grid gap-3 md:grid-cols-2">
+          <div className="rounded-md border border-teal-200 bg-white p-4 dark:border-teal-800 dark:bg-slate-950">
+            <p className="font-semibold text-teal-900 dark:text-teal-100">Perfiles priorizados</p>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              Goles +1.5, DNB local, Local goles +0.5, Corners total -10.5, Local goles -2.5, Tarjetas total -4.5, Goles -3.5 y 1T +0.5.
+            </p>
+          </div>
+          <div className="rounded-md border border-teal-200 bg-white p-4 dark:border-teal-800 dark:bg-slate-950">
+            <p className="font-semibold text-teal-900 dark:text-teal-100">Perfiles degradados</p>
+            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+              Corners over, corners por equipo, 1T -1.5, DNB visita, Tarjetas total -5.5 y mercados no clasificados.
+            </p>
+          </div>
+        </div>
       </section>
 
       <section className="rounded-lg border border-slate-200 bg-white p-5 shadow-sm dark:border-slate-800 dark:bg-slate-900">

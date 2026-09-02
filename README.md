@@ -206,11 +206,25 @@ El servidor optimiza por fecha/liga y cachea respuestas, por lo que el gasto rea
 
 Reglas:
 
-- Prioriza riesgo `Bajo` y `Medio`.
-- Evita mas de 2 picks del mismo `correlationGroup`.
+- Prioriza riesgo `Bajo` y `Medio`, EV positivo y probabilidad minima de 72%.
+- Usa maximo 3 picks por partido para reducir exposicion acumulada.
+- Evita repetir picks del mismo `correlationGroup`.
 - Evita combinar dos lineas redundantes del mismo mercado, por ejemplo `Goles +1.5` y `Goles +2.5`.
-- Maximo 4 picks por partido.
+- Prioriza perfiles con mejor historial de acierto: `Goles +1.5`, `DNB local`, `Local goles +0.5`, `Corners total -10.5`, `Local goles -2.5`, `Tarjetas total -4.5`, `Goles -3.5` y `1T +0.5`.
+- Degrada perfiles con rendimiento historico debil: corners over, corners por equipo, `1T -1.5`, `DNB visita`, `Tarjetas total -5.5` y mercados no clasificados.
 - Si una combinada supera 10 selecciones, muestra advertencia.
+
+### Retroalimentacion historica de recomendaciones
+
+Con el corte de resultados al `2026-09-02`, las recomendaciones anteriores muestran que los mercados de goles sostienen mejor tasa de acierto que corners. El ajuste conservador busca mejorar el porcentaje de aciertos aunque genere menos jugadas:
+
+- `Goles +1.5`: perfil principal por estabilidad historica.
+- `DNB local`: util, considerando que varios casos pueden quedar devueltos.
+- `Corners`: solo se permite `Corners total -10.5`; el resto queda fuera de combinadas sugeridas por volatilidad.
+- `1T`: solo se mantiene `1T +0.5`; `1T -1.5` queda fuera por menor rendimiento.
+- `Tarjetas`: solo se mantiene `Tarjetas total -4.5`; lineas mas altas no entran como sugeridas.
+
+Este filtro no garantiza ganancias. Es una capa de aprendizaje operativo sobre el historial disponible y debe revisarse cuando aumente la muestra.
 
 ## Estructura relevante
 

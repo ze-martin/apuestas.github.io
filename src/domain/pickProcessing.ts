@@ -413,20 +413,47 @@ function isRedundantLine(a: ProcessedPick, b: ProcessedPick) {
   )
 }
 
+function sameLine(value: number | null, expected: number) {
+  return value !== null && Math.abs(value - expected) < 0.01
+}
+
+export function recommendationProfileScore(pick: ProcessedPick) {
+  if (pick.marketType === 'goals' && pick.side === 'total' && pick.direction === 'over' && sameLine(pick.line, 1.5)) return 100
+  if (pick.marketType === 'draw_no_bet' && pick.side === 'home' && pick.direction === 'home') return 95
+  if (pick.marketType === 'goals' && pick.side === 'home' && pick.direction === 'over' && sameLine(pick.line, 0.5)) return 92
+  if (pick.marketType === 'corners' && pick.side === 'total' && pick.direction === 'under' && sameLine(pick.line, 10.5)) return 86
+  if (pick.marketType === 'goals' && pick.side === 'home' && pick.direction === 'under' && sameLine(pick.line, 2.5)) return 84
+  if (pick.marketType === 'cards' && pick.side === 'total' && pick.direction === 'under' && sameLine(pick.line, 4.5)) return 82
+  if (pick.marketType === 'goals' && pick.side === 'total' && pick.direction === 'under' && sameLine(pick.line, 3.5)) return 80
+  if (pick.marketType === 'first_half_goals' && pick.side === 'total' && pick.direction === 'over' && sameLine(pick.line, 0.5)) return 76
+  return 0
+}
+
+export function isHighAccuracyRecommendation(pick: ProcessedPick) {
+  return (
+    pick.hasOdds &&
+    pick.isPositiveEV &&
+    pick.riskTier !== 'Alto' &&
+    pick.probability >= 0.72 &&
+    recommendationProfileScore(pick) > 0
+  )
+}
+
 export function createSuggestedParlay(picks: ProcessedPick[], maxLegs = 4) {
   const selected: ProcessedPick[] = []
+  const maxRecommendedLegs = Math.min(maxLegs, 3)
   const candidates = picks
-    .filter((pick) => pick.hasOdds && pick.isPositiveEV && pick.riskTier !== 'Alto')
+    .filter(isHighAccuracyRecommendation)
     .sort((a, b) => {
       const riskA = a.riskTier === 'Bajo' ? 0 : 1
       const riskB = b.riskTier === 'Bajo' ? 0 : 1
-      return b.probability - a.probability || riskA - riskB || b.pickScore - a.pickScore
+      return b.probability - a.probability || riskA - riskB || recommendationProfileScore(b) - recommendationProfileScore(a) || b.pickScore - a.pickScore
     })
 
   for (const candidate of candidates) {
-    if (selected.length >= maxLegs) break
+    if (selected.length >= maxRecommendedLegs) break
     const sameGroup = selected.filter((pick) => pick.correlationGroup === candidate.correlationGroup).length
-    if (sameGroup >= 2) continue
+    if (sameGroup >= 1) continue
     if (selected.some((pick) => isRedundantLine(pick, candidate))) continue
     selected.push(candidate)
   }
