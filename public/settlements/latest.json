@@ -1,45 +1,177 @@
 {
-  "generatedAt": "2026-09-02T15:36:15.196Z",
+  "generatedAt": "2026-09-03T17:24:13.281Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
-  "reportCount": 47,
-  "suggestedPickCount": 445,
+  "reportCount": 48,
+  "suggestedPickCount": 451,
   "settlements": [
     {
-      "key": "2026-09-02|17:30|Flamengo vs Mirassol|Goles +1.5|10Bet",
+      "key": "2026-09-03|14:00|Real Sociedad vs Celta Vigo|Goles -3.5|10Bet",
       "settlement": "Pendiente",
       "source": "API-Football",
       "reason": "Fixture NS: Not Started.",
       "fixture": {
-        "id": 1492145,
+        "id": 1570392,
         "status": "NS",
         "statusLong": "Not Started",
         "elapsed": null,
         "live": false,
         "halftime": "N/D-N/D",
+        "home": "Real Sociedad",
+        "away": "Celta Vigo"
+      }
+    },
+    {
+      "key": "2026-09-02|13:45|VfL Osnabrück vs Bayern München|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550705,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-4",
+        "halftime": "1-2",
+        "home": "VfL Osnabrück",
+        "away": "Bayern München"
+      }
+    },
+    {
+      "key": "2026-09-02|13:45|VfL Osnabrück vs Bayern München|Corners total -10.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550705,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-4",
+        "halftime": "1-2",
+        "home": "VfL Osnabrück",
+        "away": "Bayern München"
+      }
+    },
+    {
+      "key": "2026-09-02|13:45|VfL Osnabrück vs Bayern München|Local goles +0.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550705,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-4",
+        "halftime": "1-2",
+        "home": "VfL Osnabrück",
+        "away": "Bayern München"
+      }
+    },
+    {
+      "key": "2026-09-02|17:30|Flamengo vs Mirassol|Corners total -10.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492145,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "2-0",
         "home": "Flamengo",
         "away": "Mirassol"
       }
     },
     {
-      "key": "2026-09-02|19:15|Velez Sarsfield vs Boca Juniors|Goles +1.5|10Bet",
-      "settlement": "Pendiente",
+      "key": "2026-09-02|17:30|Flamengo vs Mirassol|Goles +1.5|10Bet",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492145,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "2-0",
+        "home": "Flamengo",
+        "away": "Mirassol"
+      }
     },
     {
-      "key": "2026-09-02|19:30|Santos vs Palmeiras|1T +0.5|10Bet",
-      "settlement": "Pendiente",
+      "key": "2026-09-02|17:30|Flamengo vs Mirassol|Tarjetas total -4.5|Betano",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492145,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-0",
+        "halftime": "2-0",
+        "home": "Flamengo",
+        "away": "Mirassol"
+      }
     },
     {
-      "key": "2026-09-02|19:30|Santos vs Palmeiras|Goles +1.5|10Bet",
-      "settlement": "Pendiente",
+      "key": "2026-09-02|19:15|Velez Sarsfield vs Boca Juniors|Goles +1.5|Betano",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
-      "fixture": null
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1593679,
+        "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Velez Sarsfield",
+        "away": "Boca Juniors"
+      }
+    },
+    {
+      "key": "2026-09-02|19:30|Santos vs Palmeiras|1T +0.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1623075,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Santos",
+        "away": "Palmeiras"
+      }
+    },
+    {
+      "key": "2026-09-02|19:30|Vitoria vs Vasco DA Gama|Corners total -10.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1623076,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-2",
+        "halftime": "0-0",
+        "home": "Vitoria",
+        "away": "Vasco DA Gama"
+      }
     },
     {
       "key": "2026-09-01|19:00|Atletico-MG vs Cruzeiro|Goles -3.5|Betano",
@@ -7520,15 +7652,15 @@
     }
   ],
   "requestSummary": {
-    "uniqueMatches": 266,
-    "fixtureLookups": 51,
-    "fixtureStatistics": 45,
-    "fixtureEvents": 20,
+    "uniqueMatches": 269,
+    "fixtureLookups": 52,
+    "fixtureStatistics": 48,
+    "fixtureEvents": 21,
     "cacheHits": 0,
-    "cacheMisses": 116,
+    "cacheMisses": 121,
     "liveMatches": 0,
-    "apiRequests": 116,
-    "estimatedExtraRequestsPerMatch": 0.44,
+    "apiRequests": 121,
+    "estimatedExtraRequestsPerMatch": 0.45,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
