@@ -41,6 +41,7 @@ Archivo principal:
 
 ```text
 src/domain/pickProcessing.ts
+src/domain/recommendationRules.mjs
 ```
 
 Funciones separadas:
@@ -51,6 +52,7 @@ Funciones separadas:
 - `classifyRisk`: clasifica riesgo segun probabilidad, EV y cuota.
 - `filterPicks`: aplica filtros del dashboard.
 - `createSuggestedParlay`: arma combinadas evitando redundancia/correlacion excesiva.
+- `recommendationRules.mjs`: fuente unica de perfiles recomendables, probabilidad minima, score por perfil y limite conservador de picks por partido.
 
 Campos derivados:
 
@@ -139,6 +141,8 @@ Incluye:
 
 `Historial real` no usa marcas manuales. Solo toma resultados reales cargados en el CSV/HTML del protocolo. Reconoce campos como `resultado_real`, `resultado_pick`, `resultado`, `result`, `outcome`, `settlement`, `status_resultado`, `estado_resultado`, `pick_result` o `resultado_final`, ademas de estados reconocibles como `Acertado`, `Fallado`, `Devuelto`, `Win`, `Loss`, `Void`, etc.
 
+Tambien incluye un backtest por perfil recomendado. Esa seccion agrupa los picks liquidados de las combinadas sugeridas por perfiles como `Goles +1.5`, `DNB local`, `Local goles +0.5`, `Corners total -10.5`, `Tarjetas total -4.5` o `1T +0.5`, y muestra acierto, P/L y ROI simulado. La lectura sirve para ajustar la exposicion futura segun evidencia historica, sin presentar ninguna recomendacion como garantia.
+
 Si el reporte solo trae estados operativos como `EV positivo Betano`, el pick queda `Pendiente` hasta que se consulte la API o se cargue un resultado verificable. Si API-Football no encuentra el fixture o no devuelve estadisticas suficientes para una fecha ya pasada, el pick queda como `Sin dato oficial`. La app no inventa resultados.
 
 ### Liquidacion con API-Football
@@ -216,7 +220,7 @@ Reglas:
 
 ### Retroalimentacion historica de recomendaciones
 
-Con el corte de resultados al `2026-09-02`, las recomendaciones anteriores muestran que los mercados de goles sostienen mejor tasa de acierto que corners. El ajuste conservador busca mejorar el porcentaje de aciertos aunque genere menos jugadas:
+Con el corte de resultados al `2026-09-05`, las recomendaciones anteriores muestran que los mercados de goles sostienen mejor tasa de acierto que corners. El ajuste conservador busca mejorar el porcentaje de aciertos aunque genere menos jugadas:
 
 - `Goles +1.5`: perfil principal por estabilidad historica.
 - `DNB local`: util, considerando que varios casos pueden quedar devueltos.
@@ -235,6 +239,19 @@ src/
     ProcessedBettingDashboard.tsx
   domain/
     pickProcessing.ts
+    recommendationRules.mjs
+  services/
+    protectedProtocolRepository.ts
+    supabaseClient.ts
+  types/
+    mjs-modules.d.ts
+supabase/
+  migrations/
+    001_private_protocol_schema.sql
+    002_auth_profile_trigger.sql
+server/
+  generateSettlementSnapshot.mjs
+  settlementServer.mjs
 ```
 
 ## Supabase Auth: crear usuario admin o premium
@@ -289,7 +306,22 @@ Para usar el repositorio que se ve en tu captura, `ze-martin/apuestas.github.io`
 ```text
 VITE_BASE_PATH=/apuestas.github.io/
 VITE_PROTOCOL_INDEX_URL=https://ze-martin.github.io/
+VITE_DATA_SOURCE_MODE=github-pages
+VITE_AUTH_PROVIDER=none
+VITE_DATABASE_PROVIDER=localStorage
 ```
+
+Cuando pases a Supabase protegido, puedes cambiar esas variables a:
+
+```text
+VITE_DATA_SOURCE_MODE=supabase
+VITE_AUTH_PROVIDER=supabase
+VITE_DATABASE_PROVIDER=supabase
+VITE_SUPABASE_URL=https://tu-proyecto.supabase.co
+VITE_SUPABASE_ANON_KEY=tu_publishable_or_anon_key
+```
+
+No agregues `SUPABASE_SERVICE_ROLE_KEY`, `FOOTBALL_API_KEY` ni passwords en variables `VITE_`. Todo lo que empieza con `VITE_` queda incluido en el frontend publicado.
 
 Con esa configuracion, la URL publica esperada es:
 

@@ -1,21 +1,1303 @@
 {
-  "generatedAt": "2026-09-03T17:24:13.281Z",
+  "generatedAt": "2026-09-05T21:32:06.279Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
-  "reportCount": 48,
-  "suggestedPickCount": 451,
+  "reportCount": 52,
+  "suggestedPickCount": 529,
   "settlements": [
     {
-      "key": "2026-09-03|14:00|Real Sociedad vs Celta Vigo|Goles -3.5|10Bet",
+      "key": "2026-09-06|08:00|Estac Troyes vs Strasbourg|Goles +1.5|William Hill",
       "settlement": "Pendiente",
       "source": "API-Football",
       "reason": "Fixture NS: Not Started.",
       "fixture": {
-        "id": 1570392,
+        "id": 1552755,
         "status": "NS",
         "statusLong": "Not Started",
         "elapsed": null,
         "live": false,
         "halftime": "N/D-N/D",
+        "home": "Estac Troyes",
+        "away": "Strasbourg"
+      }
+    },
+    {
+      "key": "2026-09-06|08:00|Everton vs Manchester United|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1557390,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Everton",
+        "away": "Manchester United"
+      }
+    },
+    {
+      "key": "2026-09-06|08:00|Everton vs Manchester United|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1557390,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Everton",
+        "away": "Manchester United"
+      }
+    },
+    {
+      "key": "2026-09-06|08:00|Parma vs Monza|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1550115,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Parma",
+        "away": "Monza"
+      }
+    },
+    {
+      "key": "2026-09-06|08:00|Parma vs Monza|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1550115,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Parma",
+        "away": "Monza"
+      }
+    },
+    {
+      "key": "2026-09-06|08:30|Hamburger SV vs FSV Mainz 05|Goles -3.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1575154,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Hamburger SV",
+        "away": "FSV Mainz 05"
+      }
+    },
+    {
+      "key": "2026-09-06|09:00|Coritiba vs Mirassol|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1492363,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Coritiba",
+        "away": "Mirassol"
+      }
+    },
+    {
+      "key": "2026-09-06|09:15|Valencia vs Barcelona|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1570371,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Valencia",
+        "away": "Barcelona"
+      }
+    },
+    {
+      "key": "2026-09-06|10:15|Angers vs Rennes|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1552747,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Angers",
+        "away": "Rennes"
+      }
+    },
+    {
+      "key": "2026-09-06|10:15|Angers vs Rennes|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1552747,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Angers",
+        "away": "Rennes"
+      }
+    },
+    {
+      "key": "2026-09-06|10:30|Eintracht Frankfurt vs FC Augsburg|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1575152,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Eintracht Frankfurt",
+        "away": "FC Augsburg"
+      }
+    },
+    {
+      "key": "2026-09-06|10:30|Eintracht Frankfurt vs FC Augsburg|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1575152,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Eintracht Frankfurt",
+        "away": "FC Augsburg"
+      }
+    },
+    {
+      "key": "2026-09-06|10:30|Arsenal vs Chelsea|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1557387,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Arsenal",
+        "away": "Chelsea"
+      }
+    },
+    {
+      "key": "2026-09-06|10:30|Arsenal vs Chelsea|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1557387,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Arsenal",
+        "away": "Chelsea"
+      }
+    },
+    {
+      "key": "2026-09-06|11:30|Malaga vs Levante|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1570369,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Malaga",
+        "away": "Levante"
+      }
+    },
+    {
+      "key": "2026-09-06|11:30|Malaga vs Levante|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1570369,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Malaga",
+        "away": "Levante"
+      }
+    },
+    {
+      "key": "2026-09-06|14:00|Espanyol vs Sevilla|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1570367,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Espanyol",
+        "away": "Sevilla"
+      }
+    },
+    {
+      "key": "2026-09-06|14:00|Espanyol vs Sevilla|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1570367,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Espanyol",
+        "away": "Sevilla"
+      }
+    },
+    {
+      "key": "2026-09-06|14:00|Cruzeiro vs Atletico Paranaense|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1492364,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Cruzeiro",
+        "away": "Atletico Paranaense"
+      }
+    },
+    {
+      "key": "2026-09-06|14:00|Internacional vs Santos|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1492366,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Internacional",
+        "away": "Santos"
+      }
+    },
+    {
+      "key": "2026-09-06|14:00|Remo vs Flamengo|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1492367,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Remo",
+        "away": "Flamengo"
+      }
+    },
+    {
+      "key": "2026-09-06|15:00|Juan Pablo II College vs Alianza Lima|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549478,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Juan Pablo II College",
+        "away": "Alianza Lima"
+      }
+    },
+    {
+      "key": "2026-09-06|15:00|Juan Pablo II College vs Alianza Lima|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549478,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Juan Pablo II College",
+        "away": "Alianza Lima"
+      }
+    },
+    {
+      "key": "2026-09-06|16:30|Botafogo vs Palmeiras|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1492360,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Botafogo",
+        "away": "Palmeiras"
+      }
+    },
+    {
+      "key": "2026-09-06|17:30|Corinthians vs Chapecoense-sc|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1492362,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Corinthians",
+        "away": "Chapecoense-sc"
+      }
+    },
+    {
+      "key": "2026-09-06|18:30|FBC Melgar vs ADT|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549476,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "FBC Melgar",
+        "away": "ADT"
+      }
+    },
+    {
+      "key": "2026-09-05|06:30|Newcastle vs Bournemouth|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557395,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-2",
+        "halftime": "1-2",
+        "home": "Newcastle",
+        "away": "Bournemouth"
+      }
+    },
+    {
+      "key": "2026-09-05|06:30|Newcastle vs Bournemouth|DNB local|10Bet",
+      "settlement": "Devuelto",
+      "source": "API-Football",
+      "reason": "Apuesta devuelta: la seleccion no gana ni pierde y el stake se devuelve.",
+      "fixture": {
+        "id": 1557395,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-2",
+        "halftime": "1-2",
+        "home": "Newcastle",
+        "away": "Bournemouth"
+      }
+    },
+    {
+      "key": "2026-09-05|08:00|Fiorentina vs Torino|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550110,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "0-0",
+        "home": "Fiorentina",
+        "away": "Torino"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|1899 Hoffenheim vs Borussia Dortmund|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575150,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "1-0",
+        "home": "1899 Hoffenheim",
+        "away": "Borussia Dortmund"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|1899 Hoffenheim vs Borussia Dortmund|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575150,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "1-0",
+        "home": "1899 Hoffenheim",
+        "away": "Borussia Dortmund"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Bayer Leverkusen vs Union Berlin|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575151,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "4-0",
+        "halftime": "2-0",
+        "home": "Bayer Leverkusen",
+        "away": "Union Berlin"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Bayer Leverkusen vs Union Berlin|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575151,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "4-0",
+        "halftime": "2-0",
+        "home": "Bayer Leverkusen",
+        "away": "Union Berlin"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Bayer Leverkusen vs Union Berlin|Corners total -10.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1575151,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "4-0",
+        "halftime": "2-0",
+        "home": "Bayer Leverkusen",
+        "away": "Union Berlin"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Borussia Mönchengladbach vs SV Elversberg|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575153,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-4",
+        "halftime": "2-1",
+        "home": "Borussia Mönchengladbach",
+        "away": "SV Elversberg"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Borussia Mönchengladbach vs SV Elversberg|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575153,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-4",
+        "halftime": "2-1",
+        "home": "Borussia Mönchengladbach",
+        "away": "SV Elversberg"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|SC Paderborn 07 vs SC Freiburg|Goles -3.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575157,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-1",
+        "halftime": "0-1",
+        "home": "SC Paderborn 07",
+        "away": "SC Freiburg"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|SC Paderborn 07 vs SC Freiburg|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1575157,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-1",
+        "halftime": "0-1",
+        "home": "SC Paderborn 07",
+        "away": "SC Freiburg"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Werder Bremen vs RB Leipzig|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575155,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Werder Bremen",
+        "away": "RB Leipzig"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Werder Bremen vs RB Leipzig|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575155,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-1",
+        "halftime": "1-0",
+        "home": "Werder Bremen",
+        "away": "RB Leipzig"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Brentford vs Sunderland|Goles -3.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557388,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-1",
+        "halftime": "0-0",
+        "home": "Brentford",
+        "away": "Sunderland"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Brentford vs Sunderland|DNB local|10Bet",
+      "settlement": "Devuelto",
+      "source": "API-Football",
+      "reason": "Apuesta devuelta: la seleccion no gana ni pierde y el stake se devuelve.",
+      "fixture": {
+        "id": 1557388,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-1",
+        "halftime": "0-0",
+        "home": "Brentford",
+        "away": "Sunderland"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Brighton vs Leeds|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557389,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-1",
+        "halftime": "0-1",
+        "home": "Brighton",
+        "away": "Leeds"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Brighton vs Leeds|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557389,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-1",
+        "halftime": "0-1",
+        "home": "Brighton",
+        "away": "Leeds"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Fulham vs Crystal Palace|Corners total -10.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557391,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "2-1",
+        "home": "Fulham",
+        "away": "Crystal Palace"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Fulham vs Crystal Palace|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557391,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "2-1",
+        "home": "Fulham",
+        "away": "Crystal Palace"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Fulham vs Crystal Palace|DNB local|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1557391,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "2-1",
+        "home": "Fulham",
+        "away": "Crystal Palace"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Manchester City vs Coventry|DNB local|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557394,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-0",
+        "halftime": "1-0",
+        "home": "Manchester City",
+        "away": "Coventry"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Manchester City vs Coventry|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1557394,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-0",
+        "halftime": "1-0",
+        "home": "Manchester City",
+        "away": "Coventry"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Nottingham Forest vs Tottenham|DNB local|10Bet",
+      "settlement": "Devuelto",
+      "source": "API-Football",
+      "reason": "Apuesta devuelta: la seleccion no gana ni pierde y el stake se devuelve.",
+      "fixture": {
+        "id": 1557396,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Nottingham Forest",
+        "away": "Tottenham"
+      }
+    },
+    {
+      "key": "2026-09-05|09:00|Nottingham Forest vs Tottenham|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1557396,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Nottingham Forest",
+        "away": "Tottenham"
+      }
+    },
+    {
+      "key": "2026-09-05|09:15|Athletic Club vs Atletico Madrid|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1570364,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-0",
+        "halftime": "0-0",
+        "home": "Athletic Club",
+        "away": "Atletico Madrid"
+      }
+    },
+    {
+      "key": "2026-09-05|10:15|Lens vs Lorient|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1552749,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-1",
+        "halftime": "0-0",
+        "home": "Lens",
+        "away": "Lorient"
+      }
+    },
+    {
+      "key": "2026-09-05|11:00|Inter vs Napoli|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550113,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "0-0",
+        "home": "Inter",
+        "away": "Napoli"
+      }
+    },
+    {
+      "key": "2026-09-05|11:00|Inter vs Napoli|1T +0.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1550113,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "0-0",
+        "home": "Inter",
+        "away": "Napoli"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|FC Schalke 04 vs Bayern München|Tarjetas total -4.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575156,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "FC Schalke 04",
+        "away": "Bayern München"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|FC Schalke 04 vs Bayern München|Local goles -2.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1575156,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "FC Schalke 04",
+        "away": "Bayern München"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|FC Schalke 04 vs Bayern München|Goles +1.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1575156,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "FC Schalke 04",
+        "away": "Bayern München"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|Rayo Vallecano vs Racing Santander|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1570370,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "2-2",
+        "home": "Rayo Vallecano",
+        "away": "Racing Santander"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|Rayo Vallecano vs Racing Santander|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1570370,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "2-2",
+        "home": "Rayo Vallecano",
+        "away": "Racing Santander"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|Hull City vs Aston Villa|DNB local|10Bet",
+      "settlement": "Devuelto",
+      "source": "API-Football",
+      "reason": "Apuesta devuelta: la seleccion no gana ni pierde y el stake se devuelve.",
+      "fixture": {
+        "id": 1557392,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Hull City",
+        "away": "Aston Villa"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|Hull City vs Aston Villa|Goles -3.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1557392,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Hull City",
+        "away": "Aston Villa"
+      }
+    },
+    {
+      "key": "2026-09-05|11:30|Hull City vs Aston Villa|1T +0.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1557392,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "Hull City",
+        "away": "Aston Villa"
+      }
+    },
+    {
+      "key": "2026-09-05|13:45|Le Havre vs Stade Brestois 29|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1552748,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-2",
+        "halftime": "0-1",
+        "home": "Le Havre",
+        "away": "Stade Brestois 29"
+      }
+    },
+    {
+      "key": "2026-09-05|13:45|Nice vs Le Mans|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1552752,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-1",
+        "halftime": "1-1",
+        "home": "Nice",
+        "away": "Le Mans"
+      }
+    },
+    {
+      "key": "2026-09-05|13:45|Nice vs Le Mans|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1552752,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "1-1",
+        "halftime": "1-1",
+        "home": "Nice",
+        "away": "Le Mans"
+      }
+    },
+    {
+      "key": "2026-09-05|13:45|AS Roma vs Atalanta|DNB local|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550107,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "0-0",
+        "home": "AS Roma",
+        "away": "Atalanta"
+      }
+    },
+    {
+      "key": "2026-09-05|13:45|AS Roma vs Atalanta|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550107,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-1",
+        "halftime": "0-0",
+        "home": "AS Roma",
+        "away": "Atalanta"
+      }
+    },
+    {
+      "key": "2026-09-05|14:00|Villarreal vs Deportivo La Coruna|1T +0.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1570372,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "1-1",
+        "home": "Villarreal",
+        "away": "Deportivo La Coruna"
+      }
+    },
+    {
+      "key": "2026-09-05|14:00|Villarreal vs Deportivo La Coruna|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1570372,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "1-1",
+        "home": "Villarreal",
+        "away": "Deportivo La Coruna"
+      }
+    },
+    {
+      "key": "2026-09-05|14:00|RB Bragantino vs Bahia|Goles -3.5|10Bet",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1492361,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "2-2",
+        "home": "RB Bragantino",
+        "away": "Bahia"
+      }
+    },
+    {
+      "key": "2026-09-05|14:00|RB Bragantino vs Bahia|Goles +1.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1492361,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "2-2",
+        "home": "RB Bragantino",
+        "away": "Bahia"
+      }
+    },
+    {
+      "key": "2026-09-05|15:00|Sport Huancayo vs Sport Boys|1T +0.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Partido en vivo minuto 64: 2H Second Half. Marcador provisional 1-1. No se liquida hasta el final. goles 1T: 1 supera la linea 0.5.",
+      "fixture": {
+        "id": 1549479,
+        "status": "2H",
+        "statusLong": "Second Half",
+        "elapsed": 64,
+        "live": true,
+        "score": "1-1",
+        "halftime": "1-0",
+        "home": "Sport Huancayo",
+        "away": "Sport Boys",
+        "livePickStatus": "Cumplido en vivo",
+        "livePickReason": "goles 1T: 1 supera la linea 0.5."
+      }
+    },
+    {
+      "key": "2026-09-05|18:00|Cusco vs UCV Moquegua|Goles +1.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Fixture NS: Not Started.",
+      "fixture": {
+        "id": 1549474,
+        "status": "NS",
+        "statusLong": "Not Started",
+        "elapsed": null,
+        "live": false,
+        "halftime": "N/D-N/D",
+        "home": "Cusco",
+        "away": "UCV Moquegua"
+      }
+    },
+    {
+      "key": "2026-09-05|19:00|Fluminense vs Vasco DA Gama|Goles +1.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-09-05|20:30|Universitario vs Comerciantes Unidos|1T +0.5|William Hill",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
+      "fixture": null
+    },
+    {
+      "key": "2026-09-04|18:30|New York City FC vs Nashville SC|Goles +1.5|William Hill",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1490436,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "New York City FC",
+        "away": "Nashville SC"
+      }
+    },
+    {
+      "key": "2026-09-04|18:30|New York City FC vs Nashville SC|1T +0.5|William Hill",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1490436,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
+        "home": "New York City FC",
+        "away": "Nashville SC"
+      }
+    },
+    {
+      "key": "2026-09-03|14:00|Real Sociedad vs Celta Vigo|Goles -3.5|10Bet",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1570392,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "0-0",
+        "halftime": "0-0",
         "home": "Real Sociedad",
         "away": "Celta Vigo"
       }
@@ -7652,15 +8934,15 @@
     }
   ],
   "requestSummary": {
-    "uniqueMatches": 269,
-    "fixtureLookups": 52,
-    "fixtureStatistics": 48,
-    "fixtureEvents": 21,
+    "uniqueMatches": 315,
+    "fixtureLookups": 55,
+    "fixtureStatistics": 51,
+    "fixtureEvents": 22,
     "cacheHits": 0,
-    "cacheMisses": 121,
-    "liveMatches": 0,
-    "apiRequests": 121,
-    "estimatedExtraRequestsPerMatch": 0.45,
+    "cacheMisses": 128,
+    "liveMatches": 1,
+    "apiRequests": 128,
+    "estimatedExtraRequestsPerMatch": 0.41,
     "maxRecommendedRequestsPerMatch": 3
   }
 }

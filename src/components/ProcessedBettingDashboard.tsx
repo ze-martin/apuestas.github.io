@@ -21,6 +21,7 @@ import {
   groupByMatch,
   isHighAccuracyRecommendation,
   parseReportText,
+  recommendationProfileLabel,
   recommendationProfileScore,
   type MarketType,
   type PickFilters,
@@ -1209,6 +1210,57 @@ function dateChartData(records: SuggestedHistoryRecord[]) {
     .reverse()
 }
 
+function profileBacktestData(records: SuggestedHistoryRecord[]) {
+  const grouped = records.reduce<Record<string, {
+    profile: string
+    total: number
+    won: number
+    lost: number
+    returned: number
+    noData: number
+    pending: number
+    profit: number
+  }>>((acc, record) => {
+    const profile = recommendationProfileLabel(record.pick)
+    const current = acc[profile] ?? {
+      profile,
+      total: 0,
+      won: 0,
+      lost: 0,
+      returned: 0,
+      noData: 0,
+      pending: 0,
+      profit: 0,
+    }
+
+    current.total += 1
+    current.profit += record.profit ?? 0
+    if (record.settlement === 'Acertado') current.won += 1
+    if (record.settlement === 'Fallado') current.lost += 1
+    if (record.settlement === 'Devuelto') current.returned += 1
+    if (record.settlement === 'Sin dato oficial') current.noData += 1
+    if (record.settlement === 'Pendiente') current.pending += 1
+    acc[profile] = current
+    return acc
+  }, {})
+
+  return Object.values(grouped)
+    .map((row) => {
+      const graded = row.won + row.lost
+      const settled = row.won + row.lost + row.returned
+      const hitRate = graded ? row.won / graded : null
+      return {
+        ...row,
+        graded,
+        settled,
+        hitRate,
+        hitRatePct: hitRate === null ? 0 : Number((hitRate * 100).toFixed(1)),
+        roi: settled ? row.profit / settled : null,
+      }
+    })
+    .sort((a, b) => (b.hitRate ?? -1) - (a.hitRate ?? -1) || b.graded - a.graded || b.total - a.total)
+}
+
 function SuggestedHistoryView({
   records,
   mode,
@@ -1230,6 +1282,10 @@ function SuggestedHistoryView({
 }) {
   const summary = summarizeHistory(records)
   const grouped = historyByDate(records)
+  const profileBacktest = profileBacktestData(records)
+  const qualifiedProfiles = profileBacktest.filter((row) => row.graded >= 3 && row.hitRate !== null)
+  const bestProfiles = qualifiedProfiles.slice(0, 3)
+  const weakProfiles = [...qualifiedProfiles].sort((a, b) => (a.hitRate ?? 0) - (b.hitRate ?? 0)).slice(0, 3)
   const maxDateTotal = Math.max(1, ...grouped.map(([, items]) => items.length))
   const isUserMode = mode === 'user'
   const title = isUserMode ? 'Mi seguimiento de aciertos' : 'Historial real de recomendaciones'
@@ -1365,6 +1421,82 @@ function SuggestedHistoryView({
           </div>
         </div>
       </section>
+
+      {!isUserMode && profileBacktest.length > 0 && (
+        <section className="grid gap-4 xl:grid-cols-[1fr_420px]">
+          <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <h3 className="font-semibold">Backtest por perfil recomendado</h3>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              Compara el rendimiento real de los perfiles usados en combinadas sugeridas. Los perfiles con poca muestra deben tomarse solo como senal preliminar.
+            </p>
+            <div className="mt-4 h-[280px]">
+              <ResponsiveContainer width="100%" height="100%">
+                <BarChart data={profileBacktest} margin={{ top: 8, right: 16, left: 0, bottom: 70 }}>
+                  <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                  <XAxis dataKey="profile" angle={-35} textAnchor="end" interval={0} height={86} tick={{ fontSize: 11 }} />
+                  <YAxis domain={[0, 100]} tickFormatter={(value) => `${value}%`} />
+                  <Tooltip formatter={(value, name) => [name === 'hitRatePct' ? `${value}%` : value, name === 'hitRatePct' ? 'Acierto' : name]} />
+                  <Bar dataKey="hitRatePct" fill="#0f766e" radius={[4, 4, 0, 0]} />
+                </BarChart>
+              </ResponsiveContainer>
+            </div>
+          </div>
+
+          <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <h3 className="font-semibold">Lectura para mejorar</h3>
+            <div className="mt-4 space-y-4 text-sm">
+              <div>
+                <p className="font-semibold text-emerald-700 dark:text-emerald-300">Priorizar</p>
+                <p className="mt-1 text-slate-600 dark:text-slate-300">
+                  {bestProfiles.length
+                    ? bestProfiles.map((row) => `${row.profile} (${formatPct((row.hitRate ?? 0) * 100)}, ${row.graded} picks)`).join(' | ')
+                    : 'Aun falta muestra liquidada suficiente por perfil.'}
+                </p>
+              </div>
+              <div>
+                <p className="font-semibold text-amber-700 dark:text-amber-300">Revisar con cautela</p>
+                <p className="mt-1 text-slate-600 dark:text-slate-300">
+                  {weakProfiles.length
+                    ? weakProfiles.map((row) => `${row.profile} (${formatPct((row.hitRate ?? 0) * 100)}, ${row.graded} picks)`).join(' | ')
+                    : 'No hay perfiles debiles con muestra minima.'}
+                </p>
+              </div>
+              <p className="rounded-md border border-slate-200 bg-slate-50 p-3 text-slate-600 dark:border-slate-800 dark:bg-slate-950 dark:text-slate-300">
+                Regla operativa actual: mantener prioridad en probabilidad alta, EV positivo y riesgo Bajo/Medio; bajar exposicion en perfiles que caen por debajo del promedio historico.
+              </p>
+            </div>
+          </div>
+
+          <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900 xl:col-span-2">
+            <table className="min-w-[920px] text-left text-sm">
+              <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-950">
+                <tr>
+                  <th className="px-4 py-3">Perfil</th>
+                  <th className="px-4 py-3">Picks</th>
+                  <th className="px-4 py-3">Liquidables</th>
+                  <th className="px-4 py-3">Acierto</th>
+                  <th className="px-4 py-3">A/F/D/S/P</th>
+                  <th className="px-4 py-3">P/L</th>
+                  <th className="px-4 py-3">ROI</th>
+                </tr>
+              </thead>
+              <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+                {profileBacktest.map((row) => (
+                  <tr key={row.profile}>
+                    <td className="px-4 py-3 font-semibold">{row.profile}</td>
+                    <td className="px-4 py-3">{row.total}</td>
+                    <td className="px-4 py-3">{row.graded}</td>
+                    <td className="px-4 py-3">{row.hitRate === null ? 'N/D' : formatPct(row.hitRate * 100)}</td>
+                    <td className="px-4 py-3">{row.won}/{row.lost}/{row.returned}/{row.noData}/{row.pending}</td>
+                    <td className="px-4 py-3">{row.profit.toFixed(2)} u</td>
+                    <td className="px-4 py-3">{row.roi === null ? 'N/D' : formatPct(row.roi * 100)}</td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </section>
+      )}
 
       <section className="grid gap-4 lg:grid-cols-[360px_1fr]">
         <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
