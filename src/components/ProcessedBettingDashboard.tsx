@@ -470,33 +470,23 @@ type SimulationMode = 'upcoming' | 'selected-date' | 'latest-available'
 
 function simulationScope(picks: ProcessedPick[], selectedDate: string) {
   const validDate = (date: string) => /^\d{4}-\d{2}-\d{2}$/.test(date)
-  const betanoDates = new Set(
-    picks
-      .filter((pick) => pick.hasBetanoOdds)
-      .map((pick) => pick.fecha)
-      .filter(validDate),
-  )
-  if (selectedDate && betanoDates.has(selectedDate)) {
+  const allDates = new Set(picks.map((pick) => pick.fecha).filter(validDate))
+
+  if (selectedDate && allDates.has(selectedDate)) {
     return { dates: [selectedDate], includeStarted: true, mode: 'selected-date' as SimulationMode }
   }
 
-  const available = new Set(
-    picks
-      .filter((pick) => pick.hasBetanoOdds && !hasEventStarted(pick))
-      .map((pick) => pick.fecha)
-      .filter(validDate),
-  )
   const today = todayInLima()
   const windowDates = [today, addDateDays(today, 1), addDateDays(today, 2)]
-  const inWindow = windowDates.filter((date) => available.has(date))
+  const inWindow = windowDates.filter((date) => allDates.has(date))
   if (inWindow.length) return { dates: inWindow, includeStarted: false, mode: 'upcoming' as SimulationMode }
 
-  const upcomingFallback = [...available].sort((a, b) => a.localeCompare(b)).slice(0, 3)
+  const upcomingFallback = [...allDates].filter((date) => date >= today).sort((a, b) => a.localeCompare(b)).slice(0, 3)
   if (upcomingFallback.length) {
     return { dates: upcomingFallback, includeStarted: false, mode: 'upcoming' as SimulationMode }
   }
 
-  return { dates: uniqDates([...betanoDates]).slice(0, 3), includeStarted: true, mode: 'latest-available' as SimulationMode }
+  return { dates: uniqDates([...allDates]).slice(0, 3), includeStarted: true, mode: 'latest-available' as SimulationMode }
 }
 
 function betanoOdds(pick: ProcessedPick) {
@@ -660,7 +650,7 @@ export function ProcessedBettingDashboard() {
   const withBetanoOdds = useMemo(() => picks.filter((pick) => pick.hasBetanoOdds), [picks])
   const simulation = useMemo(() => simulationScope(picks, filters.fecha), [filters.fecha, picks])
   const simulationPicks = useMemo(
-    () => picks.filter((pick) => pick.hasBetanoOdds && simulation.dates.includes(pick.fecha) && (simulation.includeStarted || !hasEventStarted(pick))),
+    () => picks.filter((pick) => simulation.dates.includes(pick.fecha) && (simulation.includeStarted || !hasEventStarted(pick))),
     [picks, simulation],
   )
   const filteredMain = useMemo(() => sortPicks(filterPicks(withOdds, filters), sortKey), [filters, sortKey, withOdds])
@@ -1691,13 +1681,15 @@ function BetanoSimulation({
       return acc
     }, {}),
   ).sort(([, aPicks], [, bPicks]) => pickTimestamp(aPicks[0]) - pickTimestamp(bPicks[0]))
-  const selectedPicks = picks.filter((pick) => selections[suggestedPickKey(pick)])
+  const selectablePicks = picks.filter((pick) => betanoOdds(pick) !== null)
+  const selectedPicks = selectablePicks.filter((pick) => selections[suggestedPickKey(pick)])
   const selectedByMatch = selectedPicks.reduce<Record<string, ProcessedPick[]>>((acc, pick) => {
     const key = `${pick.fecha}|${pick.hora}|${pick.partido}`
     acc[key] = [...(acc[key] ?? []), pick]
     return acc
   }, {})
   const totalOdds = combinedOdds(selectedPicks)
+  const groupsWithBetano = groups.filter(([, matchPicks]) => matchPicks.some((pick) => betanoOdds(pick) !== null)).length
 
   if (!picks.length) {
     return (
@@ -1714,9 +1706,9 @@ function BetanoSimulation({
   }
 
   const modeCopy = {
-    upcoming: 'Partidos vigentes del dia y los 2 proximos dias con cuota Betano. Las filas destacadas son las recomendaciones del protocolo, priorizadas por mayor probabilidad.',
-    'selected-date': 'Mostrando la fecha elegida en el filtro. Puede incluir partidos ya iniciados o finalizados para revision y control.',
-    'latest-available': 'No hay partidos futuros con cuota Betano; se muestra la ultima fecha disponible con cuotas Betano en modo revision.',
+    upcoming: 'Partidos vigentes del dia y los 2 proximos dias. Solo se pueden seleccionar mercados con cuota Betano; los demas quedan como referencia informativa.',
+    'selected-date': 'Mostrando la fecha elegida en el filtro. Si Betano no expuso cuotas para algun partido, se muestra deshabilitado para que no parezca que falta el evento.',
+    'latest-available': 'No hay partidos futuros cargados; se muestra la ultima fecha disponible en modo revision.',
   } satisfies Record<SimulationMode, string>
 
   return (
@@ -1749,10 +1741,10 @@ function BetanoSimulation({
       </div>
 
       <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
-        <Kpi label="Partidos Betano" value={groups.length.toString()} />
+        <Kpi label="Partidos en alcance" value={groups.length.toString()} />
+        <Kpi label="Con cuota Betano" value={groupsWithBetano.toString()} tone="green" />
         <Kpi label="Picks seleccionados" value={selectedPicks.length.toString()} tone="green" />
         <Kpi label="Partidos combinados" value={Object.keys(selectedByMatch).length.toString()} />
-        <Kpi label="Cuota total" value={totalOdds === null ? 'N/D' : totalOdds.toFixed(2)} tone="green" />
       </section>
 
       {selectedPicks.length > 0 && (
@@ -1788,10 +1780,13 @@ function BetanoSimulation({
         {groups.map(([groupKey, matchPicks]) => {
           const recommended = createBetanoSuggestedParlay(matchPicks, 4)
           const recommendedKeys = new Set(recommended.map(suggestedPickKey))
-          const selectedInMatch = matchPicks.filter((pick) => selections[suggestedPickKey(pick)])
+          const selectedInMatch = matchPicks.filter((pick) => betanoOdds(pick) !== null && selections[suggestedPickKey(pick)])
           const matchOdds = combinedOdds(selectedInMatch)
           const event = eventLabelFromKey(groupKey)
-          const sorted = [...matchPicks].sort((a, b) => b.probability - a.probability || (b.evBetano ?? -999) - (a.evBetano ?? -999))
+          const betanoMatchPicks = matchPicks.filter((pick) => betanoOdds(pick) !== null)
+          const sorted = (betanoMatchPicks.length ? betanoMatchPicks : matchPicks)
+            .sort((a, b) => b.probability - a.probability || (b.evBetano ?? -999) - (a.evBetano ?? -999))
+            .slice(0, betanoMatchPicks.length ? undefined : 3)
 
           return (
             <article key={groupKey} className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
@@ -1818,6 +1813,15 @@ function BetanoSimulation({
                 <Badge className="border-teal-500/40 bg-teal-500/10 text-teal-800 dark:text-teal-100">
                   {recommended.length} recomendadas
                 </Badge>
+                {betanoMatchPicks.length ? (
+                  <Badge className="border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-100">
+                    {betanoMatchPicks.length} mercados con Betano
+                  </Badge>
+                ) : (
+                  <Badge className="border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200">
+                    Sin cuota Betano
+                  </Badge>
+                )}
               </div>
 
               <div className="mt-4 space-y-2">
@@ -1825,27 +1829,32 @@ function BetanoSimulation({
                   const key = suggestedPickKey(pick)
                   const recommendedPick = recommendedKeys.has(key)
                   const selected = Boolean(selections[key])
+                  const hasBetano = betanoOdds(pick) !== null
                   return (
                     <label
                       key={key}
-                      className={`grid cursor-pointer gap-3 rounded-md border p-3 text-sm transition sm:grid-cols-[auto_1fr_auto] sm:items-center ${
-                        selected
+                      className={`grid gap-3 rounded-md border p-3 text-sm transition sm:grid-cols-[auto_1fr_auto] sm:items-center ${
+                        !hasBetano
+                          ? 'cursor-not-allowed border-slate-200 bg-slate-50 opacity-75 dark:border-slate-800 dark:bg-slate-950'
+                          : selected
                           ? 'border-teal-600 bg-teal-50 dark:border-teal-500 dark:bg-teal-950/40'
                           : recommendedPick
                             ? 'border-emerald-400 bg-emerald-50 dark:border-emerald-700 dark:bg-emerald-950/30'
-                            : 'border-slate-200 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-950'
+                            : 'cursor-pointer border-slate-200 hover:bg-slate-50 dark:border-slate-800 dark:hover:bg-slate-950'
                       }`}
                     >
-                      <input type="checkbox" checked={selected} onChange={() => onToggle(key)} />
+                      <input type="checkbox" checked={hasBetano && selected} disabled={!hasBetano} onChange={() => hasBetano && onToggle(key)} />
                       <div>
                         <div className="flex flex-wrap items-center gap-2">
                           <strong>{pick.pick}</strong>
                           {recommendedPick && <Badge className="border-emerald-500/40 bg-emerald-500/10 text-emerald-800 dark:text-emerald-100">Recomendada</Badge>}
+                          {!hasBetano && <Badge className="border-slate-300 bg-slate-100 text-slate-700 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200">Sin cuota Betano</Badge>}
                           <Badge className={riskClass(pick.riskTier)}>Riesgo: {pick.riskTier}</Badge>
                           <Badge className="border-slate-300 bg-white text-slate-700 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200">Confianza: {pick.confianza}</Badge>
                         </div>
                         <p className="mt-1 text-xs text-slate-500">
                           Prob. {formatPct(pick.probabilityPct)} - EV Betano {formatDecimal(pick.evBetano)} - {marketLabels[pick.marketType]}
+                          {!hasBetano && ' - Informativo hasta que Betano exponga cuota'}
                         </p>
                       </div>
                       <div className="text-right">
