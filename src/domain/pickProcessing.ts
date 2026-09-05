@@ -169,6 +169,25 @@ function clampScore(value: number) {
   return Math.max(0, Math.min(100, value))
 }
 
+function normalizeHeader(value: string) {
+  return value
+    .normalize('NFD')
+    .replace(/[\u0300-\u036f]/g, '')
+    .toLowerCase()
+    .replace(/[^a-z0-9]+/g, ' ')
+    .trim()
+}
+
+function headerGetter(headers: string[]) {
+  const normalizedHeaders = headers.map(normalizeHeader)
+  return (row: Element, names: string[], fallbackIndex: number) => {
+    const normalizedNames = names.map(normalizeHeader)
+    const index = normalizedHeaders.findIndex((header) => normalizedNames.includes(header))
+    const cellIndex = index >= 0 ? index : fallbackIndex
+    return row.children[cellIndex]?.textContent?.trim() ?? ''
+  }
+}
+
 export function normalizeMarket(input: string) {
   const raw = input.trim()
   const value = raw.toLowerCase()
@@ -296,56 +315,60 @@ function parseHtmlReport(html: string): RawPickRow[] {
   const title = document.querySelector('h1')?.textContent ?? ''
   const reportDate = title.match(/(\d{4}-\d{2}-\d{2})/)?.[1] ?? 'No disponible'
   const reportLeague = inferLeagueFromTitle(title)
-  const headers = Array.from(document.querySelectorAll('#markets thead th')).map((cell) => cell.textContent?.trim().toLowerCase() ?? '')
-  const hasDualOddsSchema = headers.some((header) => header.includes('betano'))
-  const cell = (row: Element, index: number) => row.children[index]?.textContent?.trim() ?? ''
+  const headers = Array.from(document.querySelectorAll('#markets thead th')).map((cell) => cell.textContent?.trim() ?? '')
+  const hasDualOddsSchema = headers.some((header) => normalizeHeader(header).includes('betano'))
+  const cell = headerGetter(headers)
 
   return Array.from(document.querySelectorAll('#markets tbody tr')).map((row) => {
     if (hasDualOddsSchema) {
+      const apiBook = cell(row, ['Book API-Football', 'Book 10Bet/API', 'Book API', 'Bookmaker API'], 8)
+      const betanoBook = cell(row, ['Book Betano', 'Bookmaker Betano'], 13)
+      const apiStatus = cell(row, ['Estado API-Football', 'Estado 10Bet/API', 'Estado API'], 18)
+      const betanoStatus = cell(row, ['Estado Betano'], 19)
       return {
         fecha: reportDate,
-        hora: cell(row, 1),
-        partido: cell(row, 2),
+        hora: cell(row, ['Hora'], 1),
+        partido: cell(row, ['Partido'], 2),
         league: row.getAttribute('data-league') ?? row.getAttribute('data-liga') ?? reportLeague,
-        pick: cell(row, 3),
-        market_original: cell(row, 3),
-        probabilidad: cell(row, 4),
-        prob_num: cell(row, 4),
-        bookmaker: cell(row, 8) || cell(row, 5) || 'No disponible',
-        bookmaker_api: cell(row, 5) || '10Bet/API',
-        cuota_api: cell(row, 6),
-        ev_api: row.getAttribute('data-ev-api') ?? cell(row, 7),
-        bookmaker_betano: cell(row, 8) || 'Betano',
-        cuota_betano: cell(row, 9),
-        ev_betano: row.getAttribute('data-ev-betano') ?? cell(row, 10),
-        estado_api: cell(row, 11),
-        estado_betano: cell(row, 12),
-        estado: cell(row, 12) || cell(row, 11),
-        confianza: cell(row, 13),
-        fuente: cell(row, 14),
-        razon: cell(row, 14),
-        riesgo: cell(row, 15),
+        pick: cell(row, ['Pick', 'Pick principal'], 3),
+        market_original: cell(row, ['Pick', 'Pick principal'], 3),
+        probabilidad: cell(row, ['Prob', 'Probabilidad'], 4),
+        prob_num: cell(row, ['Prob', 'Probabilidad'], 4),
+        bookmaker: betanoBook || apiBook || 'No disponible',
+        bookmaker_api: apiBook || '10Bet/API',
+        cuota_api: cell(row, ['Cuota API-Football', 'Cuota 10Bet/API', 'Cuota API'], 9),
+        ev_api: row.getAttribute('data-ev-api') ?? cell(row, ['EV API-Football', 'EV 10Bet/API', 'EV API'], 10),
+        bookmaker_betano: betanoBook || 'Betano',
+        cuota_betano: cell(row, ['Cuota Betano'], 14),
+        ev_betano: row.getAttribute('data-ev-betano') ?? cell(row, ['EV Betano'], 15),
+        estado_api: apiStatus,
+        estado_betano: betanoStatus,
+        estado: betanoStatus || apiStatus,
+        confianza: cell(row, ['Confianza'], 22),
+        fuente: cell(row, ['Fuente'], 23),
+        razon: cell(row, ['Fuente', 'Razon', 'Razón'], 23),
+        riesgo: cell(row, ['Riesgo'], 24),
       }
     }
 
     return {
       fecha: reportDate,
-      hora: cell(row, 1),
-      partido: cell(row, 2),
+      hora: cell(row, ['Hora'], 1),
+      partido: cell(row, ['Partido'], 2),
       league: row.getAttribute('data-league') ?? row.getAttribute('data-liga') ?? reportLeague,
       bookmaker: 'API-Football/10Bet',
-      pick: cell(row, 3),
-      market_original: cell(row, 3),
-      probabilidad: cell(row, 4),
-      prob_num: cell(row, 4),
-      cuota: cell(row, 5),
-      ev: cell(row, 6),
-      ev_num: cell(row, 6),
-      estado: cell(row, 7),
-      confianza: cell(row, 8),
-      fuente: cell(row, 9),
-      razon: cell(row, 9),
-      riesgo: cell(row, 10),
+      pick: cell(row, ['Pick', 'Pick principal'], 3),
+      market_original: cell(row, ['Pick', 'Pick principal'], 3),
+      probabilidad: cell(row, ['Prob', 'Probabilidad'], 4),
+      prob_num: cell(row, ['Prob', 'Probabilidad'], 4),
+      cuota: cell(row, ['Cuota', 'Odds'], 5),
+      ev: cell(row, ['EV'], 6),
+      ev_num: cell(row, ['EV'], 6),
+      estado: cell(row, ['Estado'], 7),
+      confianza: cell(row, ['Confianza'], 8),
+      fuente: cell(row, ['Fuente'], 9),
+      razon: cell(row, ['Fuente', 'Razon', 'Razón'], 9),
+      riesgo: cell(row, ['Riesgo'], 10),
     }
   })
 }

@@ -1,8 +1,8 @@
 {
-  "generatedAt": "2026-09-05T21:32:06.279Z",
+  "generatedAt": "2026-09-05T21:50:46.556Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 52,
-  "suggestedPickCount": 529,
+  "suggestedPickCount": 532,
   "settlements": [
     {
       "key": "2026-09-06|08:00|Estac Troyes vs Strasbourg|Goles +1.5|William Hill",
@@ -455,7 +455,7 @@
       }
     },
     {
-      "key": "2026-09-05|08:00|Fiorentina vs Torino|Goles +1.5|10Bet",
+      "key": "2026-09-05|08:00|Fiorentina vs Torino|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -472,7 +472,7 @@
       }
     },
     {
-      "key": "2026-09-05|08:30|1899 Hoffenheim vs Borussia Dortmund|Goles +1.5|10Bet",
+      "key": "2026-09-05|08:30|1899 Hoffenheim vs Borussia Dortmund|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -506,7 +506,24 @@
       }
     },
     {
-      "key": "2026-09-05|08:30|Bayer Leverkusen vs Union Berlin|Goles +1.5|10Bet",
+      "key": "2026-09-05|08:30|1899 Hoffenheim vs Borussia Dortmund|Corners total -10.5|Betano",
+      "settlement": "Fallado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como fallado.",
+      "fixture": {
+        "id": 1575150,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "2-3",
+        "halftime": "1-0",
+        "home": "1899 Hoffenheim",
+        "away": "Borussia Dortmund"
+      }
+    },
+    {
+      "key": "2026-09-05|08:30|Bayer Leverkusen vs Union Berlin|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -557,7 +574,7 @@
       }
     },
     {
-      "key": "2026-09-05|08:30|Borussia Mönchengladbach vs SV Elversberg|Goles +1.5|10Bet",
+      "key": "2026-09-05|08:30|Borussia Mönchengladbach vs SV Elversberg|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -608,7 +625,7 @@
       }
     },
     {
-      "key": "2026-09-05|08:30|SC Paderborn 07 vs SC Freiburg|Goles +1.5|10Bet",
+      "key": "2026-09-05|08:30|SC Paderborn 07 vs SC Freiburg|Goles +1.5|William Hill",
       "settlement": "Fallado",
       "source": "API-Football",
       "reason": "Mercado liquidado como fallado.",
@@ -625,7 +642,7 @@
       }
     },
     {
-      "key": "2026-09-05|08:30|Werder Bremen vs RB Leipzig|Goles +1.5|10Bet",
+      "key": "2026-09-05|08:30|Werder Bremen vs RB Leipzig|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -710,7 +727,7 @@
       }
     },
     {
-      "key": "2026-09-05|09:00|Brighton vs Leeds|Goles +1.5|10Bet",
+      "key": "2026-09-05|09:00|Brighton vs Leeds|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -744,7 +761,7 @@
       }
     },
     {
-      "key": "2026-09-05|09:00|Fulham vs Crystal Palace|Goles +1.5|10Bet",
+      "key": "2026-09-05|09:00|Fulham vs Crystal Palace|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -795,7 +812,7 @@
       }
     },
     {
-      "key": "2026-09-05|09:00|Manchester City vs Coventry|Goles +1.5|10Bet",
+      "key": "2026-09-05|09:00|Manchester City vs Coventry|Goles +1.5|William Hill",
       "settlement": "Fallado",
       "source": "API-Football",
       "reason": "Mercado liquidado como fallado.",
@@ -829,7 +846,7 @@
       }
     },
     {
-      "key": "2026-09-05|09:00|Nottingham Forest vs Tottenham|Goles +1.5|10Bet",
+      "key": "2026-09-05|09:00|Nottingham Forest vs Tottenham|Goles +1.5|William Hill",
       "settlement": "Fallado",
       "source": "API-Football",
       "reason": "Mercado liquidado como fallado.",
@@ -846,7 +863,7 @@
       }
     },
     {
-      "key": "2026-09-05|09:15|Athletic Club vs Atletico Madrid|Goles +1.5|10Bet",
+      "key": "2026-09-05|09:15|Athletic Club vs Atletico Madrid|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -863,7 +880,7 @@
       }
     },
     {
-      "key": "2026-09-05|10:15|Lens vs Lorient|Goles +1.5|10Bet",
+      "key": "2026-09-05|10:15|Lens vs Lorient|Goles +1.5|William Hill",
       "settlement": "Fallado",
       "source": "API-Football",
       "reason": "Mercado liquidado como fallado.",
@@ -877,6 +894,23 @@
         "halftime": "0-0",
         "home": "Lens",
         "away": "Lorient"
+      }
+    },
+    {
+      "key": "2026-09-05|11:00|Inter vs Napoli|Tarjetas total -4.5|Betano",
+      "settlement": "Acertado",
+      "source": "API-Football",
+      "reason": "Mercado liquidado como acertado.",
+      "fixture": {
+        "id": 1550113,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "3-2",
+        "halftime": "0-0",
+        "home": "Inter",
+        "away": "Napoli"
       }
     },
     {
@@ -948,7 +982,7 @@
       }
     },
     {
-      "key": "2026-09-05|11:30|FC Schalke 04 vs Bayern München|Goles +1.5|10Bet",
+      "key": "2026-09-05|11:30|FC Schalke 04 vs Bayern München|Goles +1.5|William Hill",
       "settlement": "Fallado",
       "source": "API-Football",
       "reason": "Mercado liquidado como fallado.",
@@ -965,7 +999,7 @@
       }
     },
     {
-      "key": "2026-09-05|11:30|Rayo Vallecano vs Racing Santander|Goles +1.5|10Bet",
+      "key": "2026-09-05|11:30|Rayo Vallecano vs Racing Santander|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -1050,7 +1084,7 @@
       }
     },
     {
-      "key": "2026-09-05|13:45|Le Havre vs Stade Brestois 29|Goles +1.5|10Bet",
+      "key": "2026-09-05|13:45|Le Havre vs Stade Brestois 29|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -1067,7 +1101,7 @@
       }
     },
     {
-      "key": "2026-09-05|13:45|Nice vs Le Mans|Goles +1.5|10Bet",
+      "key": "2026-09-05|13:45|Nice vs Le Mans|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -1118,7 +1152,7 @@
       }
     },
     {
-      "key": "2026-09-05|13:45|AS Roma vs Atalanta|Goles +1.5|10Bet",
+      "key": "2026-09-05|13:45|AS Roma vs Atalanta|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -1152,7 +1186,7 @@
       }
     },
     {
-      "key": "2026-09-05|14:00|Villarreal vs Deportivo La Coruna|Goles +1.5|10Bet",
+      "key": "2026-09-05|14:00|Villarreal vs Deportivo La Coruna|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -1186,7 +1220,7 @@
       }
     },
     {
-      "key": "2026-09-05|14:00|RB Bragantino vs Bahia|Goles +1.5|10Bet",
+      "key": "2026-09-05|14:00|RB Bragantino vs Bahia|Goles +1.5|William Hill",
       "settlement": "Acertado",
       "source": "API-Football",
       "reason": "Mercado liquidado como acertado.",
@@ -1203,15 +1237,32 @@
       }
     },
     {
-      "key": "2026-09-05|15:00|Sport Huancayo vs Sport Boys|1T +0.5|10Bet",
+      "key": "2026-09-05|15:00|Sport Huancayo vs Sport Boys|Local goles -2.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 64: 2H Second Half. Marcador provisional 1-1. No se liquida hasta el final. goles 1T: 1 supera la linea 0.5.",
+      "reason": "Partido en vivo minuto 83: 2H Second Half. Marcador provisional 1-1. No se liquida hasta el final.",
       "fixture": {
         "id": 1549479,
         "status": "2H",
         "statusLong": "Second Half",
-        "elapsed": 64,
+        "elapsed": 83,
+        "live": true,
+        "score": "1-1",
+        "halftime": "1-0",
+        "home": "Sport Huancayo",
+        "away": "Sport Boys"
+      }
+    },
+    {
+      "key": "2026-09-05|15:00|Sport Huancayo vs Sport Boys|1T +0.5|10Bet",
+      "settlement": "Pendiente",
+      "source": "API-Football",
+      "reason": "Partido en vivo minuto 83: 2H Second Half. Marcador provisional 1-1. No se liquida hasta el final. goles 1T: 1 supera la linea 0.5.",
+      "fixture": {
+        "id": 1549479,
+        "status": "2H",
+        "statusLong": "Second Half",
+        "elapsed": 83,
         "live": true,
         "score": "1-1",
         "halftime": "1-0",
@@ -1245,7 +1296,7 @@
       "fixture": null
     },
     {
-      "key": "2026-09-05|20:30|Universitario vs Comerciantes Unidos|1T +0.5|William Hill",
+      "key": "2026-09-05|20:30|Universitario vs Comerciantes Unidos|1T +0.5|Betano",
       "settlement": "Pendiente",
       "source": "API-Football",
       "reason": "No se encontro fixture en API-Football para ese partido/fecha.",
@@ -8936,13 +8987,13 @@
   "requestSummary": {
     "uniqueMatches": 315,
     "fixtureLookups": 55,
-    "fixtureStatistics": 51,
-    "fixtureEvents": 22,
+    "fixtureStatistics": 53,
+    "fixtureEvents": 23,
     "cacheHits": 0,
-    "cacheMisses": 128,
+    "cacheMisses": 131,
     "liveMatches": 1,
-    "apiRequests": 128,
-    "estimatedExtraRequestsPerMatch": 0.41,
+    "apiRequests": 131,
+    "estimatedExtraRequestsPerMatch": 0.42,
     "maxRecommendedRequestsPerMatch": 3
   }
 }
