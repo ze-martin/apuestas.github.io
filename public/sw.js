@@ -1,4 +1,4 @@
-const CACHE_NAME = 'protocolo-apuestas-shell-v2'
+const CACHE_NAME = 'protocolo-apuestas-shell-v3'
 const SHELL_ASSETS = ['./', './manifest.webmanifest', './favicon.svg']
 
 self.addEventListener('install', (event) => {
