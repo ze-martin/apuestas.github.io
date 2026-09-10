@@ -119,6 +119,7 @@ Vistas:
 - `Vista por partido`: tarjetas por partido con mejor pick seguro, mejor EV, mejor score, top 5 EV+ y combinada sugerida.
 - `Mi seguimiento`: recuento editable por usuario de los picks incluidos en las combinadas sugeridas por partido.
 - `Historial real`: rendimiento real de las recomendaciones de combinadas sugeridas, usando solo resultados cargados por CSV/HTML.
+- `Control combinadas`: seguimiento de cada combinada propuesta por partido como ticket completo, con cuota combinada, resultado, P/L y ROI.
 - `Probabilidades sin cuota`: mercados informativos sin cuota.
 
 ## Seguimiento e historial real
@@ -144,6 +145,13 @@ Incluye:
 Tambien incluye un backtest por perfil recomendado. Esa seccion agrupa los picks liquidados de las combinadas sugeridas por perfiles como `Goles +1.5`, `DNB local`, `Local goles +0.5`, `Corners total -10.5`, `Tarjetas total -4.5` o `1T +0.5`, y muestra acierto, P/L y ROI simulado. La lectura sirve para ajustar la exposicion futura segun evidencia historica, sin presentar ninguna recomendacion como garantia.
 
 Si el reporte solo trae estados operativos como `EV positivo Betano`, el pick queda `Pendiente` hasta que se consulte la API o se cargue un resultado verificable. Si API-Football no encuentra el fixture o no devuelve estadisticas suficientes para una fecha ya pasada, el pick queda como `Sin dato oficial`. La app no inventa resultados.
+
+`Control combinadas` agrupa esos picks por partido para medir el ticket propuesto completo. La regla es conservadora:
+
+- si una pierna falla, la combinada queda `Fallado`;
+- si todas las piernas activas aciertan, queda `Acertado`;
+- si una pierna queda `Devuelto`, esa pierna se excluye de la cuota combinada;
+- si faltan resultados oficiales, queda `Pendiente` o `Sin dato oficial`.
 
 ### Liquidacion con API-Football
 

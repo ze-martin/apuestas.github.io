@@ -30,7 +30,7 @@ import {
 import { integrationConfig } from '../config/integrations'
 import { fetchProtectedProtocolPicks, fetchProtectedSettlements } from '../services/protectedProtocolRepository'
 
-type MainView = 'main' | 'matches' | 'leagues' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'noOdds'
+type MainView = 'main' | 'matches' | 'leagues' | 'simulation' | 'guide' | 'userHistory' | 'actualHistory' | 'parlayControl' | 'noOdds'
 type SortKey = 'score' | 'edge' | 'probability' | 'ev' | 'odds' | 'risk'
 type Settlement = 'Pendiente' | 'Acertado' | 'Fallado' | 'Devuelto' | 'Sin dato oficial'
 
@@ -57,6 +57,18 @@ interface SuggestedHistoryRecord {
     livePickStatus?: string
     livePickReason?: string
   } | null
+}
+
+interface SuggestedParlayRecord {
+  key: string
+  fecha: string
+  hora: string
+  partido: string
+  legs: SuggestedHistoryRecord[]
+  settlement: Settlement
+  combinedOdds: number | null
+  profit: number | null
+  sourceSummary: string
 }
 
 const historyStorageKey = 'protocolo-apuestas:suggested-history:v1'
@@ -355,6 +367,78 @@ function summarizeHistory(records: SuggestedHistoryRecord[]) {
     pending,
     live,
     liveFulfilled,
+    hitRate: graded.length ? won / graded.length : null,
+    profit,
+    roi: settled.length ? profit / settled.length : null,
+  }
+}
+
+function parlaySettlement(legs: SuggestedHistoryRecord[]): Settlement {
+  if (legs.some((leg) => leg.settlement === 'Fallado')) return 'Fallado'
+  if (legs.some((leg) => leg.settlement === 'Pendiente')) return 'Pendiente'
+  if (legs.some((leg) => leg.settlement === 'Sin dato oficial')) return 'Sin dato oficial'
+  if (legs.every((leg) => leg.settlement === 'Devuelto')) return 'Devuelto'
+  if (legs.every((leg) => leg.settlement === 'Acertado' || leg.settlement === 'Devuelto')) return 'Acertado'
+  return 'Pendiente'
+}
+
+function parlayCombinedOdds(legs: SuggestedHistoryRecord[], settlement: Settlement) {
+  const activeLegs = legs.filter((leg) => settlement === 'Acertado' ? leg.settlement === 'Acertado' : leg.settlement !== 'Devuelto')
+  const odds = activeLegs.map((leg) => leg.pick.odds).filter((value): value is number => value !== null && value > 1)
+  if (!odds.length || odds.length !== activeLegs.length) return null
+  return odds.reduce((product, value) => product * value, 1)
+}
+
+function parlayProfit(settlement: Settlement, combinedOdds: number | null) {
+  if (settlement === 'Acertado') return (combinedOdds ?? 1) - 1
+  if (settlement === 'Fallado') return -1
+  if (settlement === 'Devuelto') return 0
+  return null
+}
+
+function buildSuggestedParlayControl(records: SuggestedHistoryRecord[]): SuggestedParlayRecord[] {
+  const grouped = records.reduce<Record<string, SuggestedHistoryRecord[]>>((acc, record) => {
+    const key = `${record.fecha}|${record.hora}|${record.partido}`
+    acc[key] = [...(acc[key] ?? []), record]
+    return acc
+  }, {})
+
+  return Object.entries(grouped)
+    .map(([key, legs]) => {
+      const settlement = parlaySettlement(legs)
+      const combinedOdds = parlayCombinedOdds(legs, settlement)
+      return {
+        key,
+        fecha: legs[0]?.fecha ?? '',
+        hora: legs[0]?.hora ?? '',
+        partido: legs[0]?.partido ?? '',
+        legs,
+        settlement,
+        combinedOdds,
+        profit: parlayProfit(settlement, combinedOdds),
+        sourceSummary: uniq(legs.map((leg) => leg.settlementSource)).join(' + ') || 'N/D',
+      }
+    })
+    .sort((a, b) => b.fecha.localeCompare(a.fecha) || a.hora.localeCompare(b.hora) || a.partido.localeCompare(b.partido))
+}
+
+function summarizeParlays(records: SuggestedParlayRecord[]) {
+  const settled = records.filter((record) => record.settlement === 'Acertado' || record.settlement === 'Fallado' || record.settlement === 'Devuelto')
+  const graded = records.filter((record) => record.settlement === 'Acertado' || record.settlement === 'Fallado')
+  const won = records.filter((record) => record.settlement === 'Acertado').length
+  const lost = records.filter((record) => record.settlement === 'Fallado').length
+  const returned = records.filter((record) => record.settlement === 'Devuelto').length
+  const noData = records.filter((record) => record.settlement === 'Sin dato oficial').length
+  const pending = records.filter((record) => record.settlement === 'Pendiente').length
+  const profit = settled.reduce((sum, record) => sum + (record.profit ?? 0), 0)
+  return {
+    total: records.length,
+    settled: settled.length,
+    won,
+    lost,
+    returned,
+    noData,
+    pending,
     hitRate: graded.length ? won / graded.length : null,
     profit,
     roi: settled.length ? profit / settled.length : null,
@@ -660,6 +744,7 @@ export function ProcessedBettingDashboard() {
   )
   const suggestedUserHistory = useMemo(() => buildSuggestedHistory(filteredMain, historyOverrides), [filteredMain, historyOverrides])
   const suggestedActualHistory = useMemo(() => buildSuggestedActualHistory(filteredMain, actualSettlements), [filteredMain, actualSettlements])
+  const suggestedParlayControl = useMemo(() => buildSuggestedParlayControl(suggestedActualHistory), [suggestedActualHistory])
 
   const positiveEv = withOdds.filter((pick) => pick.isPositiveEV)
   const positiveApiEv = withApiOdds.filter((pick) => pick.isPositiveApiEV)
@@ -776,7 +861,7 @@ export function ProcessedBettingDashboard() {
   }, [refreshActualSettlements])
 
   useEffect(() => {
-    if (view !== 'actualHistory') return
+    if (view !== 'actualHistory' && view !== 'parlayControl') return
     if (actualAutoRefreshStarted.current) return
     if (!filteredMain.length) return
     actualAutoRefreshStarted.current = true
@@ -915,6 +1000,7 @@ export function ProcessedBettingDashboard() {
           <TabButton active={view === 'guide'} onClick={() => setView('guide')} label="Guia de decision" />
           <TabButton active={view === 'userHistory'} onClick={() => setView('userHistory')} label="Mi seguimiento" count={suggestedUserHistory.length} />
           <TabButton active={view === 'actualHistory'} onClick={() => setView('actualHistory')} label="Historial real" count={suggestedActualHistory.length} />
+          <TabButton active={view === 'parlayControl'} onClick={() => setView('parlayControl')} label="Control combinadas" count={suggestedParlayControl.length} />
           <TabButton active={view === 'noOdds'} onClick={() => setView('noOdds')} label="Probabilidades sin cuota" count={filteredInfo.length} />
         </nav>
 
@@ -938,6 +1024,16 @@ export function ProcessedBettingDashboard() {
           <SuggestedHistoryView
             records={suggestedActualHistory}
             mode="actual"
+            onRefreshActual={() => void refreshActualSettlements(true)}
+            onRecalculateActual={recalculateActualSettlements}
+            refreshLoading={settlementLoading}
+            refreshError={settlementError}
+            requestSummary={settlementSummary}
+          />
+        )}
+        {view === 'parlayControl' && (
+          <ParlayControlView
+            records={suggestedParlayControl}
             onRefreshActual={() => void refreshActualSettlements(true)}
             onRecalculateActual={recalculateActualSettlements}
             refreshLoading={settlementLoading}
@@ -1200,6 +1296,28 @@ function dateChartData(records: SuggestedHistoryRecord[]) {
     .reverse()
 }
 
+function parlayDateChartData(records: SuggestedParlayRecord[]) {
+  const grouped = Object.entries(
+    records.reduce<Record<string, SuggestedParlayRecord[]>>((acc, record) => {
+      acc[record.fecha] = [...(acc[record.fecha] ?? []), record]
+      return acc
+    }, {}),
+  ).sort(([a], [b]) => a.localeCompare(b))
+
+  return grouped.map(([date, items]) => {
+    const summary = summarizeParlays(items)
+    return {
+      date,
+      Ganadas: summary.won,
+      Perdidas: summary.lost,
+      Devueltas: summary.returned,
+      'Sin dato oficial': summary.noData,
+      Pendientes: summary.pending,
+      Profit: Number(summary.profit.toFixed(2)),
+    }
+  })
+}
+
 function profileBacktestData(records: SuggestedHistoryRecord[]) {
   const grouped = records.reduce<Record<string, {
     profile: string
@@ -1249,6 +1367,195 @@ function profileBacktestData(records: SuggestedHistoryRecord[]) {
       }
     })
     .sort((a, b) => (b.hitRate ?? -1) - (a.hitRate ?? -1) || b.graded - a.graded || b.total - a.total)
+}
+
+function ParlayControlView({
+  records,
+  onRefreshActual,
+  onRecalculateActual,
+  refreshLoading = false,
+  refreshError = '',
+  requestSummary,
+}: {
+  records: SuggestedParlayRecord[]
+  onRefreshActual: () => void
+  onRecalculateActual: () => void
+  refreshLoading?: boolean
+  refreshError?: string
+  requestSummary?: SettlementRequestSummary | null
+}) {
+  const summary = summarizeParlays(records)
+  const chartData = historyChartData({
+    total: summary.total,
+    settled: summary.settled,
+    won: summary.won,
+    lost: summary.lost,
+    returned: summary.returned,
+    noData: summary.noData,
+    pending: summary.pending,
+    live: 0,
+    liveFulfilled: 0,
+    hitRate: summary.hitRate,
+    profit: summary.profit,
+    roi: summary.roi,
+  })
+
+  if (!records.length) {
+    return (
+      <section className="rounded-lg border border-slate-200 bg-white p-6 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex items-center gap-2">
+          <Link2 className="h-5 w-5 text-teal-700 dark:text-teal-300" />
+          <h2 className="font-semibold">Control combinadas</h2>
+        </div>
+        <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">
+          No hay combinadas sugeridas con los filtros actuales.
+        </p>
+      </section>
+    )
+  }
+
+  return (
+    <section className="space-y-4">
+      <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <Link2 className="h-5 w-5 text-teal-700 dark:text-teal-300" />
+              <h2 className="font-semibold">Control de aciertos en combinadas</h2>
+            </div>
+            <p className="mt-1 text-sm text-slate-600 dark:text-slate-300">
+              Evalua cada combinada propuesta por partido como ticket completo. Una sola pierna fallada marca la combinada como fallada; las devueltas ajustan la cuota.
+            </p>
+          </div>
+          <Badge className="border-amber-500/40 bg-amber-500/10 text-amber-800 dark:text-amber-100">
+            Stake simulado: 1 unidad por combinada
+          </Badge>
+        </div>
+
+        <div className="mt-4 grid gap-3 lg:grid-cols-[auto_1fr] lg:items-center">
+          <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={onRefreshActual}
+              disabled={refreshLoading}
+              className="inline-flex items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800 disabled:cursor-not-allowed disabled:opacity-60"
+            >
+              {refreshLoading && <Loader2 className="h-4 w-4 animate-spin" />}
+              Actualizar resultados reales
+            </button>
+            <button
+              type="button"
+              onClick={onRecalculateActual}
+              disabled={refreshLoading}
+              className="inline-flex items-center justify-center gap-2 rounded-md border border-slate-300 bg-white px-4 py-2 text-sm font-semibold text-slate-700 hover:bg-slate-50 disabled:cursor-not-allowed disabled:opacity-60 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-100 dark:hover:bg-slate-900"
+            >
+              Recalcular combinadas
+            </button>
+          </div>
+          <div className="text-sm text-slate-600 dark:text-slate-300">
+            {requestSummary ? (
+              <span>
+                API requests: <strong>{requestSummary.apiRequests}</strong> - partidos: <strong>{requestSummary.uniqueMatches}</strong> - extra por partido: <strong>{requestSummary.estimatedExtraRequestsPerMatch}</strong>
+              </span>
+            ) : (
+              <span>Usa el snapshot publico o el backend local, sin enviar claves al navegador.</span>
+            )}
+          </div>
+        </div>
+
+        {refreshError && (
+          <p className="mt-3 rounded-md border border-rose-300 bg-rose-50 p-3 text-sm font-semibold text-rose-800 dark:border-rose-800 dark:bg-rose-950/30 dark:text-rose-100">
+            {refreshError}
+          </p>
+        )}
+      </div>
+
+      <section className="grid gap-3 sm:grid-cols-2 xl:grid-cols-8">
+        <Kpi label="Combinadas" value={summary.total.toString()} />
+        <Kpi label="Liquidadas" value={summary.settled.toString()} />
+        <Kpi label="Ganadas" value={summary.won.toString()} tone="green" />
+        <Kpi label="Perdidas" value={summary.lost.toString()} />
+        <Kpi label="Devueltas" value={summary.returned.toString()} />
+        <Kpi label="Pendientes" value={summary.pending.toString()} />
+        <Kpi label="Acierto ticket" value={summary.hitRate === null ? 'N/D' : formatPct(summary.hitRate * 100)} tone="green" />
+        <Kpi label="ROI ticket" value={summary.roi === null ? 'N/D' : formatPct(summary.roi * 100)} tone="green" />
+      </section>
+
+      <section className="grid gap-4 xl:grid-cols-[420px_1fr]">
+        <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 className="font-semibold">Distribucion de combinadas</h3>
+          <div className="mt-4 h-[260px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <PieChart>
+                <Pie data={chartData} dataKey="value" nameKey="name" innerRadius={58} outerRadius={92} paddingAngle={3}>
+                  {chartData.map((item) => <Cell key={item.name} fill={item.fill} />)}
+                </Pie>
+                <Tooltip formatter={(value, name) => [value, name]} />
+              </PieChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+
+        <div className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+          <h3 className="font-semibold">Combinadas por fecha</h3>
+          <div className="mt-4 h-[300px]">
+            <ResponsiveContainer width="100%" height="100%">
+              <BarChart data={parlayDateChartData(records)} margin={{ top: 8, right: 16, left: 0, bottom: 28 }}>
+                <CartesianGrid strokeDasharray="3 3" vertical={false} />
+                <XAxis dataKey="date" angle={-30} textAnchor="end" height={58} tick={{ fontSize: 11 }} />
+                <YAxis allowDecimals={false} />
+                <Tooltip />
+                <Bar dataKey="Ganadas" stackId="results" fill={settlementColors.Acertado} radius={[3, 3, 0, 0]} />
+                <Bar dataKey="Perdidas" stackId="results" fill={settlementColors.Fallado} />
+                <Bar dataKey="Devueltas" stackId="results" fill={settlementColors.Devuelto} />
+                <Bar dataKey="Sin dato oficial" stackId="results" fill={settlementColors['Sin dato oficial']} />
+                <Bar dataKey="Pendientes" stackId="results" fill={settlementColors.Pendiente} />
+              </BarChart>
+            </ResponsiveContainer>
+          </div>
+        </div>
+      </section>
+
+      <div className="overflow-x-auto rounded-lg border border-slate-200 bg-white shadow-sm dark:border-slate-800 dark:bg-slate-900">
+        <table className="min-w-[1180px] text-left text-sm">
+          <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-950">
+            <tr>
+              <th className="px-4 py-3">Fecha</th>
+              <th className="px-4 py-3">Partido</th>
+              <th className="px-4 py-3">Piernas</th>
+              <th className="px-4 py-3">Cuota combinada</th>
+              <th className="px-4 py-3">Resultado ticket</th>
+              <th className="px-4 py-3">P/L</th>
+              <th className="px-4 py-3">Detalle</th>
+            </tr>
+          </thead>
+          <tbody className="divide-y divide-slate-200 dark:divide-slate-800">
+            {records.map((record) => (
+              <tr key={record.key}>
+                <td className="px-4 py-3">{record.fecha} {record.hora}</td>
+                <td className="px-4 py-3 font-semibold">{record.partido}</td>
+                <td className="px-4 py-3">{record.legs.length}</td>
+                <td className="px-4 py-3 font-bold">{formatDecimal(record.combinedOdds)}</td>
+                <td className="px-4 py-3"><Badge className={settlementClass(record.settlement)}>{record.settlement}</Badge></td>
+                <td className="px-4 py-3">{record.profit === null ? 'N/D' : `${record.profit.toFixed(2)} u`}</td>
+                <td className="px-4 py-3">
+                  <div className="space-y-1">
+                    {record.legs.map((leg) => (
+                      <div key={leg.key} className="flex flex-wrap items-center gap-2">
+                        <Badge className={settlementClass(leg.settlement)}>{leg.settlement}</Badge>
+                        <span>{leg.pick.pick} @ {formatDecimal(leg.pick.odds)}</span>
+                        {leg.fixture?.score && <span className="text-slate-500">Marcador: {leg.fixture.score}</span>}
+                      </div>
+                    ))}
+                  </div>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </table>
+      </div>
+    </section>
+  )
 }
 
 function SuggestedHistoryView({
