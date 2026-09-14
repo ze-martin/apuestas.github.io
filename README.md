@@ -116,11 +116,22 @@ El filtro `Fecha` se llena con todas las fechas detectadas en los reportes carga
 Vistas:
 
 - `Panel principal`: tabla ordenable con partido, hora, pick, probabilidad, bookmaker de referencia, cuota/EV de referencia, cuota/EV Betano, cuota/EV 10Bet/API, edge, score, riesgo y confianza.
+- `Centro de decision`: resumen accionable de los filtros activos, picks recomendables, EV+ Betano, riesgo Bajo/Medio y top inmediato para revisar primero.
 - `Vista por partido`: tarjetas por partido con mejor pick seguro, mejor EV, mejor score, top 5 EV+ y combinada sugerida.
+- `Ligas`: agrupacion por competicion para revisar volumen, probabilidad media, EV+ y partidos disponibles por liga.
+- `Simulacion Betano`: seleccion manual de picks con cuota Betano y calculo de cuota combinada por partido o entre partidos.
 - `Mi seguimiento`: recuento editable por usuario de los picks incluidos en las combinadas sugeridas por partido.
 - `Historial real`: rendimiento real de las recomendaciones de combinadas sugeridas, usando solo resultados cargados por CSV/HTML.
 - `Control combinadas`: seguimiento de cada combinada propuesta por partido como ticket completo, con cuota combinada, resultado, P/L y ROI.
 - `Probabilidades sin cuota`: mercados informativos sin cuota.
+
+UX implementada:
+
+- En escritorio, la navegacion usa pestanas horizontales con contadores por seccion.
+- En movil, la navegacion cambia a un selector compacto para evitar saltos y botones apretados.
+- El panel de filtros muestra chips con los filtros activos para distinguir entre "no hay datos" y "los filtros estan ocultando datos".
+- La tabla principal se mantiene completa en escritorio, pero en movil cambia a tarjetas legibles por pick con probabilidad, cuota, EV, riesgo, confianza y bookmaker.
+- La app prioriza lectura operativa: primero decision, luego filtros, luego detalle.
 
 ## Seguimiento e historial real
 

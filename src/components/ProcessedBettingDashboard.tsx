@@ -4,11 +4,13 @@ import {
   BarChart3,
   CloudDownload,
   FileText,
+  Filter,
   Link2,
   Loader2,
   Moon,
   Search,
   Sun,
+  Target,
   Upload,
 } from 'lucide-react'
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react'
@@ -127,6 +129,18 @@ const marketLabels: Record<MarketType, string> = {
   draw_no_bet: 'DNB',
   shots: 'Tiros',
   other: 'Otros',
+}
+
+const viewLabels: Record<MainView, string> = {
+  main: 'Panel principal',
+  leagues: 'Ligas',
+  matches: 'Vista por partido',
+  simulation: 'Simulacion Betano',
+  guide: 'Guia de decision',
+  userHistory: 'Mi seguimiento',
+  actualHistory: 'Historial real',
+  parlayControl: 'Control combinadas',
+  noOdds: 'Probabilidades sin cuota',
 }
 
 function uniq(values: string[]) {
@@ -508,6 +522,21 @@ function formatDecimal(value: number | null | undefined, digits = 2) {
   return value === null || value === undefined ? 'N/D' : value.toFixed(digits)
 }
 
+function activeFilterLabels(filters: PickFilters) {
+  const labels: string[] = []
+  if (filters.fecha) labels.push(`Fecha: ${filters.fecha}`)
+  if (filters.league) labels.push(`Liga: ${filters.league}`)
+  if (filters.partido) labels.push(`Partido: ${filters.partido}`)
+  if (filters.marketType) labels.push(`Mercado: ${marketLabels[filters.marketType as MarketType] ?? filters.marketType}`)
+  if (filters.riskTier) labels.push(`Riesgo: ${filters.riskTier}`)
+  if (filters.minOdds) labels.push(`Cuota min: ${filters.minOdds}`)
+  if (filters.maxOdds) labels.push(`Cuota max: ${filters.maxOdds}`)
+  if (filters.minProbability) labels.push(`Prob. min: ${Number(filters.minProbability) > 1 ? `${filters.minProbability}%` : formatPct(Number(filters.minProbability) * 100)}`)
+  if (filters.evOnly) labels.push('Solo EV+')
+  if (filters.query) labels.push(`Busqueda: ${filters.query}`)
+  return labels
+}
+
 function settlementEndpoint() {
   const configured = import.meta.env.VITE_SETTLEMENT_API_URL
   if (configured) return configured
@@ -775,6 +804,18 @@ export function ProcessedBettingDashboard() {
   }, [filters.fecha, filters.league, picks])
   const dates = uniqDates(picks.map((pick) => pick.fecha))
   const marketTypes = uniq(picks.map((pick) => pick.marketType))
+  const activeFilters = activeFilterLabels(filters)
+  const navItems: { view: MainView; count?: number }[] = [
+    { view: 'main', count: filteredMain.length },
+    { view: 'leagues', count: Object.keys(groupByLeague(filteredMain)).length },
+    { view: 'matches', count: Object.keys(groupByMatch(filteredMain)).length },
+    { view: 'simulation', count: Object.keys(groupByMatch(simulationPicks)).length },
+    { view: 'guide' },
+    { view: 'userHistory', count: suggestedUserHistory.length },
+    { view: 'actualHistory', count: suggestedActualHistory.length },
+    { view: 'parlayControl', count: suggestedParlayControl.length },
+    { view: 'noOdds', count: filteredInfo.length },
+  ]
   const changeDate = (fecha: string) => setFilters({ ...defaultFilters, fecha })
   const resetFilters = () => setFilters(defaultFilters)
 
@@ -935,7 +976,7 @@ export function ProcessedBettingDashboard() {
                 Cargar datos
               </button>
             </div>
-            <p className="mt-2 text-sm text-slate-600 dark:text-slate-300">{status}</p>
+            <p className="mt-2 max-h-28 overflow-y-auto rounded-md bg-slate-50 p-2 text-sm text-slate-600 dark:bg-slate-950/60 dark:text-slate-300">{status}</p>
           </div>
         </section>
 
@@ -949,6 +990,8 @@ export function ProcessedBettingDashboard() {
           <Kpi label="EV promedio positivo" value={avgPositiveEv.toFixed(2)} />
           <Kpi label="Mejor edge" value={bestEdge === null ? 'N/D' : `${bestEdge.toFixed(1)}%`} tone="green" />
         </section>
+
+        <DecisionCenter picks={filteredMain} filters={filters} parlayRecords={suggestedParlayControl} onOpenGuide={() => setView('guide')} />
 
         <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="grid gap-3 lg:grid-cols-4 xl:grid-cols-9">
@@ -990,19 +1033,36 @@ export function ProcessedBettingDashboard() {
           >
             Limpiar filtros
           </button>
+          <ActiveFilterSummary labels={activeFilters} />
         </section>
 
-        <nav className="flex flex-wrap gap-2 rounded-lg border border-slate-200 bg-white p-2 dark:border-slate-800 dark:bg-slate-900">
-          <TabButton active={view === 'main'} onClick={() => setView('main')} label="Panel principal" count={filteredMain.length} />
-          <TabButton active={view === 'leagues'} onClick={() => setView('leagues')} label="Ligas" count={Object.keys(groupByLeague(filteredMain)).length} />
-          <TabButton active={view === 'matches'} onClick={() => setView('matches')} label="Vista por partido" count={Object.keys(groupByMatch(filteredMain)).length} />
-          <TabButton active={view === 'simulation'} onClick={() => setView('simulation')} label="Simulacion Betano" count={Object.keys(groupByMatch(simulationPicks)).length} />
-          <TabButton active={view === 'guide'} onClick={() => setView('guide')} label="Guia de decision" />
-          <TabButton active={view === 'userHistory'} onClick={() => setView('userHistory')} label="Mi seguimiento" count={suggestedUserHistory.length} />
-          <TabButton active={view === 'actualHistory'} onClick={() => setView('actualHistory')} label="Historial real" count={suggestedActualHistory.length} />
-          <TabButton active={view === 'parlayControl'} onClick={() => setView('parlayControl')} label="Control combinadas" count={suggestedParlayControl.length} />
-          <TabButton active={view === 'noOdds'} onClick={() => setView('noOdds')} label="Probabilidades sin cuota" count={filteredInfo.length} />
-        </nav>
+        <section className="sticky top-0 z-20 rounded-lg border border-slate-200 bg-white/95 p-2 shadow-sm backdrop-blur dark:border-slate-800 dark:bg-slate-900/95">
+          <label className="block text-sm md:hidden">
+            <span className="mb-1 block text-slate-500">Seccion</span>
+            <select
+              value={view}
+              onChange={(event) => setView(event.target.value as MainView)}
+              className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 font-semibold dark:border-slate-700 dark:bg-slate-950"
+            >
+              {navItems.map((item) => (
+                <option key={item.view} value={item.view}>
+                  {viewLabels[item.view]}{item.count !== undefined ? ` (${item.count})` : ''}
+                </option>
+              ))}
+            </select>
+          </label>
+          <nav className="hidden gap-2 overflow-x-auto md:flex">
+            {navItems.map((item) => (
+              <TabButton
+                key={item.view}
+                active={view === item.view}
+                onClick={() => setView(item.view)}
+                label={viewLabels[item.view]}
+                count={item.count}
+              />
+            ))}
+          </nav>
+        </section>
 
         {view === 'main' && (filteredMain.length ? <PicksTable picks={filteredMain} sortKey={sortKey} setSortKey={setSortKey} /> : <EmptyFilteredState onReset={resetFilters} />)}
         {view === 'matches' && (filteredMain.length ? <MatchCards picks={filteredMain} /> : <EmptyFilteredState onReset={resetFilters} />)}
@@ -1047,6 +1107,125 @@ export function ProcessedBettingDashboard() {
           Validar cuota en Betano antes de apostar. Las cuotas cargadas son referencia operativa del reporte y no garantizan disponibilidad final.
         </section>
       </main>
+    </div>
+  )
+}
+
+function DecisionCenter({
+  picks,
+  filters,
+  parlayRecords,
+  onOpenGuide,
+}: {
+  picks: ProcessedPick[]
+  filters: PickFilters
+  parlayRecords: SuggestedParlayRecord[]
+  onOpenGuide: () => void
+}) {
+  const recommended = picks.filter(isHighAccuracyRecommendation)
+  const betanoValue = recommended.filter((pick) => pick.hasBetanoOdds && pick.isPositiveBetanoEV)
+  const lowOrMedium = recommended.filter((pick) => pick.riskTier !== 'Alto')
+  const topPicks = [...recommended]
+    .sort((a, b) => b.probability - a.probability || b.pickScore - a.pickScore || (b.ev ?? -999) - (a.ev ?? -999))
+    .slice(0, 3)
+  const bestFallback = [...picks].sort((a, b) => b.probability - a.probability || b.pickScore - a.pickScore)[0]
+  const parlaySummary = summarizeParlays(parlayRecords)
+  const scopeLabel = filters.fecha ? `Fecha ${filters.fecha}` : 'Todas las fechas cargadas'
+  const decisionTone = !recommended.length
+    ? 'Esperar / revisar filtros'
+    : lowOrMedium.length >= Math.ceil(recommended.length * 0.6)
+      ? 'Dia selectivo favorable'
+      : 'Dia con cautela'
+  const decisionCopy = !recommended.length
+    ? 'No hay picks que superen simultaneamente probabilidad, EV y perfil recomendado con los filtros actuales.'
+    : betanoValue.length
+      ? 'Prioriza picks con EV+ en Betano, riesgo Bajo/Medio y evita forzar combinadas largas.'
+      : 'Hay picks de probabilidad alta, pero falta valor claro en Betano; conviene validar cuota o esperar mejora.'
+
+  return (
+    <section className="grid gap-4 rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900 xl:grid-cols-[1.15fr_1fr]">
+      <div className="space-y-4">
+        <div className="flex flex-wrap items-start justify-between gap-3">
+          <div>
+            <div className="flex items-center gap-2">
+              <Target className="h-5 w-5 text-teal-700 dark:text-teal-300" />
+              <h2 className="font-semibold">Centro de decision</h2>
+            </div>
+            <p className="mt-1 text-sm text-slate-500">{scopeLabel}</p>
+          </div>
+          <Badge className={recommended.length ? 'border-teal-500/40 bg-teal-500/10 text-teal-800 dark:text-teal-100' : 'border-amber-500/40 bg-amber-500/10 text-amber-800 dark:text-amber-100'}>
+            {decisionTone}
+          </Badge>
+        </div>
+
+        <p className="text-sm text-slate-600 dark:text-slate-300">{decisionCopy}</p>
+
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-4">
+          <DecisionMetric label="Recomendables" value={recommended.length.toString()} />
+          <DecisionMetric label="EV+ Betano" value={betanoValue.length.toString()} />
+          <DecisionMetric label="Riesgo Bajo/Medio" value={lowOrMedium.length.toString()} />
+          <DecisionMetric label="Combinadas liquidadas" value={parlaySummary.settled.toString()} />
+        </div>
+
+        <button
+          type="button"
+          onClick={onOpenGuide}
+          className="inline-flex items-center justify-center rounded-md border border-slate-300 px-3 py-2 text-sm font-semibold hover:bg-slate-100 dark:border-slate-700 dark:hover:bg-slate-800"
+        >
+          Ver guia de decision
+        </button>
+      </div>
+
+      <div className="rounded-lg border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950/50">
+        <h3 className="text-sm font-semibold text-slate-700 dark:text-slate-200">Top inmediato</h3>
+        <div className="mt-3 space-y-2">
+          {(topPicks.length ? topPicks : bestFallback ? [bestFallback] : []).map((pick) => <DecisionPickCard key={pick.id} pick={pick} />)}
+          {!topPicks.length && !bestFallback && <p className="text-sm text-slate-500">Carga datos o ajusta filtros para ver oportunidades.</p>}
+        </div>
+      </div>
+    </section>
+  )
+}
+
+function DecisionMetric({ label, value }: { label: string; value: string }) {
+  return (
+    <div className="rounded-md border border-slate-200 bg-slate-50 p-3 dark:border-slate-800 dark:bg-slate-950">
+      <p className="text-xs font-semibold uppercase text-slate-500">{label}</p>
+      <p className="mt-1 text-2xl font-bold">{value}</p>
+    </div>
+  )
+}
+
+function DecisionPickCard({ pick }: { pick: ProcessedPick }) {
+  return (
+    <article className="rounded-md border border-slate-200 bg-white p-3 text-sm dark:border-slate-800 dark:bg-slate-900">
+      <div className="flex flex-wrap items-start justify-between gap-2">
+        <div>
+          <p className="font-semibold">{pick.partido}</p>
+          <p className="mt-1 text-slate-600 dark:text-slate-300">{pick.pick}</p>
+        </div>
+        <Badge className={riskClass(pick.riskTier)}>Riesgo: {pick.riskTier}</Badge>
+      </div>
+      <div className="mt-3 grid grid-cols-2 gap-2 text-xs sm:grid-cols-4">
+        <span>Prob. <strong>{formatPct(pick.probabilityPct)}</strong></span>
+        <span>Cuota <strong>{formatDecimal(pick.odds)}</strong></span>
+        <span>EV <strong>{formatDecimal(pick.ev)}</strong></span>
+        <span>Score <strong>{pick.pickScore.toFixed(1)}</strong></span>
+      </div>
+    </article>
+  )
+}
+
+function ActiveFilterSummary({ labels }: { labels: string[] }) {
+  return (
+    <div className="mt-3 flex flex-wrap items-center gap-2 text-xs">
+      <span className="inline-flex items-center gap-1 font-semibold text-slate-500">
+        <Filter className="h-3.5 w-3.5" />
+        Filtros activos
+      </span>
+      {labels.length ? labels.map((label) => (
+        <Badge key={label} className="border-slate-300 bg-slate-50 text-slate-700 dark:border-slate-700 dark:bg-slate-950 dark:text-slate-200">{label}</Badge>
+      )) : <span className="text-slate-500">Sin filtros adicionales.</span>}
     </div>
   )
 }
@@ -1914,7 +2093,10 @@ function PicksTable({ picks, sortKey, setSortKey }: { picks: ProcessedPick[]; so
           </button>
         ))}
       </div>
-      <div className="overflow-x-auto">
+      <div className="space-y-3 p-3 lg:hidden">
+        {picks.map((pick) => <MobilePickCard key={pick.id} pick={pick} />)}
+      </div>
+      <div className="hidden overflow-x-auto lg:block">
         <table className="min-w-[1540px] text-left text-sm">
           <thead className="bg-slate-50 text-xs uppercase text-slate-500 dark:bg-slate-950">
             <tr>
@@ -1961,6 +2143,45 @@ function PicksTable({ picks, sortKey, setSortKey }: { picks: ProcessedPick[]; so
         </table>
       </div>
     </section>
+  )
+}
+
+function MobilePickCard({ pick }: { pick: ProcessedPick }) {
+  return (
+    <article className="rounded-lg border border-slate-200 bg-white p-3 text-sm shadow-sm dark:border-slate-800 dark:bg-slate-950">
+      <div className="flex items-start justify-between gap-3">
+        <div>
+          <p className="text-xs font-semibold uppercase text-slate-500">{pick.league}</p>
+          <h3 className="mt-1 font-semibold leading-snug">{pick.partido}</h3>
+          <p className="mt-1 text-xs text-slate-500">{pick.fecha} - {pick.hora}</p>
+        </div>
+        <Badge className={riskClass(pick.riskTier)}>Riesgo: {pick.riskTier}</Badge>
+      </div>
+
+      <p className="mt-3 font-semibold text-slate-900 dark:text-white">{pick.pick}</p>
+      <div className="mt-3 grid grid-cols-2 gap-2">
+        <MobileStat label="Probabilidad" value={formatPct(pick.probabilityPct)} />
+        <MobileStat label="Score" value={pick.pickScore.toFixed(1)} />
+        <MobileStat label="Cuota ref." value={formatDecimal(pick.odds)} />
+        <MobileStat label="EV ref." value={formatDecimal(pick.ev)} positive={pick.isPositiveEV} />
+        <MobileStat label="Betano" value={formatDecimal(pick.oddsBetano)} />
+        <MobileStat label="EV Betano" value={formatDecimal(pick.evBetano)} positive={pick.isPositiveBetanoEV} />
+      </div>
+      <div className="mt-3 flex flex-wrap items-center gap-2">
+        <Badge className="border-slate-300 text-slate-700 dark:border-slate-700 dark:text-slate-200">Confianza: {pick.confianza}</Badge>
+        <Badge className="border-slate-300 text-slate-700 dark:border-slate-700 dark:text-slate-200">{marketLabels[pick.marketType]}</Badge>
+        <Badge className="border-slate-300 text-slate-700 dark:border-slate-700 dark:text-slate-200">{pick.preferredBookmaker}</Badge>
+      </div>
+    </article>
+  )
+}
+
+function MobileStat({ label, value, positive }: { label: string; value: string; positive?: boolean }) {
+  return (
+    <div className={`rounded-md border p-2 ${positive ? 'border-emerald-500/40 bg-emerald-500/10' : 'border-slate-200 bg-slate-50 dark:border-slate-800 dark:bg-slate-900'}`}>
+      <p className="text-[11px] font-semibold uppercase text-slate-500">{label}</p>
+      <p className="mt-1 font-bold">{value}</p>
+    </div>
   )
 }
 
