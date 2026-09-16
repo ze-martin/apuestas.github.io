@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-15T23:36:53.510Z",
+  "generatedAt": "2026-09-16T02:48:25.812Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 62,
   "suggestedPickCount": 803,
@@ -1359,15 +1359,15 @@
     },
     {
       "key": "2026-09-15|17:00|Vasco DA Gama vs Santa Fe|Corners total -10.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 76: 2H Second Half. Marcador provisional 2-0. No se liquida hasta el final.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1635577,
-        "status": "2H",
-        "statusLong": "Second Half",
-        "elapsed": 76,
-        "live": true,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
         "score": "2-0",
         "halftime": "1-0",
         "home": "Vasco DA Gama",
@@ -13549,7 +13549,7 @@
     "fixtureEvents": 62,
     "cacheHits": 0,
     "cacheMisses": 242,
-    "liveMatches": 1,
+    "liveMatches": 0,
     "apiRequests": 242,
     "estimatedExtraRequestsPerMatch": 0.53,
     "maxRecommendedRequestsPerMatch": 3
