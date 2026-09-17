@@ -1,5 +1,5 @@
 {
-  "generatedAt": "2026-09-17T04:00:04.787Z",
+  "generatedAt": "2026-09-17T12:46:59.625Z",
   "sourceIndexUrl": "https://ze-martin.github.io/",
   "reportCount": 62,
   "suggestedPickCount": 803,
@@ -908,54 +908,50 @@
     },
     {
       "key": "2026-09-16|14:30|Barcelona vs Racing Santander|Goles +1.5|William Hill",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 4-2. No se liquida hasta el final. goles: 6 supera la linea 1.5.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1570385,
-        "status": "2H",
-        "statusLong": "Second Half",
-        "elapsed": 65,
-        "live": true,
-        "score": "4-2",
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "7-2",
         "halftime": "4-1",
         "home": "Barcelona",
-        "away": "Racing Santander",
-        "livePickStatus": "Cumplido en vivo",
-        "livePickReason": "goles: 6 supera la linea 1.5."
+        "away": "Racing Santander"
       }
     },
     {
       "key": "2026-09-16|14:30|Barcelona vs Racing Santander|1T +0.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 4-2. No se liquida hasta el final. goles 1T: 5 supera la linea 0.5.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1570385,
-        "status": "2H",
-        "statusLong": "Second Half",
-        "elapsed": 65,
-        "live": true,
-        "score": "4-2",
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "7-2",
         "halftime": "4-1",
         "home": "Barcelona",
-        "away": "Racing Santander",
-        "livePickStatus": "Cumplido en vivo",
-        "livePickReason": "goles 1T: 5 supera la linea 0.5."
+        "away": "Racing Santander"
       }
     },
     {
       "key": "2026-09-16|14:30|Barcelona vs Racing Santander|Tarjetas total -4.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Partido en vivo minuto 65: 2H Second Half. Marcador provisional 4-2. No se liquida hasta el final.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1570385,
-        "status": "2H",
-        "statusLong": "Second Half",
-        "elapsed": 65,
-        "live": true,
-        "score": "4-2",
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
+        "live": false,
+        "score": "7-2",
         "halftime": "4-1",
         "home": "Barcelona",
         "away": "Racing Santander"
@@ -963,9 +959,9 @@
     },
     {
       "key": "2026-09-16|14:30|Levante vs Athletic Club|Goles +1.5|William Hill",
-      "settlement": "Pendiente",
+      "settlement": "Sin dato oficial",
       "source": "API-Football",
-      "reason": "Fixture PST: Match Postponed.",
+      "reason": "Fixture PST: Match Postponed. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
       "fixture": {
         "id": 1570389,
         "status": "PST",
@@ -979,48 +975,51 @@
     },
     {
       "key": "2026-09-16|17:00|LDU de Quito vs Palmeiras|Goles -3.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1631509,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "3-2",
+        "halftime": "1-1",
         "home": "LDU de Quito",
         "away": "Palmeiras"
       }
     },
     {
       "key": "2026-09-16|17:00|Atletico-MG vs Santos|Tarjetas total -4.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1631513,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "4-2",
+        "halftime": "3-1",
         "home": "Atletico-MG",
         "away": "Santos"
       }
     },
     {
       "key": "2026-09-16|17:00|Atletico-MG vs Santos|Goles +1.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Acertado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como acertado.",
       "fixture": {
         "id": 1631513,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "PEN",
+        "statusLong": "Match Finished",
+        "elapsed": 120,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "4-2",
+        "halftime": "3-1",
         "home": "Atletico-MG",
         "away": "Santos"
       }
@@ -1044,16 +1043,17 @@
     },
     {
       "key": "2026-09-16|17:30|Botafogo vs Gremio|Local goles -2.5|Betano",
-      "settlement": "Pendiente",
+      "settlement": "Fallado",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started.",
+      "reason": "Mercado liquidado como fallado.",
       "fixture": {
         "id": 1492311,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
+        "status": "FT",
+        "statusLong": "Match Finished",
+        "elapsed": 90,
         "live": false,
-        "halftime": "N/D-N/D",
+        "score": "3-2",
+        "halftime": "1-1",
         "home": "Botafogo",
         "away": "Gremio"
       }
@@ -1912,33 +1912,15 @@
       "key": "2026-09-13|10:30|ADT vs Cienciano|1T +0.5|William Hill",
       "settlement": "Sin dato oficial",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
-      "fixture": {
-        "id": 1549482,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
-        "live": false,
-        "halftime": "N/D-N/D",
-        "home": "ADT",
-        "away": "Cienciano"
-      }
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
+      "fixture": null
     },
     {
       "key": "2026-09-13|10:30|ADT vs Cienciano|Goles +1.5|William Hill",
       "settlement": "Sin dato oficial",
       "source": "API-Football",
-      "reason": "Fixture NS: Not Started. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
-      "fixture": {
-        "id": 1549482,
-        "status": "NS",
-        "statusLong": "Not Started",
-        "elapsed": null,
-        "live": false,
-        "halftime": "N/D-N/D",
-        "home": "ADT",
-        "away": "Cienciano"
-      }
+      "reason": "No se encontro fixture en API-Football para ese partido/fecha. Fecha pasada sin dato oficial suficiente para liquidar este mercado sin inventar resultado.",
+      "fixture": null
     },
     {
       "key": "2026-09-13|11:00|Napoli vs Bologna|Goles +1.5|Betano",
@@ -13587,11 +13569,11 @@
     "uniqueMatches": 453,
     "fixtureLookups": 66,
     "fixtureStatistics": 114,
-    "fixtureEvents": 67,
+    "fixtureEvents": 68,
     "cacheHits": 0,
-    "cacheMisses": 247,
-    "liveMatches": 1,
-    "apiRequests": 247,
+    "cacheMisses": 248,
+    "liveMatches": 0,
+    "apiRequests": 248,
     "estimatedExtraRequestsPerMatch": 0.55,
     "maxRecommendedRequestsPerMatch": 3
   }
