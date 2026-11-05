@@ -672,7 +672,9 @@ export function ProcessedBettingDashboard() {
   const [settlementLoading, setSettlementLoading] = useState(false)
   const [settlementError, setSettlementError] = useState('')
   const [simulationSelections, setSimulationSelections] = useState<Record<string, boolean>>({})
-  const initialLoadStarted = useRef(false)
+  const activeLoad = useRef<AbortController | null>(null)
+  const [reportIndex, setReportIndex] = useState<string[]>([])
+  const [retryDate, setRetryDate] = useState<string | null>(null)
   const actualAutoRefreshStarted = useRef(false)
 
   useEffect(() => {
@@ -698,63 +700,96 @@ export function ProcessedBettingDashboard() {
     if (settlementSummary) localStorage.setItem(settlementSummaryStorageKey, JSON.stringify(settlementSummary))
   }, [settlementSummary])
 
-  const loadText = useCallback(async (raw: string, sourceLabel: string) => {
-    const parsed = applyDateFallback(await parseReportText(raw), sourceLabel)
-    setPicks(parsed)
-    setFilters(defaultFilters)
-    setStatus(`${parsed.length} mercados procesados desde ${sourceLabel}.`)
-  }, [])
-
   async function loadFile(file: File | null) {
     if (!file) return
-    await loadText(await file.text(), file.name)
-  }
-
-  async function fetchText(url: string) {
-    const fetchUrl = new URL(url)
-    fetchUrl.searchParams.set('_refresh', Date.now().toString())
-    const response = await fetch(fetchUrl.toString(), { cache: 'no-store' })
-    if (!response.ok) throw new Error(`HTTP ${response.status} leyendo ${url}`)
-    return response.text()
-  }
-
-  const loadUrl = useCallback(async () => {
+    activeLoad.current?.abort()
+    const task = new AbortController()
+    activeLoad.current = task
     setLoading(true)
+    setStatus('Leyendo archivo local…')
+    try {
+      const parsed = applyDateFallback(await parseReportText(await file.text()), file.name)
+      if (task.signal.aborted) return
+      setPicks(parsed)
+      setFilters(defaultFilters)
+      setReportIndex([])
+      setRetryDate(null)
+      setStatus(`${parsed.length} mercados procesados desde ${file.name}.`)
+    } catch {
+      if (!task.signal.aborted) setStatus('No se pudo leer el archivo. Selecciona otro para reintentar.')
+    } finally {
+      if (!task.signal.aborted) setLoading(false)
+    }
+  }
+
+  const loadUrl = useCallback(async (date = '', index: string[] = []) => {
+    activeLoad.current?.abort()
+    const task = new AbortController()
+    activeLoad.current = task
+    let target = date
+    let timer: ReturnType<typeof setTimeout>
+    const startTimeout = () => {
+      clearTimeout(timer)
+      timer = setTimeout(() => task.abort(), 20000)
+    }
+    const read = async (url: string) => {
+      startTimeout()
+      const response = await fetch(url, { signal: task.signal, cache: 'no-cache' })
+      if (!response.ok) throw new Error(`HTTP ${response.status}`)
+      return response.text()
+    }
+    setLoading(true)
+    setRetryDate(null)
+    setStatus(index.length ? `Cargando reporte del ${date}…` : 'Consultando las fechas disponibles…')
+    startTimeout()
     try {
       if (integrationConfig.dataSourceMode === 'supabase') {
-        const protectedPicks = await fetchProtectedProtocolPicks()
+        const protectedPicks = await fetchProtectedProtocolPicks(task.signal)
+        if (task.signal.aborted) throw new Error()
         setPicks(protectedPicks)
         setFilters(defaultFilters)
-        const availableDates = uniqDates(protectedPicks.map((pick) => pick.fecha)).join(', ')
-        setStatus(`${protectedPicks.length} mercados procesados desde la base protegida. Fechas disponibles: ${availableDates}.`)
+        setStatus(`${protectedPicks.length} mercados procesados desde la base protegida.`)
         return
       }
-
-      const sourceUrl = configuredProtocolSourceUrl
-      const indexHtml = await fetchText(sourceUrl)
-      const reportUrls = extractReportUrls(indexHtml, sourceUrl)
-      if (!reportUrls.length) throw new Error('No encontre reportes disponibles en la fuente configurada.')
-
-      const urlsToLoad = reportUrls
-      const reports = await Promise.all(
-        urlsToLoad.map(async (url) => applyDateFallback(await parseReportText(await fetchText(url)), url)),
-      )
-      const merged = reports.flat()
-      const availableDates = uniqDates(merged.map((pick) => pick.fecha)).join(', ')
-      setPicks(merged)
-      setFilters(defaultFilters)
-      setStatus(`${merged.length} mercados procesados desde ${urlsToLoad.length} reporte(s). Fechas disponibles: ${availableDates}.`)
+      if (!index.length) {
+        index = extractReportUrls(await read(configuredProtocolSourceUrl), configuredProtocolSourceUrl).filter(url => inferDateFromSource(url))
+        if (task.signal.aborted) throw new Error()
+        if (!index.length) throw new Error('El índice no contiene reportes con fecha.')
+        setReportIndex(index)
+      }
+      const today = todayInLima()
+      const days = index.map(inferDateFromSource)
+      target ||= days.find(day => day <= today) ?? days[days.length - 1]
+      const urls = index.filter(url => inferDateFromSource(url) === target)
+      if (!urls.length) throw new Error('La fecha ya no figura en el índice.')
+      const parsed: ProcessedPick[] = []
+      for (const url of urls) {
+        setStatus(`Cargando reporte del ${target}…`)
+        const batch = applyDateFallback(await parseReportText(await read(url)), url)
+        if (task.signal.aborted) throw new Error()
+        parsed.push(...batch)
+      }
+      if (!parsed.length) throw new Error('El reporte no contiene mercados legibles.')
+      setPicks(parsed)
+      setFilters({ ...defaultFilters, fecha: target })
+      setStatus(`${target}: ${parsed.length} mercados. Elige otra fecha para consultar su reporte.`)
     } catch (error) {
-      setStatus(error instanceof Error ? error.message : 'No se pudieron cargar los reportes configurados.')
+      if (activeLoad.current !== task) return
+      const reason = task.signal.aborted ? 'La solicitud superó los 20 segundos.' : error instanceof Error ? error.message : 'Error de conexión.'
+      setStatus(`No se pudo cargar ${target || 'el índice'}. ${reason}`)
+      setRetryDate(target)
     } finally {
-      setLoading(false)
+      clearTimeout(timer!)
+      if (activeLoad.current === task) setLoading(false)
     }
   }, [])
 
   useEffect(() => {
-    if (initialLoadStarted.current) return
-    initialLoadStarted.current = true
     void loadUrl()
+    return () => {
+      activeLoad.current?.abort()
+      activeLoad.current = null
+    }
   }, [loadUrl])
 
   const withOdds = useMemo(() => picks.filter((pick) => pick.hasOdds), [picks])
@@ -816,8 +851,11 @@ export function ProcessedBettingDashboard() {
     { view: 'parlayControl', count: suggestedParlayControl.length },
     { view: 'noOdds', count: filteredInfo.length },
   ]
-  const changeDate = (fecha: string) => setFilters({ ...defaultFilters, fecha })
-  const resetFilters = () => setFilters(defaultFilters)
+  const changeDate = (fecha: string) => {
+    if (reportIndex.length && fecha) void loadUrl(fecha, reportIndex)
+    else setFilters({ ...defaultFilters, fecha })
+  }
+  const resetFilters = () => setFilters({ ...defaultFilters, fecha: reportIndex.length ? filters.fecha : defaultFilters.fecha })
 
   useEffect(() => {
     if (filters.league && !leagueOptions.includes(filters.league)) {
@@ -969,14 +1007,15 @@ export function ProcessedBettingDashboard() {
             <div className="mt-3 flex rounded-md border border-slate-200 bg-slate-50 p-4 dark:border-slate-800 dark:bg-slate-950/50">
               <button
                 type="button"
-                onClick={() => void loadUrl()}
+                disabled={loading}
+                onClick={() => void (retryDate !== null ? loadUrl(retryDate, retryDate ? reportIndex : []) : loadUrl())}
                 className="inline-flex w-fit items-center justify-center gap-2 rounded-md bg-teal-700 px-4 py-2 text-sm font-semibold text-white hover:bg-teal-800"
               >
                 {loading && <Loader2 className="h-4 w-4 animate-spin" />}
-                Cargar datos
+                {loading ? 'Cargando…' : retryDate !== null ? 'Reintentar' : 'Cargar datos'}
               </button>
             </div>
-            <p className="mt-2 max-h-28 overflow-y-auto rounded-md bg-slate-50 p-2 text-sm text-slate-600 dark:bg-slate-950/60 dark:text-slate-300">{status}</p>
+            <p role="status" className="mt-2 max-h-28 overflow-y-auto rounded-md bg-slate-50 p-2 text-sm text-slate-600 dark:bg-slate-950/60 dark:text-slate-300">{status}</p>
           </div>
         </section>
 
@@ -995,7 +1034,7 @@ export function ProcessedBettingDashboard() {
 
         <section className="rounded-lg border border-slate-200 bg-white p-4 shadow-sm dark:border-slate-800 dark:bg-slate-900">
           <div className="grid gap-3 lg:grid-cols-4 xl:grid-cols-9">
-            <Select label="Fecha" value={filters.fecha} onChange={changeDate} options={dates} />
+            <Select label="Fecha" value={filters.fecha} onChange={changeDate} includeAll={!reportIndex.length} options={reportIndex.length ? uniqDates(reportIndex.map(inferDateFromSource)) : dates} />
             <Select label="Liga" value={filters.league} onChange={(value) => setFilters({ ...filters, league: value, partido: '' })} options={leagueOptions} />
             <Select label="Partido" value={filters.partido} onChange={(value) => setFilters({ ...filters, partido: value })} options={matchOptions} />
             <Select
@@ -1244,19 +1283,22 @@ function Select({
   value,
   options,
   onChange,
+  includeAll = true,
   formatter = (option) => option,
 }: {
   label: string
   value: string
   options: string[]
   onChange: (value: string) => void
+  includeAll?: boolean
   formatter?: (option: string) => string
 }) {
   return (
     <label className="text-sm">
       <span className="mb-1 block text-slate-500">{label}</span>
       <select value={value} onChange={(event) => onChange(event.target.value)} className="w-full rounded-md border border-slate-300 bg-white px-3 py-2 dark:border-slate-700 dark:bg-slate-950">
-        <option value="">Todos</option>
+        {includeAll && <option value="">Todos</option>}
+        {!includeAll && !value && <option value="">Elige una fecha</option>}
         {options.map((option) => (
           <option key={option} value={option}>
             {formatter(option)}

@@ -7,15 +7,16 @@ interface ProtectedPickRow {
   raw_payload: RawPickRow
 }
 
-export async function fetchProtectedProtocolPicks(): Promise<ProcessedPick[]> {
+export async function fetchProtectedProtocolPicks(signal?: AbortSignal): Promise<ProcessedPick[]> {
   if (!supabase) throw new Error('Supabase no esta configurado.')
 
-  const { data, error } = await supabase
+  const query = supabase
     .from('picks')
     .select('id, league, raw_payload')
     .order('event_date', { ascending: false })
     .order('event_time', { ascending: true })
     .limit(10000)
+  const { data, error } = await (signal ? query.abortSignal(signal) : query)
 
   if (error) throw new Error(`No se pudo leer la base protegida: ${error.message}`)
 
